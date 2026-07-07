@@ -1,0 +1,9 @@
+# Reverse proxy con HTTPS automático (Let's Encrypt) para ufpcombat.com
+ufpcombat.com {
+	encode zstd gzip
+	reverse_proxy web:3000
+}
+
+www.ufpcombat.com {
+	redir https://ufpcombat.com{uri} permanent
+}
