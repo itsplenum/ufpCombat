@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getUpcomingEvent } from "@/data";
+import type { Locale } from "@/data/types";
+import { formatEventDate } from "@/lib/format";
+import { localizedAlternates } from "@/lib/seo";
 import { Ticker } from "@/components/layout/Ticker";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -15,6 +19,19 @@ import { SponsorsApplySection } from "@/components/home/SponsorsApplySection";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const event = getUpcomingEvent();
+  const title = event
+    ? `UFP ${event.number}: ${event.title} · ${formatEventDate(event.date, locale as Locale)}`
+    : undefined;
+
+  return {
+    ...(title ? { title } : {}),
+    alternates: localizedAlternates("/", locale),
+  };
 }
 
 /** Home one-pager: el póster del próximo evento + todas las áreas de la promotora. */

@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { localizedAlternates } from "@/lib/seo";
 import { Footer } from "@/components/layout/Footer";
 import { Section } from "@/components/ui/Section";
 import { OutlineText } from "@/components/ui/OutlineText";
@@ -9,6 +11,17 @@ import { RankingsBoard } from "@/components/rankings/RankingsBoard";
 
 interface RankingsPageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: RankingsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "rankingsPage" });
+
+  return {
+    title: `${t("title")} ${t("titleAccent")}`,
+    description: t("officialNote"),
+    alternates: localizedAlternates("/rankings", locale),
+  };
 }
 
 /**

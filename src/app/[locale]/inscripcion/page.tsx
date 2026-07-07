@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { localizedAlternates } from "@/lib/seo";
 import { Footer } from "@/components/layout/Footer";
 import { OutlineText } from "@/components/ui/OutlineText";
 import { Reveal } from "@/components/ui/Reveal";
@@ -10,6 +12,17 @@ interface ApplyPageProps {
 }
 
 const REQUIREMENT_KEYS = ["req1", "req2", "req3", "req4"] as const;
+
+export async function generateMetadata({ params }: ApplyPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "applyPage" });
+
+  return {
+    title: `${t("title")} ${t("titleAccent")}`,
+    description: t("pitch"),
+    alternates: localizedAlternates("/inscripcion", locale),
+  };
+}
 
 /** /inscripcion — convocatoria abierta con formulario completo de aplicación. */
 export default async function ApplyPage({ params }: ApplyPageProps) {

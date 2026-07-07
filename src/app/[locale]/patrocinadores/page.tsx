@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { localizedAlternates } from "@/lib/seo";
 import { sponsorTiers } from "@/data/sponsors";
 import type { Locale } from "@/data/types";
 import { L } from "@/lib/localize";
@@ -21,6 +23,17 @@ const reachStats = [
 ] as const;
 
 const SPONSOR_LOGO_SLOTS = 6;
+
+export async function generateMetadata({ params }: SponsorsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "sponsorsPage" });
+
+  return {
+    title: `${t("title")} ${t("titleAccent")}`,
+    description: t("pitch"),
+    alternates: localizedAlternates("/patrocinadores", locale),
+  };
+}
 
 /** /patrocinadores — pitch de alcance, paquetes y contacto comercial. */
 export default async function SponsorsPage({ params }: SponsorsPageProps) {

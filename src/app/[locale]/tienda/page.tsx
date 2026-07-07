@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { localizedAlternates } from "@/lib/seo";
 import { products } from "@/data/products";
 import type { Locale, ProductCategory } from "@/data/types";
 import { L } from "@/lib/localize";
@@ -9,6 +11,17 @@ import { ShopCatalog, type ProductView, type ShopLabels } from "@/components/sho
 
 interface ShopPageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: ShopPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "shopPage" });
+
+  return {
+    title: `${t("title")} ${t("titleAccent")}`,
+    description: t("kicker"),
+    alternates: localizedAlternates("/tienda", locale),
+  };
 }
 
 /** /tienda — catálogo completo con filtro por categoría y carrito mock. */

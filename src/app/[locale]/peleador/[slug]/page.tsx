@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { getAllFighters, getFighter } from "@/data";
+import { getAllFighters, getDivision, getFighter } from "@/data";
+import type { Fighter, Locale } from "@/data/types";
+import { site } from "@/data/site";
+import { formatRecordWithFinish } from "@/lib/format";
+import { L } from "@/lib/localize";
+import { localizedAlternates } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/components/layout/Footer";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -20,6 +27,35 @@ export function generateStaticParams() {
   );
 }
 
+export async function generateMetadata({ params }: FighterPageProps): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const fighter = getFighter(slug);
+  if (!fighter) return {};
+
+  const division = getDivision(fighter.divisionId);
+
+  return {
+    title: `${fighter.shortName} — ${formatRecordWithFinish(fighter.record)}`,
+    description: division
+      ? `${fighter.shortName} · ${L(division.name, locale as Locale)} · ${site.fullName}`
+      : fighter.shortName,
+    alternates: localizedAlternates(`/peleador/${fighter.slug}`, locale),
+  };
+}
+
+/** Structured data para que Google indexe al peleador como Person. */
+function fighterJsonLd(fighter: Fighter) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: `${fighter.firstName} ${fighter.lastName}`,
+    ...(fighter.nickname ? { alternateName: fighter.nickname } : {}),
+    jobTitle: fighter.discipline === "mma" ? "MMA Fighter" : "Boxer",
+    nationality: fighter.stats.origin,
+    memberOf: { "@type": "SportsOrganization", name: site.fullName, url: site.domain },
+  };
+}
+
 /** Perfil de peleador: hero con récord y bio, próxima pelea, historial y highlights. */
 export default async function FighterPage({ params }: FighterPageProps) {
   const { locale, slug } = await params;
@@ -32,6 +68,7 @@ export default async function FighterPage({ params }: FighterPageProps) {
 
   return (
     <>
+      <JsonLd data={fighterJsonLd(fighter)} />
       <main>
         <FighterHero fighter={fighter} />
         <NextFightBand fighterSlug={fighter.slug} />

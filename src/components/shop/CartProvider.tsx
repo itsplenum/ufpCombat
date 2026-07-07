@@ -4,9 +4,8 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -28,39 +27,60 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+/**
+ * Store del carrito mock respaldado en localStorage: persiste entre visitas,
+ * sincroniza entre pestañas (evento "storage") y el SSR ve un carrito vacío.
+ */
 const CART_STORAGE_KEY = "ufp-cart";
+const emptyCart: CartItem[] = [];
+const listeners = new Set<() => void>();
 
-/** Carrito mock: contexto + persistencia en localStorage. Sin checkout real todavía. */
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+let cachedRaw: string | null = null;
+let cachedItems: CartItem[] = emptyCart;
 
-  useEffect(() => {
+function readCart(): CartItem[] {
+  const raw = localStorage.getItem(CART_STORAGE_KEY);
+  if (raw !== cachedRaw) {
+    cachedRaw = raw;
     try {
-      const stored = localStorage.getItem(CART_STORAGE_KEY);
-      if (stored) setItems(JSON.parse(stored));
+      cachedItems = raw ? (JSON.parse(raw) as CartItem[]) : emptyCart;
     } catch {
-      // localStorage corrupto o bloqueado — se arranca con carrito vacío
+      cachedItems = emptyCart;
     }
-  }, []);
+  }
+  return cachedItems;
+}
 
-  useEffect(() => {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+function writeCart(items: CartItem[]): void {
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  listeners.forEach((notify) => notify());
+}
+
+function subscribeToCart(listener: () => void): () => void {
+  listeners.add(listener);
+  window.addEventListener("storage", listener);
+  return () => {
+    listeners.delete(listener);
+    window.removeEventListener("storage", listener);
+  };
+}
+
+export function CartProvider({ children }: { children: ReactNode }) {
+  const items = useSyncExternalStore(subscribeToCart, readCart, () => emptyCart);
 
   const addItem = useCallback((item: Omit<CartItem, "quantity">) => {
-    setItems((current) => {
-      const existing = current.find((entry) => entry.slug === item.slug);
-      if (existing) {
-        return current.map((entry) =>
+    const current = readCart();
+    const existing = current.find((entry) => entry.slug === item.slug);
+    const next = existing
+      ? current.map((entry) =>
           entry.slug === item.slug ? { ...entry, quantity: entry.quantity + 1 } : entry,
-        );
-      }
-      return [...current, { ...item, quantity: 1 }];
-    });
+        )
+      : [...current, { ...item, quantity: 1 }];
+    writeCart(next);
   }, []);
 
   const removeItem = useCallback((slug: string) => {
-    setItems((current) => current.filter((entry) => entry.slug !== slug));
+    writeCart(readCart().filter((entry) => entry.slug !== slug));
   }, []);
 
   const hasItem = useCallback(
