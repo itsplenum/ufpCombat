@@ -1,0 +1,103 @@
+{
+  "brand": {
+    "name": "UFP",
+    "tagline": "Ultimate Fight Promotions"
+  },
+  "nav": {
+    "event": "Event",
+    "fightCard": "Fight Card",
+    "fighters": "Fighters",
+    "rankings": "Rankings",
+    "results": "Results",
+    "shop": "Shop",
+    "tickets": "Tickets",
+    "home": "Home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "signup": "Fighter Signup",
+    "sponsors": "Sponsorships",
+    "contact": "contacto@ufpcombat.com"
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hrs",
+    "minutes": "Min",
+    "seconds": "Sec"
+  },
+  "hero": {
+    "nextEvent": "Próximo evento / Next event",
+    "buyTickets": "Buy tickets",
+    "watchPpv": "Watch on PPV"
+  },
+  "sections": {
+    "mainEvent": {
+      "title": "Main Event",
+      "kicker": "Pelea estelar · {division} · {rounds} rounds"
+    },
+    "fightCard": {
+      "title": "Fight Card",
+      "kicker": "Cartelera · {event}",
+      "eventPageLink": "Event page →"
+    },
+    "tickets": {
+      "title": "Tickets",
+      "titleAccent": "/ Boletos",
+      "buy": "Buy"
+    },
+    "fighters": {
+      "title": "Fighters",
+      "kicker": "UFP Roster"
+    },
+    "rankings": {
+      "title": "Champions",
+      "titleAccent": "& Rankings",
+      "belt": "UFP BELT",
+      "vacant": "Vacant",
+      "fullRankingsLink": "Full rankings →"
+    },
+    "results": {
+      "title": "Results",
+      "kicker": "Past events · Full fights"
+    },
+    "shop": {
+      "title": "Shop",
+      "titleAccent": "UFP",
+      "kicker": "Official merch",
+      "viewAllLink": "View full shop →"
+    },
+    "sponsors": {
+      "title": "Sponsors",
+      "pitch": "Your brand in front of thousands in the arena and millions on PPV. Packages from cage branding to event naming rights. / Tu marca en el octágono.",
+      "kitCta": "Sponsorship kit"
+    },
+    "apply": {
+      "title": "Think you can",
+      "titleAccent": "take it?",
+      "pitch": "Open call for amateur and professional fighters. Send your record, videos and division. The best debut at UFP.",
+      "namePlaceholder": "Name / Nombre",
+      "recordPlaceholder": "Record (e.g. 5-1-0)",
+      "divisionPlaceholder": "Division and discipline",
+      "submit": "Send application",
+      "submitted": "✓ Received — we'll contact you"
+    }
+  },
+  "fight": {
+    "vs": "VS",
+    "champion": "Champion",
+    "challenger": "Challenger",
+    "viewProfile": "View profile →",
+    "height": "Height",
+    "reach": "Reach",
+    "age": "Age",
+    "stance": "Stance",
+    "orthodox": "Orthodox",
+    "southpaw": "Southpaw"
+  },
+  "common": {
+    "loading": "Loading",
+    "backHome": "← Home"
+  }
+}

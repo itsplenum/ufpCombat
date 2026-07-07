@@ -1,0 +1,103 @@
+{
+  "brand": {
+    "name": "UFP",
+    "tagline": "Ultimate Fight Promotions"
+  },
+  "nav": {
+    "event": "Evento",
+    "fightCard": "Cartelera",
+    "fighters": "Peleadores",
+    "rankings": "Rankings",
+    "results": "Resultados",
+    "shop": "Tienda",
+    "tickets": "Boletos",
+    "home": "Inicio",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "signup": "Inscripción",
+    "sponsors": "Patrocinios",
+    "contact": "contacto@ufpcombat.com"
+  },
+  "countdown": {
+    "days": "Días",
+    "hours": "Hrs",
+    "minutes": "Min",
+    "seconds": "Seg"
+  },
+  "hero": {
+    "nextEvent": "Próximo evento / Next event",
+    "buyTickets": "Comprar boletos",
+    "watchPpv": "Ver por PPV"
+  },
+  "sections": {
+    "mainEvent": {
+      "title": "Pelea estelar",
+      "kicker": "Main event · {division} · {rounds} rounds"
+    },
+    "fightCard": {
+      "title": "Cartelera",
+      "kicker": "Fight card · {event}",
+      "eventPageLink": "Página del evento →"
+    },
+    "tickets": {
+      "title": "Boletos",
+      "titleAccent": "/ Tickets",
+      "buy": "Comprar"
+    },
+    "fighters": {
+      "title": "Peleadores",
+      "kicker": "Roster UFP"
+    },
+    "rankings": {
+      "title": "Campeones",
+      "titleAccent": "& Rankings",
+      "belt": "CINTURÓN UFP",
+      "vacant": "Vacante",
+      "fullRankingsLink": "Rankings completos →"
+    },
+    "results": {
+      "title": "Resultados",
+      "kicker": "Eventos pasados · Full fights"
+    },
+    "shop": {
+      "title": "Tienda",
+      "titleAccent": "UFP",
+      "kicker": "Merch oficial",
+      "viewAllLink": "Ver toda la tienda →"
+    },
+    "sponsors": {
+      "title": "Patrocinadores",
+      "pitch": "Tu marca frente a miles en la arena y millones por PPV. Paquetes desde branding en el octágono hasta naming del evento. / Put your brand in the cage.",
+      "kitCta": "Kit de patrocinio"
+    },
+    "apply": {
+      "title": "¿Crees que",
+      "titleAccent": "aguantas?",
+      "pitch": "Convocatoria abierta para peleadores amateur y profesionales. Manda tu récord, videos y división. Los mejores debutan en UFP.",
+      "namePlaceholder": "Nombre / Name",
+      "recordPlaceholder": "Récord (ej. 5-1-0)",
+      "divisionPlaceholder": "División y disciplina",
+      "submit": "Enviar aplicación",
+      "submitted": "✓ Recibido — te contactamos"
+    }
+  },
+  "fight": {
+    "vs": "VS",
+    "champion": "Campeón",
+    "challenger": "Retador",
+    "viewProfile": "Ver perfil →",
+    "height": "Altura",
+    "reach": "Alcance",
+    "age": "Edad",
+    "stance": "Guardia",
+    "orthodox": "Ortodoxo",
+    "southpaw": "Zurdo"
+  },
+  "common": {
+    "loading": "Cargando",
+    "backHome": "← Inicio"
+  }
+}
