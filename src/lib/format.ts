@@ -21,6 +21,11 @@ export function formatPrice(amount: number): string {
 
 const dateLocales: Record<Locale, string> = { es: "es-MX", en: "en-US" };
 
+/** Strings date-only ("2026-05-24") se formatean en UTC para no correrse un día. */
+function timeZoneFor(iso: string): string {
+  return iso.length === 10 ? "UTC" : "America/Mexico_City";
+}
+
 /** "Sáb 15 Ago 2026" / "Sat Aug 15 2026" — línea de fecha de evento. */
 export function formatEventDate(iso: string, locale: Locale): string {
   const formatted = new Intl.DateTimeFormat(dateLocales[locale], {
@@ -28,13 +33,14 @@ export function formatEventDate(iso: string, locale: Locale): string {
     day: "numeric",
     month: "short",
     year: "numeric",
-    timeZone: "America/Mexico_City",
+    timeZone: timeZoneFor(iso),
   }).format(new Date(iso));
-  // "sáb, 15 ago 2026" → "Sáb 15 Ago 2026"
+  // "sáb, 15 de ago de 2026" → "Sáb 15 Ago 2026"
   return formatted
     .replaceAll(",", "")
     .replaceAll(".", "")
     .split(" ")
+    .filter((word) => word.toLowerCase() !== "de")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
@@ -45,11 +51,13 @@ export function formatDateBadge(iso: string, locale: Locale): string {
     day: "numeric",
     month: "short",
     year: "numeric",
-    timeZone: "America/Mexico_City",
+    timeZone: timeZoneFor(iso),
   })
     .format(new Date(iso))
     .replaceAll(",", "")
     .replaceAll(".", "")
+    .replaceAll(/\bde\b/gi, "")
+    .replaceAll(/\s+/g, " ")
     .toUpperCase();
 }
 
