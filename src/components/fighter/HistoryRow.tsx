@@ -31,7 +31,7 @@ export async function HistoryRow({ entry }: HistoryRowProps) {
   );
 
   return (
-    <div className="grid grid-cols-[40px_1fr_110px] items-center gap-3 border-b border-cream/10 px-4 py-[18px] transition-colors hover:bg-blood/8 md:grid-cols-[70px_1fr_220px_160px_110px] md:gap-[18px]">
+    <div className="grid grid-cols-[40px_1fr_110px] items-center gap-3 border-b border-cream/10 px-4 py-[18px] transition-colors hover:bg-blood/8 md:grid-cols-[70px_1fr_200px_110px] md:gap-[18px] lg:grid-cols-[70px_1fr_220px_160px_110px]">
       <span className={`font-display text-lg ${outcomeColors[entry.outcome]}`}>
         {t(entry.outcome)}
       </span>
@@ -41,7 +41,7 @@ export async function HistoryRow({ entry }: HistoryRowProps) {
       <span className="hidden font-condensed text-[15px] tracking-[.08em] text-cream/65 md:block">
         {L(entry.method, locale)}
       </span>
-      <span className="hidden font-mono text-xs text-cream/50 md:block">
+      <span className="hidden font-mono text-xs text-cream/50 lg:block">
         {entry.eventSlug ? (
           <Link
             href={`/evento/${entry.eventSlug}`}
