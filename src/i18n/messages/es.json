@@ -97,6 +97,49 @@
     "orthodox": "Ortodoxo",
     "southpaw": "Zurdo"
   },
+  "eventPage": {
+    "daysRemaining": "Faltan {days} días",
+    "championship": "Campeonato mundial",
+    "finished": "Evento finalizado",
+    "fullCard": "Cartelera completa",
+    "fightsCount": "{count} peleas",
+    "resultsKicker": "Resultados oficiales",
+    "winner": "Gana {name}",
+    "draw": "Empate",
+    "round": "R{round}",
+    "capacity": "CAPACIDAD",
+    "doors": "APERTURA DE PUERTAS",
+    "broadcast": "TRANSMISIÓN PPV",
+    "arenaTitle": "Arena"
+  },
+  "fighterPage": {
+    "wins": "Victorias",
+    "losses": "Derrotas",
+    "koTko": "KO / TKO",
+    "submissions": "Sumisión",
+    "championBadge": "Campeón {division}",
+    "rankBadge": "#{rank} {division}",
+    "height": "ALTURA",
+    "reach": "ALCANCE",
+    "age": "EDAD",
+    "stance": "GUARDIA",
+    "weight": "PESO",
+    "gym": "GIMNASIO",
+    "origin": "ORIGEN",
+    "debut": "DEBUT UFP",
+    "nextFight": "Próxima pelea",
+    "ticketsCta": "Boletos →",
+    "historyTitle": "Historial",
+    "historyKicker": "Fight history",
+    "videosTitle": "Mejores momentos",
+    "videosKicker": "Highlights",
+    "photoLabel": "foto cuerpo completo — pose de pelea"
+  },
+  "outcome": {
+    "W": "G",
+    "L": "P",
+    "D": "E"
+  },
   "common": {
     "loading": "Cargando",
     "backHome": "← Inicio"

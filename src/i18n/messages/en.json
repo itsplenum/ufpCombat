@@ -97,6 +97,49 @@
     "orthodox": "Orthodox",
     "southpaw": "Southpaw"
   },
+  "eventPage": {
+    "daysRemaining": "{days} days to go",
+    "championship": "World championship",
+    "finished": "Event finished",
+    "fullCard": "Full fight card",
+    "fightsCount": "{count} fights",
+    "resultsKicker": "Official results",
+    "winner": "{name} wins",
+    "draw": "Draw",
+    "round": "R{round}",
+    "capacity": "CAPACITY",
+    "doors": "DOORS OPEN",
+    "broadcast": "PPV BROADCAST",
+    "arenaTitle": "Arena"
+  },
+  "fighterPage": {
+    "wins": "Wins",
+    "losses": "Losses",
+    "koTko": "KO / TKO",
+    "submissions": "Submission",
+    "championBadge": "{division} Champion",
+    "rankBadge": "#{rank} {division}",
+    "height": "HEIGHT",
+    "reach": "REACH",
+    "age": "AGE",
+    "stance": "STANCE",
+    "weight": "WEIGHT",
+    "gym": "GYM",
+    "origin": "FROM",
+    "debut": "UFP DEBUT",
+    "nextFight": "Next fight",
+    "ticketsCta": "Tickets →",
+    "historyTitle": "Fight History",
+    "historyKicker": "Historial",
+    "videosTitle": "Highlights",
+    "videosKicker": "Mejores momentos",
+    "photoLabel": "full body photo — fight stance"
+  },
+  "outcome": {
+    "W": "W",
+    "L": "L",
+    "D": "D"
+  },
   "common": {
     "loading": "Loading",
     "backHome": "← Home"
