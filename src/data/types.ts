@@ -78,13 +78,26 @@ export interface Fighter {
 }
 
 export interface FightResult {
-  /** null = empate / sin decisión */
-  winnerSlug: string | null;
+  /** Esquina ganadora; null = empate / sin decisión. */
+  winner: "red" | "blue" | null;
   method: Localized;
   round?: number;
   time?: string;
   /** Resumen para cards de resultados, ej. "Ríos vence a Herrera por KO — R3". */
   summary: Localized;
+}
+
+/**
+ * Esquina de una pelea. Con `slug` se resuelve contra el roster (récord y
+ * link al perfil); sin slug es un rival externo que solo aporta nombre/récord.
+ */
+export interface FightCorner {
+  slug?: string;
+  name: string;
+  /** Récord como texto para rivales fuera del roster. */
+  recordText?: string;
+  /** Ej. "CAMPEÓN" / "#1". */
+  tag?: Localized;
 }
 
 export interface Fight {
@@ -98,11 +111,8 @@ export interface Fight {
   divisionLabel: Localized;
   rounds: number;
   isTitleFight: boolean;
-  redSlug: string;
-  blueSlug: string;
-  /** Ej. "CAMPEÓN" / "#1". */
-  redTag?: Localized;
-  blueTag?: Localized;
+  red: FightCorner;
+  blue: FightCorner;
   /** Solo en eventos pasados. */
   result?: FightResult;
 }
@@ -149,7 +159,17 @@ export interface UFPEvent {
   highlight?: { summary: Localized; videoDuration?: string };
 }
 
-/** Movimiento en el ranking desde la última actualización. */
+/** División de peso — entidad propia para que peleadores y rankings la referencien. */
+export interface Division {
+  id: string;
+  /** Ej. "Peso Wélter · MMA". */
+  name: Localized;
+  /** Para cards compactas, ej. "Wélter" / "Boxeo Mediano". */
+  shortName: Localized;
+  discipline: Discipline;
+}
+
+/** Movimiento en el ranking desde la última actualización del comité. */
 export type RankMovement = number | "new";
 
 export interface RankedContender {
@@ -160,22 +180,17 @@ export interface RankedContender {
   /** Récord como texto, ej. "21-1-0" (retadores fuera del roster no tienen objeto Fighter). */
   record: string;
   movement: RankMovement;
+  /** Última pelea, ej. "G — KO vs. Herrera · UFP 16". */
+  lastFight?: Localized;
 }
 
-export interface RankingDivision {
-  id: string;
-  name: Localized;
-  discipline: Discipline;
+export interface DivisionRanking {
+  divisionId: string;
   /** null ⇒ título vacante. */
   championSlug: string | null;
   /** Defensas del título del campeón actual. */
   defenses: number;
   contenders: RankedContender[];
-}
-
-export interface PoundForPoundRanking {
-  updatedAt: string;
-  entries: RankedContender[];
 }
 
 export type ProductCategory = "apparel" | "accessories" | "collectible";

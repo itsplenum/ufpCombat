@@ -30,12 +30,13 @@
   "hero": {
     "nextEvent": "Próximo evento / Next event",
     "buyTickets": "Buy tickets",
-    "watchPpv": "Watch on PPV"
+    "watchPpv": "Watch on PPV",
+    "disciplines": "MMA + Boxing"
   },
   "sections": {
     "mainEvent": {
       "title": "Main Event",
-      "kicker": "Pelea estelar · {division} · {rounds} rounds"
+      "kicker": "Pelea estelar · {division}"
     },
     "fightCard": {
       "title": "Fight Card",
