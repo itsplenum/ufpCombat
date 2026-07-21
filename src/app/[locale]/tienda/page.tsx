@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { isEnabled } from "@/data/features";
 import { localizedAlternates } from "@/lib/seo";
 import { products } from "@/data/products";
 import type { Locale, ProductCategory } from "@/data/types";
@@ -26,6 +28,7 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
 
 /** /tienda — full catalog with category filter and a mock cart. */
 export default async function ShopPage({ params }: ShopPageProps) {
+  if (!isEnabled("shop")) notFound();
   const { locale: rawLocale } = await params;
   setRequestLocale(rawLocale);
 

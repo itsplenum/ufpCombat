@@ -25,11 +25,30 @@ Everything that reaches the browser stays Spanish-first and must never be "trans
 
 Rule of thumb: if a string crosses the boundary into the browser (URL, DOM id, rendered text, message key), it stays Spanish. If it only exists for developers, it's English.
 
-## Owner's explicit principles
+## Section flags
+
+`src/data/features.ts` decides which parts of the site are live. The site was
+built ahead of its content, so finished sections with nothing real to show are
+switched off rather than shipped with placeholder data.
+
+One flag removes a section from the home page, the nav, the footer and the
+sitemap, and makes its route return 404. Nothing is deleted. Two consequences
+worth knowing before touching this:
+
+- `resolveCorner()` in `data/index.ts` drops a corner's slug when the roster is
+  off. It is the single place that decides whether a fight card links to a
+  profile — without it every link would 404.
+- `getBrowsableEvents()` hides past events when results are off, and both the
+  route and the sitemap read through it.
+
+Currently off: shop, roster, rankings, results. On: sponsors, signup.
+
+## Project principles
 
 - **DRY**: anything repeated gets abstracted into a shared component or utility.
 - **Descriptive names** and clean code.
 - **Data-scalable**: adding an event or a fighter means adding an object to `src/data/*.ts` — never duplicating markup.
+- **Nothing fake ships**: if the real content is not there, the section gets switched off rather than filled with plausible-looking invented data. Ticket prices are the one exception still visible, and they are flagged in `CONTENIDO.md`.
 
 ## Git conventions
 

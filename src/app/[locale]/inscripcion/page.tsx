@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { isEnabled } from "@/data/features";
 import { localizedAlternates } from "@/lib/seo";
 import { Footer } from "@/components/layout/Footer";
 import { OutlineText } from "@/components/ui/OutlineText";
@@ -26,6 +28,7 @@ export async function generateMetadata({ params }: ApplyPageProps): Promise<Meta
 
 /** /inscripcion — open tryout call with the full application form. */
 export default async function ApplyPage({ params }: ApplyPageProps) {
+  if (!isEnabled("signup")) notFound();
   const { locale } = await params;
   setRequestLocale(locale);
 

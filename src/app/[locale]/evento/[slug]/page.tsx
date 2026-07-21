@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { getAllEvents, getEvent, getMainFight, isEventUpcoming } from "@/data";
+import { getBrowsableEvents, getEvent, getMainFight, isEventUpcoming } from "@/data";
 import type { Locale } from "@/data/types";
 import { site } from "@/data/site";
 import { formatEventDate, formatEventName } from "@/lib/format";
@@ -27,7 +27,7 @@ export const revalidate = 3600;
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    getAllEvents().map((event) => ({ locale, slug: event.slug })),
+    getBrowsableEvents().map((event) => ({ locale, slug: event.slug })),
   );
 }
 
@@ -107,7 +107,7 @@ export default async function EventPage({ params }: EventPageProps) {
   setRequestLocale(locale);
 
   const event = getEvent(slug);
-  if (!event) notFound();
+  if (!event || !getBrowsableEvents().includes(event)) notFound();
 
   const tTickets = await getTranslations("sections.tickets");
 

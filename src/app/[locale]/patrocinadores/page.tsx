@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { isEnabled } from "@/data/features";
 import { localizedAlternates } from "@/lib/seo";
 import { sponsorBrands, sponsorTiers } from "@/data/sponsors";
 import type { Locale } from "@/data/types";
@@ -36,6 +38,7 @@ export async function generateMetadata({ params }: SponsorsPageProps): Promise<M
 
 /** /patrocinadores — reach pitch, sponsorship packages and sales contact. */
 export default async function SponsorsPage({ params }: SponsorsPageProps) {
+  if (!isEnabled("sponsors")) notFound();
   const { locale: rawLocale } = await params;
   setRequestLocale(rawLocale);
 

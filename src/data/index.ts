@@ -1,5 +1,6 @@
 import { formatEventDate } from "@/lib/format";
 import { divisions } from "./divisions";
+import { isEnabled } from "./features";
 import { events } from "./events";
 import { fighters } from "./fighters";
 import { divisionRankings } from "./rankings";
@@ -59,6 +60,14 @@ export function getPastEvents(): UFPEvent[] {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
+/**
+ * Events the site is allowed to show. With results switched off the archive is
+ * hidden, so only what is still ahead remains browsable.
+ */
+export function getBrowsableEvents(): UFPEvent[] {
+  return isEnabled("results") ? events : events.filter(isEventUpcoming);
+}
+
 /** Most recent event held — the home page falls back to it when nothing is scheduled. */
 export function getLatestPastEvent(): UFPEvent | undefined {
   return getPastEvents()[0];
@@ -111,7 +120,19 @@ export interface ResolvedCorner {
   fighter?: Fighter;
 }
 
+/**
+ * Resolves a corner against the roster.
+ *
+ * With the roster switched off there are no profile pages, so the slug is
+ * dropped here — the single place that decides whether a corner links
+ * anywhere. Without this, fight cards would keep linking to /peleador/... and
+ * every one of those links would 404.
+ */
 export function resolveCorner(corner: FightCorner): ResolvedCorner {
+  if (!isEnabled("roster")) {
+    return { corner: { name: corner.name, recordText: corner.recordText, tag: corner.tag } };
+  }
+
   return {
     corner,
     fighter: corner.slug ? getFighter(corner.slug) : undefined,

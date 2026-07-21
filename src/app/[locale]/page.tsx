@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getLatestPastEvent, getUpcomingEvent } from "@/data";
+import { isEnabled } from "@/data/features";
 import type { Locale } from "@/data/types";
 import { formatEventDate } from "@/lib/format";
 import { localizedAlternates } from "@/lib/seo";
@@ -79,10 +80,10 @@ export default async function HomePage({ params }: HomePageProps) {
           </>
         ) : null}
 
-        <RosterSection />
-        <RankingsTeaserSection />
-        <ResultsSection />
-        <ShopTeaserSection />
+        {isEnabled("roster") ? <RosterSection /> : null}
+        {isEnabled("rankings") ? <RankingsTeaserSection /> : null}
+        {isEnabled("results") ? <ResultsSection /> : null}
+        {isEnabled("shop") ? <ShopTeaserSection /> : null}
         <SponsorsApplySection />
       </main>
       <Footer />

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { isEnabled } from "@/data/features";
 import { localizedAlternates } from "@/lib/seo";
 import { Footer } from "@/components/layout/Footer";
 import { Section } from "@/components/ui/Section";
@@ -30,6 +32,7 @@ export async function generateMetadata({ params }: RankingsPageProps): Promise<M
  * contenders with their movement.
  */
 export default async function RankingsPage({ params }: RankingsPageProps) {
+  if (!isEnabled("rankings")) notFound();
   const { locale } = await params;
   setRequestLocale(locale);
 

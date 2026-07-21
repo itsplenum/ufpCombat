@@ -7,6 +7,7 @@ import type { Fighter, Locale } from "@/data/types";
 import { site } from "@/data/site";
 import { formatRecordWithFinish } from "@/lib/format";
 import { L } from "@/lib/localize";
+import { isEnabled } from "@/data/features";
 import { localizedAlternates } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/components/layout/Footer";
@@ -22,6 +23,7 @@ interface FighterPageProps {
 }
 
 export function generateStaticParams() {
+  if (!isEnabled("roster")) return [];
   return routing.locales.flatMap((locale) =>
     getAllFighters().map((fighter) => ({ locale, slug: fighter.slug })),
   );
@@ -58,6 +60,7 @@ function fighterJsonLd(fighter: Fighter) {
 
 /** Fighter profile: hero with record and bio, next fight, history and highlights. */
 export default async function FighterPage({ params }: FighterPageProps) {
+  if (!isEnabled("roster")) notFound();
   const { locale, slug } = await params;
   setRequestLocale(locale);
 

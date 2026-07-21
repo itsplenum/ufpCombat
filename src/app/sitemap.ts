@@ -1,9 +1,16 @@
 import type { MetadataRoute } from "next";
-import { getAllEvents, getAllFighters } from "@/data";
+import { getAllFighters, getBrowsableEvents } from "@/data";
 import { site } from "@/data/site";
+import { isEnabled } from "@/data/features";
 
-/** Static site routes (locale-agnostic). */
-const staticPaths = ["/", "/rankings", "/tienda", "/inscripcion", "/patrocinadores"];
+/** Static site routes (locale-agnostic). Sections that are off stay out of the sitemap. */
+const staticPaths = [
+  "/",
+  ...(isEnabled("rankings") ? ["/rankings"] : []),
+  ...(isEnabled("shop") ? ["/tienda"] : []),
+  ...(isEnabled("signup") ? ["/inscripcion"] : []),
+  ...(isEnabled("sponsors") ? ["/patrocinadores"] : []),
+];
 
 function entry(path: string): MetadataRoute.Sitemap[number] {
   const esUrl = `${site.domain}${path === "/" ? "" : path}`;
@@ -17,8 +24,10 @@ function entry(path: string): MetadataRoute.Sitemap[number] {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const eventPaths = getAllEvents().map((event) => `/evento/${event.slug}`);
-  const fighterPaths = getAllFighters().map((fighter) => `/peleador/${fighter.slug}`);
+  const eventPaths = getBrowsableEvents().map((event) => `/evento/${event.slug}`);
+  const fighterPaths = isEnabled("roster")
+    ? getAllFighters().map((fighter) => `/peleador/${fighter.slug}`)
+    : [];
 
   return [...staticPaths, ...eventPaths, ...fighterPaths].map(entry);
 }
