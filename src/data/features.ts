@@ -6,28 +6,28 @@
  * nav, the footer and the sitemap, and makes its route return 404 — nothing is
  * deleted, so flipping it back brings the section straight back.
  *
- * Right now everything is ON: this is the beta, meant to show the whole thing
- * working end to end. Before the production launch, anything still running on
- * invented data has to be switched off — see `CONTENIDO.md` for what is real
- * and what is not.
+ * This is the production configuration (ufpcombat.com): only sections backed by
+ * real content are on. The four sections still running on invented data are off
+ * — their routes 404 and they vanish from the home, nav, footer and sitemap.
+ * Flip one back on the moment its real content lands — see `CONTENIDO.md`.
  */
 export const features = {
-  /** BETA: products, prices and photos are placeholders; the cart takes no payments. */
-  shop: true,
+  /** OFF: no merchandise yet — products, prices and photos would all be invented. */
+  shop: false,
 
-  /** BETA: 13 placeholder fighters with invented records and no photos. */
-  roster: true,
+  /** OFF: the 13 rostered fighters are placeholders with invented records. */
+  roster: false,
 
-  /** BETA: rankings over placeholder fighters. */
-  rankings: true,
+  /** OFF: rankings run over the placeholder roster. */
+  rankings: false,
 
-  /** BETA: the three past events and their results are invented. */
-  results: true,
+  /** OFF: the three past events and their results are invented. */
+  results: false,
 
   /** Real — sponsors taken from the UFP 6 poster. */
   sponsors: true,
 
-  /** Real — the open call works and the form validates. */
+  /** Real — the open call works, the form validates and submissions are emailed. */
   signup: true,
 } as const;
 

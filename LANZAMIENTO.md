@@ -59,9 +59,16 @@ cat ~/.ssh/id_ed25519.pub
 # ...y pega esa llave en GitHub → Settings → SSH and GPG keys → New SSH key
 # (o hazlo en 10 segundos desde tu máquina: gh repo deploy-key add — pídemelo)
 
-# 2f. Clonar y levantar
+# 2f. Clonar
 git clone git@github.com:itsplenum/ufpCombat.git ~/ufpcombat
 cd ~/ufpcombat
+
+# 2g. Correo de los formularios (ver Paso 2.5). Sin esto el sitio corre igual,
+#     pero las inscripciones/patrocinios solo quedan en el log del contenedor.
+cp .env.example .env
+nano .env   # pega RESEND_API_KEY y SUBMISSIONS_EMAIL, guarda con Ctrl+O, Ctrl+X
+
+# 2h. Levantar
 docker compose up -d --build
 ```
 
@@ -71,6 +78,22 @@ El primer build tarda unos minutos. Verifica que los dos contenedores corren:
 docker compose ps        # web y caddy deben estar "running"
 curl -s -o /dev/null -w "%{http_code}\n" http://localhost:3000   # → 200
 ```
+
+## Paso 2.5 — Correo de los formularios con Resend (~5 min, una sola vez)
+
+Hoy no existe un correo `@ufpcombat.com`, y montarlo en la VPS toma tiempo. Mientras tanto las inscripciones y solicitudes de patrocinio te llegan a **tu correo personal** con Resend, sin tocar DNS ni servidores de correo.
+
+1. Entra a [resend.com](https://resend.com) y crea la cuenta **con el correo donde quieres recibir las submissions** (importante: con el remitente por defecto, Resend solo entrega a ese mismo correo).
+2. **API Keys → Create API Key**. Copia la clave (empieza por `re_`).
+3. En la VPS, dentro de `~/ufpcombat`, edita `.env` (paso 2g):
+   - `RESEND_API_KEY=re_...`
+   - `SUBMISSIONS_EMAIL=tu-correo@gmail.com`
+   - `SUBMISSIONS_FROM=` (déjalo vacío por ahora)
+4. Ya. Si el sitio está corriendo, aplica los cambios con `docker compose up -d`.
+
+Más adelante, cuando exista `@ufpcombat.com`, se verifica el dominio en Resend y se pone `SUBMISSIONS_FROM="UFP <noreply@ufpcombat.com>"` para enviar desde la marca y a cualquier destinatario.
+
+> El plan gratis de Resend da 3.000 correos/mes — de sobra para los formularios.
 
 ## Paso 3 — Apuntar el dominio (~5 min + propagación)
 
@@ -99,9 +122,10 @@ Abre en el navegador y confirma:
 - [ ] `https://ufpcombat.com` — home en español, candado de HTTPS válido
 - [ ] `https://ufpcombat.com/en` — home en inglés; el toggle ES/EN funciona en ambas direcciones
 - [ ] `https://www.ufpcombat.com` — redirige al dominio sin www
-- [ ] `https://ufpcombat.com/rankings` y `/evento/ufp-17` y `/peleador/marco-rios` cargan
+- [ ] `https://ufpcombat.com/evento/ufp-6` y `/patrocinadores` y `/inscripcion` cargan
 - [ ] El countdown de la home avanza
-- [ ] Enviar el formulario de inscripción → aparece "✓ Recibido" (y el dato queda en `docker compose logs web` en la VPS)
+- [ ] Enviar el formulario de inscripción → aparece "✓ Recibido", **te llega el correo** y el dato queda en `docker compose logs web` en la VPS
+- [ ] Secciones apagadas dan 404 a propósito: `/tienda`, `/rankings`, `/peleador/marco-rios` (tienda, roster, rankings y resultados están off hasta tener contenido real)
 - [ ] `https://ufpcombat.com/peleador/no-existe` → 404 con la marca UFP (nav + footer), no una pantalla blanca
 - [ ] Headers de seguridad presentes:
       `curl -sI https://ufpcombat.com | grep -i "strict-transport\|x-content-type\|x-frame"`
@@ -122,8 +146,8 @@ VPS_HOST=usuario@IP_DE_LA_VPS ./deploy.sh
 
 ## Después del lanzamiento (opcional, sin prisa)
 
-1. **Contenido real** — reemplazar peleadores/eventos/rankings de ejemplo por los reales (ver `MANUAL.md`). Se puede lanzar con placeholders y ir migrando.
-2. **Fotos y logo reales** — soltar archivos en `public/` y agregar la ruta en los datos; los placeholders rayados desaparecen solos (ver `MANUAL.md` §Imágenes).
-3. **Formularios a tu correo** — hoy quedan en el log del servidor; conectar un servicio de email (ej. Resend) en `src/actions/*.ts`.
+1. **Reactivar secciones** — tienda, roster, rankings y resultados están apagadas (`src/data/features.ts`) porque corren sobre datos inventados. Con el contenido real (ver `CONTENIDO.md` y `MANUAL.md`), poner su flag en `true` y vuelven al home, la nav, el footer y el sitemap. Lo mismo con la pizarra de alcance de patrocinios cuando tengas números reales.
+2. **Fotos y logo reales** — soltar archivos en `public/` y agregar la ruta en los datos; los placeholders rayados desaparecen solos (ver `MANUAL.md` §Imágenes). La estelar ya usa la foto real de Carlos Bravo.
+3. **Correo de marca** — cuando exista `@ufpcombat.com`, verificar el dominio en Resend y poner `SUBMISSIONS_FROM` (Paso 2.5) para enviar desde la marca.
 4. **Analytics** — agregar un script de analítica (Plausible/Umami se autohospedan en la misma VPS) en `src/app/[locale]/layout.tsx`.
 5. **Google Search Console** — dar de alta ufpcombat.com y enviar `https://ufpcombat.com/sitemap.xml` para indexar rápido.

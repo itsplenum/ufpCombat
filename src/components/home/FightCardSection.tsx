@@ -15,6 +15,11 @@ export async function FightCardSection({ event }: FightCardSectionProps) {
 
   const undercard = getPublishedFights(event).filter((fight) => fight.order > 0);
 
+  // Only the main event is confirmed so far: no undercard means no section to
+  // show (an empty "Cartelera" heading would read as broken). It returns as
+  // soon as a second bout is published.
+  if (undercard.length === 0) return null;
+
   return (
     <Section id="cartelera" width="md">
       <SectionHeading

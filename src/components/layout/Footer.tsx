@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { OutlineText } from "@/components/ui/OutlineText";
-import { getCopyright } from "@/data/site";
+import { getCopyright, site } from "@/data/site";
 import { L } from "@/lib/localize";
 import type { Locale } from "@/data/types";
 import { footerNavLinks } from "./navLinks";
@@ -9,6 +9,24 @@ import { footerNavLinks } from "./navLinks";
 interface FooterProps {
   /** Trimmed-down variant for inner pages (event, fighter). */
   compact?: boolean;
+}
+
+/**
+ * Discreet author credit. Kept to the same muted mono treatment as the legal
+ * line so it reads as a signature, not a second headline — it never competes
+ * with the UFP mark.
+ */
+function BuiltBy({ label }: { label: string }) {
+  return (
+    <a
+      href={site.authorUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-cream/65 transition-colors hover:text-blood-hover"
+    >
+      {label}
+    </a>
+  );
 }
 
 /** Page footer: outlined "UFP" + secondary nav + legal line. */
@@ -24,7 +42,10 @@ export async function Footer({ compact = false }: FooterProps) {
           <Link href="/">
             <OutlineText className="text-5xl leading-none">UFP</OutlineText>
           </Link>
-          <span className="font-mono text-[11px] text-cream/65">{copyright}</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] text-cream/65">
+            <span>{copyright}</span>
+            <BuiltBy label={t("footer.builtBy", { name: site.author })} />
+          </div>
         </div>
       </footer>
     );
@@ -52,8 +73,9 @@ export async function Footer({ compact = false }: FooterProps) {
             })}
           </nav>
         </div>
-        <div className="flex flex-wrap justify-between gap-3 font-mono text-[11px] text-cream/65">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 font-mono text-[11px] text-cream/65">
           <span>{copyright}</span>
+          <BuiltBy label={t("footer.builtBy", { name: site.author })} />
           <span>ES / EN · {t("footer.contact")}</span>
         </div>
       </div>

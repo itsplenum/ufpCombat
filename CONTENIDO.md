@@ -8,7 +8,7 @@ Los datos de **UFP 6** ya son reales (salieron del póster). El resto del sitio 
 
 ## Ya está listo
 
-Evento UFP 6 "Champions" · viernes 7 de agosto, 8:00 p.m. · Monasterio Club, Granada (Meta) · estelar **Leo Wi vs Carlos Bravo** · música en vivo, corridos bélicos, bailarinas, DJ e invitado especial MB · patrocinadores del póster · WhatsApp de ventas.
+Evento UFP 6 "Champions" · viernes 7 de agosto, 8:00 p.m. · Monasterio Club, Granada (Meta) · estelar **Leo Wi vs Carlos Bravo** (con su foto) · **boletos reales** (palcos y VIP, con precios y distancia a la jaula) · música en vivo, corridos bélicos, bailarinas, DJ e invitado especial MB · patrocinadores del póster · WhatsApp de ventas.
 
 **El sitio completo:** portada con countdown, pelea estelar, cartelera, boletos, roster, rankings, resultados, tienda, patrocinios y convocatoria de peleadores.
 
@@ -18,7 +18,6 @@ Evento UFP 6 "Champions" · viernes 7 de agosto, 8:00 p.m. · Monasterio Club, G
 
 | Qué | Cómo está hoy |
 | --- | --- |
-| **Precios y zonas de boletos** | Inventados ($80.000 a $750.000). |
 | **Los 4 duelos restantes** | Entre Garzón Palma, El Zurdo, Zuluaga, Psicópata, Lobo, Medina, Ochoa y Orozco. Están cargados pero ocultos. |
 | **Qué peleas son boxeo y cuáles MMA** | Todas figuran como MMA. |
 | **Orden de la cartelera** | Co-estelar, preliminares, apertura. |
@@ -67,7 +66,7 @@ No hay ninguna imagen real todavía; todo son placeholders rayados, hechos para 
 | Peleador, retrato | 1 por peleador | cuadrada, mín. 600×600 |
 | Productos de la tienda | 1 por producto | cuadrada, mín. 800×800 |
 
-Las de peleadores conviene sacarlas con fondo uniforme, o el roster se ve desparejo.
+Las de peleadores conviene sacarlas con fondo uniforme, o el roster se ve desparejo. De la estelar ya tenemos la de **Carlos Bravo**; falta la de **Leo Wi** (mismo formato vertical).
 
 ---
 
@@ -75,6 +74,7 @@ Las de peleadores conviene sacarlas con fondo uniforme, o el roster se ve despar
 
 - Descripción real de UFP y requisitos para inscribirse como peleador
 - Redes sociales (el sitio no tiene ninguna todavía)
+- Números reales de alcance/seguidores/asistencia para la pizarra de patrocinios — se quitó a propósito hasta tenerlos; vuelve apenas los pases
 - Paquetes de patrocinio con precio real, y el kit en PDF si existe
 - Política de tratamiento de datos — la Ley 1581 la exige y ya tenemos dos formularios recogiendo datos
 - Traducción al inglés de todo lo anterior (no se traducen nombres propios, apodos ni nombres de eventos)

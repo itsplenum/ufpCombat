@@ -1,14 +1,15 @@
 "use server";
 
 import { fighterApplicationSchema, fullFighterApplicationSchema } from "@/lib/schemas";
+import { notifySubmission } from "@/lib/email";
 
 export interface FormActionState {
   status: "idle" | "success" | "error";
 }
 
 /**
- * Receives the short application from the home page. Today it only logs on
- * the server; this is where email/CRM will be wired up once it exists.
+ * Receives the short application from the home page and relays it to the
+ * promotion's inbox (see `notifySubmission`).
  */
 export async function submitFighterApplication(
   _previous: FormActionState,
@@ -24,7 +25,15 @@ export async function submitFighterApplication(
     return { status: "error" };
   }
 
-  console.log("[UFP] Fighter application received:", parsed.data);
+  await notifySubmission({
+    subject: `Inscripción de peleador — ${parsed.data.name}`,
+    fields: {
+      Nombre: parsed.data.name,
+      Récord: parsed.data.record,
+      División: parsed.data.division,
+      Origen: "Formulario corto (home)",
+    },
+  });
   return { status: "success" };
 }
 
@@ -54,6 +63,20 @@ export async function submitFullFighterApplication(
     return { status: "error" };
   }
 
-  console.log("[UFP] Full fighter application received:", parsed.data);
+  await notifySubmission({
+    subject: `Inscripción de peleador — ${parsed.data.name}`,
+    replyTo: parsed.data.email,
+    fields: {
+      Nombre: parsed.data.name,
+      Récord: parsed.data.record,
+      División: parsed.data.division,
+      Email: parsed.data.email,
+      Teléfono: parsed.data.phone,
+      Gimnasio: parsed.data.gym,
+      Videos: parsed.data.videoUrls?.join("  |  "),
+      Mensaje: parsed.data.message,
+      Origen: "Formulario completo (/inscripcion)",
+    },
+  });
   return { status: "success" };
 }

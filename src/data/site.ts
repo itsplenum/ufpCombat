@@ -8,6 +8,9 @@ export const site = {
   contactEmail: "contacto@ufpcombat.com",
   /** Sales WhatsApp. wa.me format: country code + number, digits only. */
   whatsappNumber: "573219103153",
+  /** Site author credit, shown discreetly in the footer. */
+  author: "Plenum",
+  authorUrl: "https://github.com/itsplenum",
 } as const;
 
 /**

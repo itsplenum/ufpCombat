@@ -40,6 +40,6 @@ O manualmente en la VPS: `cd ~/ufpcombat && git pull && docker compose up -d --b
 ## Notas
 
 - El contenido (eventos, peleadores, rankings, productos) vive en `src/data/*.ts` — editar + push + deploy es todo el flujo editorial de hoy. El día que haya CMS, solo se reemplazan los selectores de `src/data/index.ts`.
-- Los formularios (inscripción/patrocinio) hoy solo se registran en el log del contenedor (`docker compose logs web`). Conectar email/CRM = editar `src/actions/*.ts`.
+- Los formularios (inscripción/patrocinio) llegan por correo vía Resend. Copia `.env.example` a `.env` en la VPS con tu `RESEND_API_KEY` y `SUBMISSIONS_EMAIL`; sin eso siguen funcionando pero solo quedan en el log del contenedor (`docker compose logs web`), que además es el respaldo si un correo falla.
 - Prueba local del stack completo: `docker compose up --build` y abre `http://localhost` (Caddy servirá con certificado interno; para probar solo la app: `docker build -t ufp . && docker run -p 3000:3000 ufp`).
 - En esta máquina de desarrollo (CachyOS) el bridge de Docker no tiene salida a internet (firewall local), así que el build local necesita `docker build --network=host …`. En la VPS no hace falta.

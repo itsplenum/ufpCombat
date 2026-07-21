@@ -48,7 +48,7 @@ Currently off: shop, roster, rankings, results. On: sponsors, signup.
 - **DRY**: anything repeated gets abstracted into a shared component or utility.
 - **Descriptive names** and clean code.
 - **Data-scalable**: adding an event or a fighter means adding an object to `src/data/*.ts` — never duplicating markup.
-- **Nothing fake ships**: if the real content is not there, the section gets switched off rather than filled with plausible-looking invented data. Ticket prices are the one exception still visible, and they are flagged in `CONTENIDO.md`.
+- **Nothing fake ships**: if the real content is not there, the section gets switched off rather than filled with plausible-looking invented data. Everything on the UFP 6 card is now real (fights confirmed as drafts flip off, tickets, prices, sponsors); the remaining placeholders live only in flagged-off-able sections and are inventoried in `CONTENIDO.md`.
 
 ## Git conventions
 
@@ -62,7 +62,7 @@ Currently off: shop, roster, rankings, results. On: sponsors, signup.
 - `src/components/` — `ui/` (Section, SectionHeading, CtaButton, OutlineText, PlaceholderImage, Reveal), `layout/`, `event/`, `fighter/`, `rankings/`, `shop/`, `forms/`, `home/` (section compositions).
 - Design tokens in `src/app/globals.css` (`@theme`): ink/surface (blacks), blood (#C1121F), cream (#F2ECE4), win (green). Fonts: Anton (display), Barlow Condensed (labels), Barlow (body). Border radius is 0 everywhere.
 - Images: `PlaceholderImage` renders CSS stripes until a real `src` is passed.
-- Forms: server actions in `src/actions/` with zod (`src/lib/schemas.ts`) — they only log today; that's where email/CRM gets wired in.
+- Forms: server actions in `src/actions/` with zod (`src/lib/schemas.ts`). On submit they log and relay the entry by email through `src/lib/email.ts` (Resend). Delivery is best-effort and never blocks a valid submission; with the env vars unset (see `.env.example`) it degrades to log-only, which is also the local-dev behavior. There is no @ufpcombat.com mailbox yet, so `SUBMISSIONS_EMAIL` points at a personal inbox for now — it lives only in the VPS `.env`, never in the repo.
 - 404s: `[locale]/not-found.tsx` for missing slugs (inherits nav/footer); `app/global-not-found.tsx` for unmatched URLs and invalid locales (requires `experimental.globalNotFound`, and ships its own fonts and styles because it bypasses the normal render).
 - `Reveal` animates with `IntersectionObserver` + the `--animate-rise` CSS keyframes, not with a JS animation library: the server HTML renders visible, so a JS failure can never leave a blank page.
 - The home and event pages are ISR (`revalidate = 3600`). Which event counts as "upcoming" is decided against the real current date, and that comparison is frozen at prerender time — revalidation is what keeps it honest without a redeploy.
@@ -71,7 +71,7 @@ Currently off: shop, roster, rankings, results. On: sponsors, signup.
 
 The promotion is based in **Colombia**: prices in **COP**, dates and numbers formatted with `es-CO`, event times in `America/Bogota`. The upcoming event is **UFP 6** (7 Aug 2026) at Movistar Arena, Bogotá.
 
-Ticket CTAs open WhatsApp with a per-zone prefilled message, built from `site.whatsappNumber` in `src/data/site.ts`. **That number is still a placeholder** — it must be replaced before launch.
+Ticket CTAs open WhatsApp with a per-zone prefilled message, built from `site.whatsappNumber` (`573219103153`, the real sales line) in `src/data/site.ts`. Ticket zones and prices are the real UFP 6 ones: three ringside boxes (Palco 6/4/1) plus two VIP tables (Oro/Plata), priced per box/table.
 
 ## Accessibility
 

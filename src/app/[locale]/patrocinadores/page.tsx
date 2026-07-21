@@ -17,14 +17,6 @@ interface SponsorsPageProps {
   params: Promise<{ locale: string }>;
 }
 
-/** Reach metrics for the pitch (placeholder until we have real numbers). */
-const reachStats = [
-  { key: "statAttendance", value: "20,500+" },
-  { key: "statPpv", value: "2.1M" },
-  { key: "statSocial", value: "3.4M" },
-] as const;
-
-
 export async function generateMetadata({ params }: SponsorsPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "sponsorsPage" });
@@ -70,18 +62,6 @@ export default async function SponsorsPage({ params }: SponsorsPageProps) {
             <p className="max-w-[640px] text-[15px] leading-relaxed text-cream/65">
               {t("pitch")}
             </p>
-            <div className="flex flex-wrap gap-8">
-              {reachStats.map(({ key, value }) => (
-                <div key={key} className="flex flex-col gap-1">
-                  <span className="font-display text-[40px] leading-none text-blood">
-                    {value}
-                  </span>
-                  <span className="font-mono text-[11px] tracking-[.14em] text-cream/65">
-                    {t(key)}
-                  </span>
-                </div>
-              ))}
-            </div>
           </Reveal>
         </section>
 

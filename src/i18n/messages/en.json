@@ -28,7 +28,8 @@
     "rights": "All rights reserved.",
     "signup": "Fighter Signup",
     "sponsors": "Sponsorships",
-    "contact": "contacto@ufpcombat.com"
+    "contact": "contacto@ufpcombat.com",
+    "builtBy": "Site by {name}"
   },
   "countdown": {
     "days": "Days",
@@ -222,9 +223,6 @@
     "titleAccent": "the fight",
     "kicker": "UFP Partnerships",
     "pitch": "Every UFP event packs the room and travels far on social. Put your brand where nobody blinks.",
-    "statAttendance": "AVG. ATTENDANCE",
-    "statPpv": "SOCIAL REACH",
-    "statSocial": "SOCIAL FOLLOWERS",
     "tiersTitle": "Packages",
     "perksLabel": "Includes",
     "currentSponsors": "Brands already in the cage",

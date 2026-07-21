@@ -2,6 +2,11 @@ services:
   web:
     build: .
     restart: unless-stopped
+    # Email relay for the forms (Resend). Optional: without a .env the site runs
+    # fine and submissions stay in `docker compose logs web`. See .env.example.
+    env_file:
+      - path: .env
+        required: false
     expose:
       - "3000"
 

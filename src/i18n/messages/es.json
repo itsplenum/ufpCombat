@@ -28,7 +28,8 @@
     "rights": "Todos los derechos reservados.",
     "signup": "Inscripción",
     "sponsors": "Patrocinios",
-    "contact": "contacto@ufpcombat.com"
+    "contact": "contacto@ufpcombat.com",
+    "builtBy": "Sitio por {name}"
   },
   "countdown": {
     "days": "Días",
@@ -222,9 +223,6 @@
     "titleAccent": "la pelea",
     "kicker": "Partnerships UFP",
     "pitch": "Cada evento UFP llena el lugar y se mueve fuerte en redes. Pon tu marca donde nadie parpadea.",
-    "statAttendance": "ASISTENCIA PROMEDIO",
-    "statPpv": "ALCANCE EN REDES",
-    "statSocial": "SEGUIDORES REDES",
     "tiersTitle": "Paquetes",
     "perksLabel": "Incluye",
     "currentSponsors": "Marcas que ya están en el octágono",
