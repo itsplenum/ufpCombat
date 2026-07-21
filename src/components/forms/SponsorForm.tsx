@@ -9,7 +9,7 @@ import type { Locale } from "@/data/types";
 import { L } from "@/lib/localize";
 import { fieldClasses, labelClasses, submitClasses } from "./formStyles";
 
-/** Formulario de contacto para patrocinadores (/patrocinadores). */
+/** Sponsor contact form (/patrocinadores). */
 export function SponsorForm() {
   const t = useTranslations("sponsorsPage");
   const locale = useLocale() as Locale;

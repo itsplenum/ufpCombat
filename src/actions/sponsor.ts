@@ -3,7 +3,7 @@
 import { sponsorContactSchema } from "@/lib/schemas";
 import type { FormActionState } from "./apply";
 
-/** Recibe solicitudes de patrocinio. Se conectará a email/CRM en producción. */
+/** Receives sponsorship requests. Will be wired to email/CRM in production. */
 export async function submitSponsorContact(
   _previous: FormActionState,
   formData: FormData,
@@ -20,6 +20,6 @@ export async function submitSponsorContact(
     return { status: "error" };
   }
 
-  console.log("[UFP] Solicitud de patrocinio recibida:", parsed.data);
+  console.log("[UFP] Sponsorship request received:", parsed.data);
   return { status: "success" };
 }

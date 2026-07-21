@@ -9,8 +9,8 @@ interface CountdownProps {
 }
 
 /**
- * Countdown en vivo al evento. Renderiza "--" en SSR y arranca el tick
- * al montar para evitar mismatch de hidratación.
+ * Live countdown to the event. Renders "--" during SSR and starts ticking
+ * on mount to avoid a hydration mismatch.
  */
 export function Countdown({ targetIso }: CountdownProps) {
   const t = useTranslations("countdown");

@@ -30,9 +30,9 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 /**
- * Metadata raíz. Es `generateMetadata` y no un objeto estático porque la
- * description tiene que salir en el idioma de la página: con `metadata` estático
- * las páginas en inglés heredaban la description en español.
+ * Root metadata. It's `generateMetadata` and not a static object because the
+ * description has to come out in the page's language: with a static `metadata`
+ * the English pages inherited the Spanish description.
  */
 export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
   const { locale } = await params;

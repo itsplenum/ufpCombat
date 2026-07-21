@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ChampionCard } from "@/components/rankings/ChampionCard";
 
-/** Teaser de rankings: las 3 divisiones principales; la página completa vive en /rankings. */
+/** Rankings teaser: the 3 headline divisions; the full page lives at /rankings. */
 export async function RankingsTeaserSection() {
   const t = await getTranslations("sections.rankings");
   const featuredRankings = getDivisionRankings().slice(0, 3);

@@ -31,7 +31,7 @@ interface CtaButtonProps {
   disabled?: boolean;
 }
 
-/** Botón de acción con el corte de paralelogramo característico de UFP. */
+/** Action button with UFP's signature parallelogram clip. */
 export function CtaButton({
   href,
   variant = "filled",

@@ -16,7 +16,7 @@ const FOCUSABLE_SELECTOR = "button:not([disabled]), a[href], [tabindex]:not([tab
 const quantityButtonClass =
   "flex size-7 cursor-pointer items-center justify-center border border-cream/25 font-mono text-sm text-cream transition-colors hover:border-blood-hover hover:text-blood-hover";
 
-/** Botón flotante de carrito + drawer lateral con items, cantidades y total. */
+/** Floating cart button + side drawer with items, quantities and total. */
 export function CartDrawer({ labels }: CartDrawerProps) {
   const { items, itemCount, total, addItem, decreaseItem, removeItem } = useCart();
   const locale = useLocale() as Locale;
@@ -27,8 +27,8 @@ export function CartDrawer({ labels }: CartDrawerProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
 
-  /* Al abrir: foco en el botón de cerrar y scroll del body bloqueado.
-     Al cerrar: el foco vuelve al botón flotante que abrió el drawer. */
+  /* On open: focus the close button and lock body scroll.
+     On close: focus returns to the floating button that opened the drawer. */
   useEffect(() => {
     if (!isOpen) return;
 
@@ -45,7 +45,7 @@ export function CartDrawer({ labels }: CartDrawerProps) {
     };
   }, [isOpen]);
 
-  /** Escape cierra; Tab queda atrapado dentro del panel. */
+  /** Escape closes; Tab stays trapped inside the panel. */
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "Escape") {
       setIsOpen(false);
@@ -70,7 +70,7 @@ export function CartDrawer({ labels }: CartDrawerProps) {
 
   return (
     <>
-      {/* Botón flotante */}
+      {/* Floating button */}
       <button
         ref={openerRef}
         type="button"
@@ -88,8 +88,8 @@ export function CartDrawer({ labels }: CartDrawerProps) {
 
       {isOpen ? (
         <div className="fixed inset-0 z-120">
-          {/* Backdrop: puro adorno clickeable, fuera del orden de tabulación
-              (cerrar por teclado es Escape o el botón ✕ del panel). */}
+          {/* Backdrop: purely decorative and clickable, kept out of the tab order
+              (closing by keyboard is Escape or the panel's ✕ button). */}
           <div
             aria-hidden="true"
             onClick={() => setIsOpen(false)}

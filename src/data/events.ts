@@ -1,22 +1,22 @@
 import type { TicketTier, UFPEvent, Venue } from "./types";
 
-const arenaCiudad: Venue = {
-  name: "Arena Ciudad",
+const movistarArena: Venue = {
+  name: "Movistar Arena",
   address: {
-    es: "Av. de los Deportes 500, CDMX. Puertas abren 16:00. Estacionamiento y transporte público disponible. Menores acompañados de un adulto.",
-    en: "Av. de los Deportes 500, Mexico City. Doors open at 4:00 PM. Parking and public transit available. Minors must be accompanied by an adult.",
+    es: "Diagonal 61C #26-36, Bogotá. Puertas abren 16:00. Estacionamiento y TransMilenio a pocas cuadras. Menores acompañados de un adulto.",
+    en: "Diagonal 61C #26-36, Bogotá. Doors open at 4:00 PM. Parking and TransMilenio nearby. Minors must be accompanied by an adult.",
   },
-  capacity: 22300,
+  capacity: 14000,
   doorsOpen: "16:00",
   broadcast: { es: "ufp.tv / cable operadores", en: "ufp.tv / cable providers" },
 };
 
-const ufp17Tickets: TicketTier[] = [
+const ufp6Tickets: TicketTier[] = [
   {
     id: "general",
     zone: "General",
-    price: 450,
-    currency: "MXN",
+    price: 80000,
+    currency: "COP",
     perks: {
       es: "Gradas superiores. La fiesta completa.",
       en: "Upper stands. The full party.",
@@ -25,8 +25,8 @@ const ufp17Tickets: TicketTier[] = [
   {
     id: "preferente",
     zone: "Preferente",
-    price: 980,
-    currency: "MXN",
+    price: 150000,
+    currency: "COP",
     perks: {
       es: "Vista lateral privilegiada del octágono.",
       en: "Prime side view of the octagon.",
@@ -35,8 +35,8 @@ const ufp17Tickets: TicketTier[] = [
   {
     id: "ringside",
     zone: "Ringside",
-    price: 2400,
-    currency: "MXN",
+    price: 350000,
+    currency: "COP",
     perks: {
       es: "A metros de la acción. Salpica.",
       en: "Feet from the action. It splashes.",
@@ -45,8 +45,8 @@ const ufp17Tickets: TicketTier[] = [
   {
     id: "vip-cage",
     zone: "VIP Cage",
-    price: 5900,
-    currency: "MXN",
+    price: 750000,
+    currency: "COP",
     perks: {
       es: "Primera fila + acceso backstage + meet & greet.",
       en: "Front row + backstage access + meet & greet.",
@@ -55,15 +55,15 @@ const ufp17Tickets: TicketTier[] = [
   },
 ];
 
-/** Eventos UFP. Agregar un evento nuevo = agregar un objeto aquí. */
+/** UFP events. Adding a new event = adding one object here. */
 export const events: UFPEvent[] = [
   {
-    slug: "ufp-17",
-    number: 17,
+    slug: "ufp-6",
+    number: 6,
     title: "Sangre Nueva",
     status: "upcoming",
-    date: "2026-08-15T20:00:00-06:00",
-    venue: arenaCiudad,
+    date: "2026-08-07T20:00:00-05:00",
+    venue: movistarArena,
     schedule: [
       { time: "17:00", label: { es: "Preliminares", en: "Prelims" } },
       { time: "19:00", label: { es: "Cartelera principal", en: "Main card" } },
@@ -72,7 +72,7 @@ export const events: UFPEvent[] = [
     ],
     fights: [
       {
-        id: "ufp17-main",
+        id: "ufp6-main",
         order: 0,
         label: { es: "Estelar · Título", en: "Main event · Title" },
         discipline: "mma",
@@ -91,7 +91,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp17-colead",
+        id: "ufp6-colead",
         order: 1,
         label: { es: "Co-estelar", en: "Co-main" },
         discipline: "mma",
@@ -102,7 +102,7 @@ export const events: UFPEvent[] = [
         blue: { slug: "kenji-nakamura", name: "Kenji Nakamura" },
       },
       {
-        id: "ufp17-boxing",
+        id: "ufp6-boxing",
         order: 2,
         label: { es: "Boxeo 10R", en: "Boxing 10R" },
         discipline: "boxing",
@@ -113,7 +113,7 @@ export const events: UFPEvent[] = [
         blue: { slug: "tyrone-bell", name: "Tyrone Bell" },
       },
       {
-        id: "ufp17-prelim-1",
+        id: "ufp6-prelim-1",
         order: 3,
         label: { es: "Preliminar", en: "Prelim" },
         discipline: "mma",
@@ -124,7 +124,7 @@ export const events: UFPEvent[] = [
         blue: { slug: "anna-kovacs", name: "Anna Kovács" },
       },
       {
-        id: "ufp17-prelim-2",
+        id: "ufp6-prelim-2",
         order: 4,
         label: { es: "Preliminar", en: "Prelim" },
         discipline: "mma",
@@ -135,7 +135,7 @@ export const events: UFPEvent[] = [
         blue: { slug: "jamal-carter", name: "Jamal Carter" },
       },
       {
-        id: "ufp17-opener",
+        id: "ufp6-opener",
         order: 5,
         label: { es: "Apertura", en: "Opener" },
         discipline: "boxing",
@@ -146,19 +146,19 @@ export const events: UFPEvent[] = [
         blue: { slug: "luca-moretti", name: "Luca Moretti" },
       },
     ],
-    tickets: ufp17Tickets,
+    tickets: ufp6Tickets,
   },
   {
-    slug: "ufp-16",
-    number: 16,
+    slug: "ufp-5",
+    number: 5,
     title: "Juicio Final",
     status: "past",
-    date: "2026-05-23T20:00:00-06:00",
-    venue: arenaCiudad,
+    date: "2026-05-23T20:00:00-05:00",
+    venue: movistarArena,
     schedule: [],
     fights: [
       {
-        id: "ufp16-main",
+        id: "ufp5-main",
         order: 0,
         label: { es: "Estelar · Título", en: "Main event · Title" },
         discipline: "mma",
@@ -183,7 +183,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp16-colead",
+        id: "ufp5-colead",
         order: 1,
         label: { es: "Co-estelar", en: "Co-main" },
         discipline: "mma",
@@ -203,7 +203,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp16-boxing",
+        id: "ufp5-boxing",
         order: 2,
         label: { es: "Boxeo 10R", en: "Boxing 10R" },
         discipline: "boxing",
@@ -222,7 +222,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp16-prelim",
+        id: "ufp5-prelim",
         order: 3,
         label: { es: "Preliminar", en: "Prelim" },
         discipline: "mma",
@@ -242,7 +242,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp16-opener",
+        id: "ufp5-opener",
         order: 4,
         label: { es: "Apertura", en: "Opener" },
         discipline: "boxing",
@@ -272,16 +272,16 @@ export const events: UFPEvent[] = [
     },
   },
   {
-    slug: "ufp-15",
-    number: 15,
+    slug: "ufp-4",
+    number: 4,
     title: "Territorio",
     status: "past",
-    date: "2026-03-14T20:00:00-06:00",
-    venue: arenaCiudad,
+    date: "2026-03-14T20:00:00-05:00",
+    venue: movistarArena,
     schedule: [],
     fights: [
       {
-        id: "ufp15-main",
+        id: "ufp4-main",
         order: 0,
         label: { es: "Estelar", en: "Main event" },
         discipline: "mma",
@@ -300,7 +300,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp15-colead",
+        id: "ufp4-colead",
         order: 1,
         label: { es: "Co-estelar", en: "Co-main" },
         discipline: "mma",
@@ -319,7 +319,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp15-boxing",
+        id: "ufp4-boxing",
         order: 2,
         label: { es: "Boxeo 8R", en: "Boxing 8R" },
         discipline: "boxing",
@@ -349,16 +349,16 @@ export const events: UFPEvent[] = [
     },
   },
   {
-    slug: "ufp-14",
-    number: 14,
+    slug: "ufp-3",
+    number: 3,
     title: "Fuego Cruzado",
     status: "past",
-    date: "2026-01-17T20:00:00-06:00",
-    venue: arenaCiudad,
+    date: "2026-01-17T20:00:00-05:00",
+    venue: movistarArena,
     schedule: [],
     fights: [
       {
-        id: "ufp14-main",
+        id: "ufp3-main",
         order: 0,
         label: { es: "Estelar · Título", en: "Main event · Title" },
         discipline: "boxing",
@@ -382,7 +382,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp14-colead",
+        id: "ufp3-colead",
         order: 1,
         label: { es: "Co-estelar", en: "Co-main" },
         discipline: "mma",
@@ -402,7 +402,7 @@ export const events: UFPEvent[] = [
         },
       },
       {
-        id: "ufp14-prelim",
+        id: "ufp3-prelim",
         order: 2,
         label: { es: "Preliminar", en: "Prelim" },
         discipline: "mma",

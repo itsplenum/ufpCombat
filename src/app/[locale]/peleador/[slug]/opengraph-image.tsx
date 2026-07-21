@@ -10,7 +10,7 @@ interface OgImageProps {
   params: Promise<{ slug: string }>;
 }
 
-/** OG image de peleador: apodo + apellido + récord. */
+/** Fighter OG image: nickname + last name + record. */
 export default async function OgImage({ params }: OgImageProps) {
   const { slug } = await params;
   const fighter = getFighter(slug);

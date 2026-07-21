@@ -5,13 +5,13 @@ import esMessages from "@/i18n/messages/es.json";
 import "./globals.css";
 
 /**
- * 404 para URLs que no matchean ninguna ruta — incluye locales inválidos
- * (`/fr/rankings`), que no llegan a renderizar el layout de `[locale]`.
+ * 404 for URLs that don't match any route — including invalid locales
+ * (`/fr/rankings`), which never get to render the `[locale]` layout.
  *
- * Next saltea el render normal acá, así que este archivo tiene que traer sus
- * propios estilos, fuentes y `<html>`. Por lo mismo no hay contexto de
- * next-intl: los textos salen del locale por defecto (es) leídos directo del
- * JSON, sin `NextIntlClientProvider`.
+ * Next skips the normal render here, so this file has to bring its own
+ * styles, fonts and `<html>`. For the same reason there's no next-intl
+ * context: the copy comes from the default locale (es) read straight from
+ * the JSON, without `NextIntlClientProvider`.
  */
 
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton" });
@@ -45,8 +45,8 @@ export default function GlobalNotFound() {
               {t.title}
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-cream/60">{t.body}</p>
-            {/* `<a>` a propósito y no `<Link>`: esta página saltea el render
-                normal del App Router, así que conviene una navegación dura. */}
+            {/* `<a>` on purpose instead of `<Link>`: this page bypasses the
+                normal App Router render, so a hard navigation is safer. */}
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
               href="/"

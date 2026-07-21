@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: FighterPageProps): Promise<Me
   };
 }
 
-/** Structured data para que Google indexe al peleador como Person. */
+/** Structured data so Google indexes the fighter as a Person. */
 function fighterJsonLd(fighter: Fighter) {
   return {
     "@context": "https://schema.org",
@@ -56,7 +56,7 @@ function fighterJsonLd(fighter: Fighter) {
   };
 }
 
-/** Perfil de peleador: hero con récord y bio, próxima pelea, historial y highlights. */
+/** Fighter profile: hero with record and bio, next fight, history and highlights. */
 export default async function FighterPage({ params }: FighterPageProps) {
   const { locale, slug } = await params;
   setRequestLocale(locale);

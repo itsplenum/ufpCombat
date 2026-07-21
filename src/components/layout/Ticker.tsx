@@ -3,8 +3,8 @@ import { getTickerMessages } from "@/data";
 import type { Locale } from "@/data/types";
 
 /**
- * Marquee rojo de anuncios. El contenido se duplica para que la animación
- * translateX(-50%) haga un loop perfecto.
+ * Red announcement marquee. The content is duplicated so that the
+ * translateX(-50%) animation loops seamlessly.
  */
 export async function Ticker() {
   const locale = (await getLocale()) as Locale;

@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ResultCard } from "@/components/event/ResultCard";
 
-/** Últimos 3 eventos con resultado y video destacado. */
+/** Last 3 events with their result and featured video. */
 export async function ResultsSection() {
   const t = await getTranslations("sections.results");
   const pastEvents = getPastEvents().slice(0, 3);

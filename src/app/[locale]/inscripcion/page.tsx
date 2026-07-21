@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ApplyPageProps): Promise<Meta
   };
 }
 
-/** /inscripcion — convocatoria abierta con formulario completo de aplicación. */
+/** /inscripcion — open tryout call with the full application form. */
 export default async function ApplyPage({ params }: ApplyPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);

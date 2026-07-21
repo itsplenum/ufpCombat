@@ -1,7 +1,7 @@
 /**
- * Links de navegación principales. Las secciones de la home usan `/#ancla`
- * para funcionar desde cualquier página; rankings y tienda tienen ruta propia.
- * La key es la entrada en messages `nav.*`.
+ * Primary navigation links. Home sections use `/#anchor` so they work from
+ * any page; rankings and shop have routes of their own.
+ * The key is the entry in messages under `nav.*`.
  */
 export const primaryNavLinks = [
   { key: "event", href: "/#evento" },

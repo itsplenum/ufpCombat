@@ -5,7 +5,7 @@ import { routing } from "@/i18n/routing";
 import { getAllEvents, getEvent, getMainFight, isEventUpcoming } from "@/data";
 import type { Locale } from "@/data/types";
 import { site } from "@/data/site";
-import { formatEventDate } from "@/lib/format";
+import { formatEventDate, formatEventName } from "@/lib/format";
 import { L } from "@/lib/localize";
 import { localizedAlternates } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -22,7 +22,7 @@ interface EventPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-/** Ver la nota de la home: `isEventUpcoming()` se evalúa al prerenderizar. */
+/** See the note on the home page: `isEventUpcoming()` is evaluated at prerender time. */
 export const revalidate = 3600;
 
 export function generateStaticParams() {
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   };
 }
 
-/** Duración estimada de una función completa (preliminares + estelar). */
+/** Estimated length of a full card (prelims + main card). */
 const EVENT_DURATION_HOURS = 4;
 
 function eventEndDate(startIso: string): string {
@@ -58,9 +58,9 @@ function eventEndDate(startIso: string): string {
 }
 
 /**
- * Structured data para que Google indexe el evento como SportsEvent.
- * `eventStatus` solo aplica a eventos por venir: schema.org no tiene un
- * estado "finalizado", eso lo comunica `endDate` en el pasado.
+ * Structured data so Google indexes the event as a SportsEvent.
+ * `eventStatus` only applies to upcoming events: schema.org has no
+ * "finished" status, that's conveyed by an `endDate` in the past.
  */
 function eventJsonLd(event: NonNullable<ReturnType<typeof getEvent>>) {
   const isUpcoming = isEventUpcoming(event);
@@ -95,7 +95,7 @@ function eventJsonLd(event: NonNullable<ReturnType<typeof getEvent>>) {
   };
 }
 
-/** Página de evento: póster, horarios, cartelera completa (con resultados si ya pasó), boletos y arena. */
+/** Event page: poster, schedule, full fight card (with results if it already happened), tickets and venue. */
 export default async function EventPage({ params }: EventPageProps) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
@@ -119,7 +119,7 @@ export default async function EventPage({ params }: EventPageProps) {
         {isUpcoming && event.tickets.length > 0 ? (
           <Section id="boletos" background="ticket-gradient" width="md" borderTop>
             <SectionHeading title={tTickets("title")} titleAccent={tTickets("titleAccent")} />
-            <TicketGrid tickets={event.tickets} />
+            <TicketGrid tickets={event.tickets} eventName={formatEventName(event)} />
           </Section>
         ) : null}
 

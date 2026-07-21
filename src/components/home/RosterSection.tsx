@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FighterCard } from "@/components/fighter/FighterCard";
 
-/** Los primeros 8 peleadores del roster tienen presencia en la home. */
+/** Only the first 8 fighters on the roster get a spot on the home page. */
 const HOME_ROSTER_SIZE = 8;
 
 export async function RosterSection() {

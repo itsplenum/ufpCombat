@@ -8,7 +8,7 @@ interface FightCardSectionProps {
   event: UFPEvent;
 }
 
-/** Cartelera del próximo evento (sin la estelar, que tiene su propia sección). */
+/** Fight card for the upcoming event (excluding the main event, which has its own section). */
 export async function FightCardSection({ event }: FightCardSectionProps) {
   const t = await getTranslations("sections.fightCard");
 

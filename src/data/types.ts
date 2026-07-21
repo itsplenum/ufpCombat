@@ -1,15 +1,14 @@
 /**
- * Modelos de datos del sitio UFP.
+ * Data models for the UFP site.
  *
- * Estos tipos son la "fuente de la verdad" del contenido: los shapes vienen
- * de los prototipos del handoff de diseño y están pensados para mapear 1:1
- * a un CMS headless en el futuro (solo habría que volver async los
- * selectores de `data/index.ts`).
+ * These types are the source of truth for content: the shapes come from the
+ * design handoff prototypes and are meant to map 1:1 onto a headless CMS later
+ * on (all it would take is making the selectors in `data/index.ts` async).
  */
 
 export type Locale = "es" | "en";
 
-/** Copy que cambia por idioma. Nombres de marca (eventos, apodos) NO se localizan. */
+/** Copy that changes per language. Brand names (events, nicknames) are NOT localized. */
 export type Localized = { es: string; en: string };
 
 export type Discipline = "mma" | "boxing";
@@ -40,7 +39,7 @@ export type FightOutcome = "W" | "L" | "D";
 export interface FightHistoryEntry {
   outcome: FightOutcome;
   opponentName: string;
-  /** Presente solo si el rival está en el roster (habilita el link al perfil). */
+  /** Set only when the opponent is on the roster (enables the link to their profile). */
   opponentSlug?: string;
   method: Localized;
   eventName: string;
@@ -60,60 +59,61 @@ export interface Fighter {
   firstName: string;
   lastName: string;
   nickname?: string;
-  /** Nombre corto para cards y cartelera, ej. '"El Verdugo" Ríos'. */
+  /** Short name for cards and the fight card, e.g. '"El Verdugo" Ríos'. */
   shortName: string;
   discipline: Discipline;
-  /** Referencia a RankingDivision.id */
+  /** Reference to Division.id */
   divisionId: string;
   record: FighterRecord;
   stats: FighterStats;
   isChampion: boolean;
-  /** Posición como retador (si aplica). */
+  /** Contender position (when applicable). */
   rank?: number;
   history: FightHistoryEntry[];
   videos: VideoClip[];
-  /** Sin foto ⇒ se renderiza PlaceholderImage con rayas. */
+  /** No photo ⇒ PlaceholderImage renders its stripes instead. */
   photoFull?: string;
   photoBust?: string;
 }
 
 export interface FightResult {
-  /** Esquina ganadora; null = empate / sin decisión. */
+  /** Winning corner; null = draw / no decision. */
   winner: "red" | "blue" | null;
   method: Localized;
   round?: number;
   time?: string;
-  /** Resumen para cards de resultados, ej. "Ríos vence a Herrera por KO — R3". */
+  /** Summary for result cards, e.g. "Ríos vence a Herrera por KO — R3". */
   summary: Localized;
 }
 
 /**
- * Esquina de una pelea. Con `slug` se resuelve contra el roster (récord y
- * link al perfil); sin slug es un rival externo que solo aporta nombre/récord.
+ * One corner of a fight. With a `slug` it resolves against the roster (record
+ * and profile link); without one it is an outside opponent contributing only a
+ * name and a record.
  */
 export interface FightCorner {
   slug?: string;
   name: string;
-  /** Récord como texto para rivales fuera del roster. */
+  /** Record as plain text, for opponents who are not on the roster. */
   recordText?: string;
-  /** Ej. "CAMPEÓN" / "#1". */
+  /** E.g. "CAMPEÓN" / "#1". */
   tag?: Localized;
 }
 
 export interface Fight {
   id: string;
-  /** Posición en la cartelera: 0 = pelea estelar. */
+  /** Slot on the fight card: 0 = main event. */
   order: number;
-  /** Ej. "Estelar · Título", "Co-estelar", "Boxeo 10R". */
+  /** E.g. "Estelar · Título", "Co-estelar", "Boxeo 10R". */
   label: Localized;
   discipline: Discipline;
-  /** Ej. "MMA · Wélter · 5R". */
+  /** E.g. "MMA · Wélter · 5R". */
   divisionLabel: Localized;
   rounds: number;
   isTitleFight: boolean;
   red: FightCorner;
   blue: FightCorner;
-  /** Solo en eventos pasados. */
+  /** Past events only. */
   result?: FightResult;
 }
 
@@ -121,7 +121,7 @@ export interface TicketTier {
   id: string;
   zone: string;
   price: number;
-  currency: "MXN";
+  currency: "COP";
   perks: Localized;
   featured?: boolean;
   soldOut?: boolean;
@@ -146,49 +146,49 @@ export interface EventScheduleItem {
 export interface UFPEvent {
   slug: string;
   number: number;
-  /** Subtítulo de marca, ej. "Sangre Nueva" — no se localiza. */
+  /** Brand subtitle, e.g. "Sangre Nueva" — not localized. */
   title: string;
   status: EventStatus;
-  /** ISO con zona horaria — target del countdown. */
+  /** ISO string with a time zone offset — the countdown target. */
   date: string;
   venue: Venue;
   schedule: EventScheduleItem[];
   fights: Fight[];
   tickets: TicketTier[];
-  /** Destacado del evento (para cards de resultados de eventos pasados). */
+  /** Event highlight (used by result cards for past events). */
   highlight?: { summary: Localized; videoDuration?: string };
 }
 
-/** División de peso — entidad propia para que peleadores y rankings la referencien. */
+/** Weight division — its own entity so fighters and rankings can reference it. */
 export interface Division {
   id: string;
-  /** Ej. "Peso Wélter · MMA". */
+  /** E.g. "Peso Wélter · MMA". */
   name: Localized;
-  /** Para cards compactas, ej. "Wélter" / "Boxeo Mediano". */
+  /** For compact cards, e.g. "Wélter" / "Boxeo Mediano". */
   shortName: Localized;
   discipline: Discipline;
 }
 
-/** Movimiento en el ranking desde la última actualización del comité. */
+/** Movement in the rankings since the committee's last update. */
 export type RankMovement = number | "new";
 
 export interface RankedContender {
   rank: number;
-  /** Presente solo si el peleador está en el roster. */
+  /** Set only when the fighter is on the roster. */
   slug?: string;
   name: string;
-  /** Récord como texto, ej. "21-1-0" (retadores fuera del roster no tienen objeto Fighter). */
+  /** Record as plain text, e.g. "21-1-0" (contenders outside the roster have no Fighter object). */
   record: string;
   movement: RankMovement;
-  /** Última pelea, ej. "G — KO vs. Herrera · UFP 16". */
+  /** Last fight, e.g. "G — KO vs. Herrera · UFP 5". */
   lastFight?: Localized;
 }
 
 export interface DivisionRanking {
   divisionId: string;
-  /** null ⇒ título vacante. */
+  /** null ⇒ vacant title. */
   championSlug: string | null;
-  /** Defensas del título del campeón actual. */
+  /** Title defenses by the current champion. */
   defenses: number;
   contenders: RankedContender[];
 }
@@ -199,7 +199,7 @@ export interface Product {
   slug: string;
   name: Localized;
   price: number;
-  currency: "MXN";
+  currency: "COP";
   category: ProductCategory;
   image?: string;
 }

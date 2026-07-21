@@ -6,8 +6,8 @@ import { formatDateBadge, formatEventDate, formatRecordWithFinish } from "@/lib/
 import { L } from "@/lib/localize";
 
 /**
- * View-model de /rankings: todo localizado y resuelto en servidor para que
- * el board cliente (filtro por disciplina) solo reciba strings serializables.
+ * View model for /rankings: everything is localized and resolved on the server
+ * so the client board (discipline filter) only receives serializable strings.
  */
 
 export interface ContenderView {

@@ -10,7 +10,7 @@ interface FighterCardProps {
   fighter: Fighter;
 }
 
-/** Card de roster: foto, nombre, récord y división. */
+/** Roster card: photo, name, record and division. */
 export async function FighterCard({ fighter }: FighterCardProps) {
   const t = await getTranslations("fight");
   const locale = (await getLocale()) as Locale;

@@ -5,11 +5,11 @@ interface ProductCardProps {
   name: string;
   priceLabel: string;
   image?: string;
-  /** Slot para el botón de carrito (solo en /tienda). */
+  /** Slot for the cart button (only on /tienda). */
   action?: ReactNode;
 }
 
-/** Card de producto — puro, usable en server (home) y client (catálogo con carrito). */
+/** Product card — pure, usable on the server (home) and the client (catalog with cart). */
 export function ProductCard({ name, priceLabel, image, action }: ProductCardProps) {
   return (
     <div className="flex flex-col gap-2.5 transition-transform duration-200 hover:-translate-y-1">

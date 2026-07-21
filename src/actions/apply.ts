@@ -7,8 +7,8 @@ export interface FormActionState {
 }
 
 /**
- * Recibe la aplicación corta de la home. Hoy solo registra en el servidor;
- * aquí se conectará el email/CRM cuando exista.
+ * Receives the short application from the home page. Today it only logs on
+ * the server; this is where email/CRM will be wired up once it exists.
  */
 export async function submitFighterApplication(
   _previous: FormActionState,
@@ -24,11 +24,11 @@ export async function submitFighterApplication(
     return { status: "error" };
   }
 
-  console.log("[UFP] Aplicación de peleador recibida:", parsed.data);
+  console.log("[UFP] Fighter application received:", parsed.data);
   return { status: "success" };
 }
 
-/** Recibe la aplicación completa de /inscripcion. */
+/** Receives the full application from /inscripcion. */
 export async function submitFullFighterApplication(
   _previous: FormActionState,
   formData: FormData,
@@ -54,6 +54,6 @@ export async function submitFullFighterApplication(
     return { status: "error" };
   }
 
-  console.log("[UFP] Aplicación completa de peleador recibida:", parsed.data);
+  console.log("[UFP] Full fighter application received:", parsed.data);
   return { status: "success" };
 }

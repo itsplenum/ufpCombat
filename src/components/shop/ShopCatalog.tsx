@@ -107,7 +107,7 @@ function CatalogGrid({ products, labels }: ShopCatalogProps) {
   );
 }
 
-/** Catálogo con filtro por categoría + carrito mock persistente. */
+/** Catalog with category filter + persistent mock cart. */
 export function ShopCatalog({ products, labels }: ShopCatalogProps) {
   return (
     <CartProvider>

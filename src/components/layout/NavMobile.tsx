@@ -12,12 +12,12 @@ interface NavMobileProps {
   closeLabel: string;
 }
 
-/** Menú hamburguesa para pantallas < lg. */
+/** Hamburger menu for screens below lg. */
 export function NavMobile({ links, ticketsLabel, openLabel, closeLabel }: NavMobileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const panelId = useId();
 
-  /* Con el overlay abierto: Escape cierra y el body no scrollea detrás. */
+  /* While the overlay is open: Escape closes it and the body can't scroll behind it. */
   useEffect(() => {
     if (!isOpen) return;
 

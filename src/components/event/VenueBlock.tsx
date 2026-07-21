@@ -8,7 +8,7 @@ interface VenueBlockProps {
   venue: Venue;
 }
 
-/** Bloque de arena: mapa/foto + dirección y datos clave en monospace. */
+/** Venue block: map/photo + address and key facts in monospace. */
 export async function VenueBlock({ venue }: VenueBlockProps) {
   const t = await getTranslations("eventPage");
   const locale = (await getLocale()) as Locale;

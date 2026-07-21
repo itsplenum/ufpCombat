@@ -7,7 +7,7 @@ interface ChampionCardProps {
   ranking: DivisionRanking;
 }
 
-/** Card compacta de campeón + top 3 retadores (teaser de rankings en la home). */
+/** Compact card with the champion + top 3 contenders (rankings teaser on the home page). */
 export async function ChampionCard({ ranking }: ChampionCardProps) {
   const t = await getTranslations("sections.rankings");
   const locale = (await getLocale()) as Locale;

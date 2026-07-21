@@ -23,10 +23,11 @@ interface HomePageProps {
 }
 
 /**
- * Qué evento es "el próximo" se decide comparando contra la fecha actual, y esa
- * comparación se congela al prerenderizar. Sin ISR, un sitio construido hoy
- * seguiría anunciando un evento ya pasado hasta el siguiente deploy.
- * Una hora es de sobra: el contenido cambia por evento, no por minuto.
+ * Which event counts as "the next one" is decided by comparing against the
+ * current date, and that comparison is frozen at prerender time. Without ISR,
+ * a site built today would keep announcing an event that already happened
+ * until the next deploy. An hour is plenty: the content changes per event,
+ * not per minute.
  */
 export const revalidate = 3600;
 
@@ -44,11 +45,11 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 }
 
 /**
- * Home one-pager: el póster del próximo evento + todas las áreas de la promotora.
+ * Home one-pager: the next event's poster + every area of the promotion.
  *
- * Sin evento agendado la home NO se cae: encabeza con el último evento
- * realizado y su cartelera con resultados, y el resto de las secciones
- * (roster, rankings, tienda, patrocinios) se muestran igual.
+ * With no event scheduled the home page does NOT break: it leads with the
+ * latest event that took place and its fight card with results, and the rest
+ * of the sections (roster, rankings, shop, sponsorships) still show up.
  */
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;

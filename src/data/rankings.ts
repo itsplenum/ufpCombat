@@ -1,13 +1,13 @@
 import type { DivisionRanking, RankedContender } from "./types";
 
 /**
- * Rankings oficiales UFP — actualizados por el comité tras cada evento.
- * Última actualización: día siguiente a UFP 16.
+ * Official UFP rankings — updated by the committee after every event.
+ * Last update: the day after UFP 5.
  */
 export const rankingsUpdatedAt = "2026-05-24";
 
 /**
- * Libra por libra: los mejores del roster sin importar división.
+ * Pound for pound: the best of the roster regardless of division.
  */
 export const poundForPound: RankedContender[] = [
   { rank: 1, slug: "marco-rios", name: "Marco Ríos", record: "18-2-0", movement: 0 },
@@ -22,7 +22,7 @@ export const poundForPound: RankedContender[] = [
   { rank: 10, slug: "bruno-salazar", name: "Bruno Salazar", record: "7-1-0", movement: "new" },
 ];
 
-/** Rankings por división. El orden define el orden de render en /rankings. */
+/** Per-division rankings. This order is the render order on /rankings. */
 export const divisionRankings: DivisionRanking[] = [
   {
     divisionId: "mma-welter",
@@ -35,7 +35,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Dmitri Volkov",
         record: "21-1-0",
         movement: 1,
-        lastFight: { es: "G — Dec. vs. Castillo · UFP 15", en: "W — Dec. vs. Castillo · UFP 15" },
+        lastFight: { es: "G — Dec. vs. Castillo · UFP 4", en: "W — Dec. vs. Castillo · UFP 4" },
       },
       {
         rank: 2,
@@ -43,14 +43,14 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Andrés Herrera",
         record: "16-4-0",
         movement: -1,
-        lastFight: { es: "P — KO vs. Ríos · UFP 16", en: "L — KO vs. Ríos · UFP 16" },
+        lastFight: { es: "P — KO vs. Ríos · UFP 5", en: "L — KO vs. Ríos · UFP 5" },
       },
       {
         rank: 3,
         name: "Javier Castillo",
         record: "13-4-0",
         movement: 0,
-        lastFight: { es: "P — Dec. vs. Volkov · UFP 15", en: "L — Dec. vs. Volkov · UFP 15" },
+        lastFight: { es: "P — Dec. vs. Volkov · UFP 4", en: "L — Dec. vs. Volkov · UFP 4" },
       },
       { rank: 4, name: "Rafael Duarte", record: "14-3-0", movement: 1 },
       { rank: 5, name: "Caio Ferreira", record: "16-5-0", movement: -1 },
@@ -72,7 +72,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Adrián Vega",
         record: "12-3-0",
         movement: 0,
-        lastFight: { es: "G — Sum. vs. Fuentes · UFP 16", en: "W — Sub. vs. Fuentes · UFP 16" },
+        lastFight: { es: "G — Sum. vs. Fuentes · UFP 5", en: "W — Sub. vs. Fuentes · UFP 5" },
       },
       {
         rank: 2,
@@ -80,14 +80,14 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Kenji Nakamura",
         record: "15-4-0",
         movement: 0,
-        lastFight: { es: "P — Dec. vs. Fuentes · UFP 13", en: "L — Dec. vs. Fuentes · UFP 13" },
+        lastFight: { es: "P — Dec. vs. Fuentes · UFP 2", en: "L — Dec. vs. Fuentes · UFP 2" },
       },
       {
         rank: 3,
         name: "Rodrigo Fuentes",
         record: "14-5-0",
         movement: -1,
-        lastFight: { es: "P — Sum. vs. Vega · UFP 16", en: "L — Sub. vs. Vega · UFP 16" },
+        lastFight: { es: "P — Sum. vs. Vega · UFP 5", en: "L — Sub. vs. Vega · UFP 5" },
       },
       { rank: 4, name: "Danny Okoye", record: "10-2-0", movement: 0 },
       { rank: 5, name: "Facundo Lima", record: "11-3-0", movement: 1 },
@@ -109,21 +109,21 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Tyrone Bell",
         record: "19-3-1",
         movement: 0,
-        lastFight: { es: "G — Dec. vs. García · UFP 16", en: "W — Dec. vs. García · UFP 16" },
+        lastFight: { es: "G — Dec. vs. García · UFP 5", en: "W — Dec. vs. García · UFP 5" },
       },
       {
         rank: 2,
         name: "Marcus Okafor",
         record: "21-2-0",
         movement: 0,
-        lastFight: { es: "P — TKO vs. Cruz · UFP 14", en: "L — TKO vs. Cruz · UFP 14" },
+        lastFight: { es: "P — TKO vs. Cruz · UFP 3", en: "L — TKO vs. Cruz · UFP 3" },
       },
       {
         rank: 3,
         name: "Saúl García",
         record: "17-6-0",
         movement: -1,
-        lastFight: { es: "P — Dec. vs. Bell · UFP 16", en: "L — Dec. vs. Bell · UFP 16" },
+        lastFight: { es: "P — Dec. vs. Bell · UFP 5", en: "L — Dec. vs. Bell · UFP 5" },
       },
       { rank: 4, name: "Héctor Manzano", record: "15-2-0", movement: 1 },
       { rank: 5, name: "Andrej Kovač", record: "18-4-0", movement: 0 },
@@ -145,7 +145,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Sofía Mendoza",
         record: "9-0-0",
         movement: 0,
-        lastFight: { es: "G — Dec. vs. López · UFP 15", en: "W — Dec. vs. López · UFP 15" },
+        lastFight: { es: "G — Dec. vs. López · UFP 4", en: "W — Dec. vs. López · UFP 4" },
       },
       {
         rank: 2,
@@ -153,7 +153,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Anna Kovács",
         record: "8-2-0",
         movement: 1,
-        lastFight: { es: "G — Sum. vs. Silva · UFP 14", en: "W — Sub. vs. Silva · UFP 14" },
+        lastFight: { es: "G — Sum. vs. Silva · UFP 3", en: "W — Sub. vs. Silva · UFP 3" },
       },
       { rank: 3, name: "Valeria López", record: "11-2-0", movement: -1 },
       { rank: 4, name: "Marta Silva", record: "7-4-0", movement: 0 },
@@ -171,7 +171,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Bruno Salazar",
         record: "7-1-0",
         movement: 1,
-        lastFight: { es: "G — KO vs. Pinto · UFP 16", en: "W — KO vs. Pinto · UFP 16" },
+        lastFight: { es: "G — KO vs. Pinto · UFP 5", en: "W — KO vs. Pinto · UFP 5" },
       },
       {
         rank: 2,
@@ -179,7 +179,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Jamal Carter",
         record: "6-1-0",
         movement: -1,
-        lastFight: { es: "G — TKO vs. Vidal · UFP 15", en: "W — TKO vs. Vidal · UFP 15" },
+        lastFight: { es: "G — TKO vs. Vidal · UFP 4", en: "W — TKO vs. Vidal · UFP 4" },
       },
       { rank: 3, name: "Álvaro Pinto", record: "6-3-0", movement: 0 },
       { rank: 4, name: "Nico Vidal", record: "8-3-0", movement: 0 },
@@ -197,7 +197,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Diego Paz",
         record: "11-0-0",
         movement: 0,
-        lastFight: { es: "G — KO vs. Rocha · UFP 15", en: "W — KO vs. Rocha · UFP 15" },
+        lastFight: { es: "G — KO vs. Rocha · UFP 4", en: "W — KO vs. Rocha · UFP 4" },
       },
       {
         rank: 2,
@@ -205,7 +205,7 @@ export const divisionRankings: DivisionRanking[] = [
         name: "Luca Moretti",
         record: "10-2-0",
         movement: 1,
-        lastFight: { es: "G — KO vs. Doyle · UFP 16", en: "W — KO vs. Doyle · UFP 16" },
+        lastFight: { es: "G — KO vs. Doyle · UFP 5", en: "W — KO vs. Doyle · UFP 5" },
       },
       { rank: 3, name: "Felipe Rocha", record: "12-3-0", movement: -1 },
       { rank: 4, name: "Owen Doyle", record: "9-4-0", movement: 0 },

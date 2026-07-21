@@ -11,7 +11,7 @@ interface PoundForPoundSectionProps {
   newLabel: string;
 }
 
-/** Top 10 libra por libra: el #1 en card destacada + lista del 2 al 10. */
+/** Pound-for-pound top 10: #1 in a featured card + a list from 2 to 10. */
 export async function PoundForPoundSection({ entries, newLabel }: PoundForPoundSectionProps) {
   const t = await getTranslations("rankingsPage");
 
@@ -22,7 +22,7 @@ export async function PoundForPoundSection({ entries, newLabel }: PoundForPoundS
     <Section id="p4p" background="ink-2" width="md" borderTop>
       <SectionHeading title={t("p4pTitle")} kicker={t("p4pKicker")} />
       <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-        {/* El #1 P4P */}
+        {/* The P4P #1 */}
         <Link
           href={first.href ?? "/rankings"}
           className="relative flex flex-col justify-end gap-2 overflow-hidden border border-blood/40 bg-linear-160 from-surface-warm to-surface p-8 transition-colors hover:border-blood"

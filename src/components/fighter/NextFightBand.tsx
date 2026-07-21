@@ -8,7 +8,7 @@ interface NextFightBandProps {
   fighterSlug: string;
 }
 
-/** Banda roja clickeable con la próxima pelea agendada del peleador. */
+/** Clickable red band showing the fighter's next scheduled fight. */
 export async function NextFightBand({ fighterSlug }: NextFightBandProps) {
   const t = await getTranslations("fighterPage");
   const locale = (await getLocale()) as Locale;

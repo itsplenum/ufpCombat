@@ -4,12 +4,12 @@ import { OutlineText } from "@/components/ui/OutlineText";
 import { CtaButton } from "@/components/ui/CtaButton";
 
 /**
- * 404 dentro de un locale válido — slug de peleador/evento inexistente, links
- * viejos, URLs compartidas mal. Renderiza dentro del layout del locale, así que
- * conserva nav, fuentes y footer.
+ * 404 inside a valid locale — nonexistent fighter/event slug, stale links,
+ * badly shared URLs. It renders inside the locale layout, so it keeps the
+ * nav, fonts and footer.
  *
- * Las URLs que no matchean ninguna ruta (locale inválido incluido) las atiende
- * `src/app/global-not-found.tsx`, que no puede depender de este layout.
+ * URLs that don't match any route (invalid locale included) are handled by
+ * `src/app/global-not-found.tsx`, which can't rely on this layout.
  */
 export default async function LocaleNotFound() {
   const t = await getTranslations("notFound");

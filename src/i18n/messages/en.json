@@ -55,8 +55,8 @@
     "tickets": {
       "title": "Tickets",
       "titleAccent": "/ Boletos",
-      "buy": "Reserve ticket",
-      "buySubject": "Ticket reservation — {zone} zone"
+      "buy": "Buy via WhatsApp",
+      "buyMessage": "Hi! I'd like to buy tickets for {event} — {zone} zone ({price}). Can you help?"
     },
     "fighters": {
       "title": "Fighters",

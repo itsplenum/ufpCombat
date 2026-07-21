@@ -11,7 +11,7 @@ interface EventHeroProps {
   event: UFPEvent;
 }
 
-/** Hero tipo póster: los dos estelares frente a frente con el título del evento al centro. */
+/** Poster-style hero: the two main-event fighters face to face with the event title in the middle. */
 export async function EventHero({ event }: EventHeroProps) {
   const tHero = await getTranslations("hero");
   const tEvent = await getTranslations("eventPage");
@@ -23,8 +23,8 @@ export async function EventHero({ event }: EventHeroProps) {
   const blue = mainFight ? resolveCorner(mainFight.blue) : undefined;
   const isUpcoming = isEventUpcoming(event);
 
-  // Nombres separados: concatenar y volver a partir por " vs " rompe con
-  // cualquier apellido que contenga esa secuencia.
+  // Names kept separate: joining them and splitting back on " vs " breaks on
+  // any last name that happens to contain that sequence.
   const redName = red ? (red.fighter?.lastName ?? red.corner.name) : null;
   const blueName = blue ? (blue.fighter?.lastName ?? blue.corner.name) : null;
 

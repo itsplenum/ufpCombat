@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductCard } from "@/components/shop/ProductCard";
 
-/** Vitrina de merch: 4 productos destacados; el catálogo completo vive en /tienda. */
+/** Merch showcase: 4 featured products; the full catalog lives at /tienda. */
 export async function ShopTeaserSection() {
   const t = await getTranslations("sections.shop");
   const locale = (await getLocale()) as Locale;

@@ -10,7 +10,7 @@ interface ResultCardProps {
   event: UFPEvent;
 }
 
-/** Card de evento pasado: thumbnail de video + resultado destacado. */
+/** Past-event card: video thumbnail + headline result. */
 export async function ResultCard({ event }: ResultCardProps) {
   const locale = (await getLocale()) as Locale;
 

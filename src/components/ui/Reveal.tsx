@@ -4,17 +4,17 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 
 interface RevealProps {
   children: ReactNode;
-  /** Retraso en segundos (para escalonar elementos de una misma sección). */
+  /** Delay in seconds (to stagger elements within the same section). */
   delay?: number;
-  /** true = anima al entrar al viewport; false = anima al montar (heros). */
+  /** true = animate on entering the viewport; false = animate on mount (heros). */
   onScroll?: boolean;
   className?: string;
 }
 
-/** Fases del reveal. `server` = tal cual salió del SSR: visible, sin estilos. */
+/** Reveal phases. `server` = exactly as SSR emitted it: visible, unstyled. */
 type RevealPhase = "server" | "hidden" | "revealed";
 
-/** `useLayoutEffect` avisa en SSR; en el servidor no hay nada que medir igual. */
+/** `useLayoutEffect` warns during SSR, and there is nothing to measure on the server anyway. */
 const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 function prefersReducedMotion(): boolean {
@@ -22,13 +22,13 @@ function prefersReducedMotion(): boolean {
 }
 
 /**
- * Entrada estándar del sitio: translateY(26px) → 0 + fade, .8s ease-out
- * (keyframes `--animate-rise` de `globals.css`).
+ * The site's standard entrance: translateY(26px) → 0 + fade, .8s ease-out
+ * (`--animate-rise` keyframes from `globals.css`).
  *
- * El HTML del servidor sale **visible y sin estilos inline**: si el JS no
- * llega a correr, todo el contenido se ve igual. El estado oculto se aplica
- * en un layout effect —antes del paint, así que no hay flash— y solo si el
- * usuario no pidió reducir movimiento.
+ * The server HTML ships **visible and without inline styles**: if the JS never
+ * runs, all the content still shows up. The hidden state is applied inside a
+ * layout effect —before paint, so there is no flash— and only if the user
+ * hasn't asked to reduce motion.
  */
 export function Reveal({ children, delay = 0, onScroll = true, className }: RevealProps) {
   const elementRef = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ export function Reveal({ children, delay = 0, onScroll = true, className }: Reve
     if (prefersReducedMotion()) return;
 
     const element = elementRef.current;
-    // Sin scroll-trigger (o sin IntersectionObserver) anima directo al montar.
+    // With no scroll trigger (or no IntersectionObserver) animate straight away on mount.
     if (!onScroll || !element || typeof IntersectionObserver === "undefined") {
       setPhase("revealed");
       return;

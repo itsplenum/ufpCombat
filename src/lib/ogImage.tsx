@@ -6,21 +6,30 @@ export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
 interface OgImageContent {
-  /** Línea pequeña superior, ej. "SÁB 15 AGO 2026 · ARENA CIUDAD". */
+  /** Small top line, e.g. "VIE 7 AGO 2026 · MOVISTAR ARENA". */
   eyebrow?: string;
-  /** Línea principal en crema, ej. "UFP 17". */
+  /** Main line in cream, e.g. "UFP 6". */
   title: string;
-  /** Línea en rojo sangre, ej. "SANGRE NUEVA". */
+  /** Blood-red line, e.g. "SANGRE NUEVA". */
   titleAccent?: string;
-  /** Línea inferior, ej. "RÍOS VS VOLKOV". */
+  /** Bottom line, e.g. "RÍOS VS VOLKOV". */
   footer?: string;
 }
 
-/** Plantilla única de OG images del sitio: negro + rojo sangre + Anton. */
+/**
+ * The font is read once per process, not per request: OG routes are dynamic
+ * (`ƒ`), so every crawler hit would otherwise touch the disk again.
+ */
+let antonFont: Promise<Buffer> | undefined;
+
+function loadAntonFont(): Promise<Buffer> {
+  antonFont ??= readFile(join(process.cwd(), "src/assets/fonts/Anton-Regular.ttf"));
+  return antonFont;
+}
+
+/** Single OG image template for the site: black + blood red + Anton. */
 export async function renderOgImage(content: OgImageContent): Promise<ImageResponse> {
-  const anton = await readFile(
-    join(process.cwd(), "src/assets/fonts/Anton-Regular.ttf"),
-  );
+  const anton = await loadAntonFont();
 
   return new ImageResponse(
     (

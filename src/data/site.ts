@@ -1,24 +1,31 @@
 import type { Localized } from "./types";
 
-/** Constantes globales del sitio — un solo lugar para marca y contacto. */
+/** Global site constants — a single place for branding and contact details. */
 export const site = {
   name: "UFP",
   fullName: "Ultimate Fight Promotions",
   domain: "https://ufpcombat.com",
   contactEmail: "contacto@ufpcombat.com",
+  /**
+   * TODO(owner): replace with the real number before going to production.
+   * wa.me format: country code + number, digits only, no "+" and no spaces.
+   * E.g. Colombia: 573001234567
+   */
+  whatsappNumber: "570000000000",
 } as const;
 
 /**
- * Frases fijas del ticker superior. Deliberadamente bilingües (estilo cartel
- * de pelea) — no se traducen por locale. El anuncio del próximo evento NO va
- * acá: lo deriva `getTickerMessages()` de `data/index.ts` a partir del evento.
+ * Fixed phrases for the top ticker. Deliberately bilingual (fight-poster
+ * style) — they are not swapped per locale. The next-event announcement does
+ * NOT belong here: `getTickerMessages()` in `data/index.ts` derives it from
+ * the event itself.
  */
 export const tickerPhrases: string[] = [
   "Boletos a la venta / Tickets on sale now",
   "PPV disponible en todo el mundo / Worldwide PPV",
 ];
 
-/** Línea de copyright — el año se calcula, nunca se hardcodea. */
+/** Copyright line — the year is computed, never hardcoded. */
 export function getCopyright(): Localized {
   const year = new Date().getFullYear();
   return {

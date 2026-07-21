@@ -10,7 +10,7 @@ interface OgImageProps {
   params: Promise<{ slug: string }>;
 }
 
-/** OG image de evento: título + estelares. */
+/** Event OG image: title + main event fighters. */
 export default async function OgImage({ params }: OgImageProps) {
   const { slug } = await params;
   const event = getEvent(slug);

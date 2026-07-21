@@ -14,7 +14,7 @@ const outcomeColors: Record<FightHistoryEntry["outcome"], string> = {
   D: "text-cream/60",
 };
 
-/** Fila del historial: resultado, rival, método, evento y fecha. */
+/** History row: outcome, opponent, method, event and date. */
 export async function HistoryRow({ entry }: HistoryRowProps) {
   const t = await getTranslations("outcome");
   const locale = (await getLocale()) as Locale;

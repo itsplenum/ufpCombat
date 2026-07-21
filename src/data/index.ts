@@ -15,8 +15,8 @@ import type {
 } from "./types";
 
 /**
- * Selectores de contenido — único punto de acceso a los datos.
- * Para migrar a un CMS headless solo hay que volver async estas funciones.
+ * Content selectors — the single point of access to the data.
+ * Migrating to a headless CMS only requires making these functions async.
  */
 
 export function getAllFighters(): Fighter[] {
@@ -36,35 +36,35 @@ export function getEvent(slug: string): UFPEvent | undefined {
 }
 
 /**
- * Un evento es "próximo" mientras su fecha no haya pasado. La fecha manda:
- * así la home no se congela esperando que alguien edite `events.ts` a mano.
- * `status: "past"` funciona como override manual para archivar un evento
- * antes de tiempo (cancelado, pospuesto sin fecha nueva).
+ * An event counts as upcoming as long as its date has not passed. The date is
+ * what decides, so the home page never goes stale waiting for someone to edit
+ * `events.ts` by hand. `status: "past"` acts as a manual override to archive an
+ * event early (cancelled, or postponed with no new date).
  */
 export function isEventUpcoming(event: UFPEvent): boolean {
   return event.status !== "past" && new Date(event.date).getTime() > Date.now();
 }
 
-/** Próximo evento (el de fecha más cercana entre los que aún no ocurrieron). */
+/** The next event (the soonest one among those that have not happened yet). */
 export function getUpcomingEvent(): UFPEvent | undefined {
   return events
     .filter(isEventUpcoming)
     .sort((a, b) => a.date.localeCompare(b.date))[0];
 }
 
-/** Eventos ya ocurridos (o archivados a mano), del más reciente al más antiguo. */
+/** Events that already took place (or were archived by hand), newest first. */
 export function getPastEvents(): UFPEvent[] {
   return events
     .filter((event) => !isEventUpcoming(event))
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
-/** Último evento realizado — fallback de la home cuando no hay nada agendado. */
+/** Most recent event held — the home page falls back to it when nothing is scheduled. */
 export function getLatestPastEvent(): UFPEvent | undefined {
   return getPastEvents()[0];
 }
 
-/** Pelea estelar de un evento (order 0). */
+/** Main event of a card (order 0). */
 export function getMainFight(event: UFPEvent): Fight | undefined {
   return event.fights.find((fight) => fight.order === 0);
 }
@@ -78,9 +78,9 @@ export function getDivisionRankings(): DivisionRanking[] {
 }
 
 /**
- * Mensajes del ticker superior: el anuncio del próximo evento se deriva del
- * propio evento (número, título, fecha y sede viven solo en `events.ts`),
- * seguido de las frases fijas de `site.ts`.
+ * Messages for the top ticker: the announcement of the next event is derived
+ * from the event itself (number, title, date and venue live only in
+ * `events.ts`), followed by the fixed phrases from `site.ts`.
  */
 export function getTickerMessages(locale: Locale): string[] {
   const upcomingEvent = getUpcomingEvent();
@@ -96,7 +96,7 @@ export function getTickerMessages(locale: Locale): string[] {
   return [announcement, ...tickerPhrases];
 }
 
-/** Esquina resuelta contra el roster para render (récord + link a perfil). */
+/** A corner resolved against the roster for rendering (record + profile link). */
 export interface ResolvedCorner {
   corner: FightCorner;
   fighter?: Fighter;
@@ -109,7 +109,7 @@ export function resolveCorner(corner: FightCorner): ResolvedCorner {
   };
 }
 
-/** Próxima pelea agendada de un peleador (para la banda "Próxima pelea" del perfil). */
+/** A fighter's next scheduled bout (for the "Próxima pelea" band on their profile). */
 export function getNextFightFor(
   fighterSlug: string,
 ): { event: UFPEvent; fight: Fight; opponent: FightCorner } | undefined {

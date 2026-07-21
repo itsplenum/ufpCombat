@@ -15,7 +15,7 @@ interface SponsorsPageProps {
   params: Promise<{ locale: string }>;
 }
 
-/** Métricas de alcance para el pitch (placeholder hasta tener datos reales). */
+/** Reach metrics for the pitch (placeholder until we have real numbers). */
 const reachStats = [
   { key: "statAttendance", value: "20,500+" },
   { key: "statPpv", value: "2.1M" },
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: SponsorsPageProps): Promise<M
   };
 }
 
-/** /patrocinadores — pitch de alcance, paquetes y contacto comercial. */
+/** /patrocinadores — reach pitch, sponsorship packages and sales contact. */
 export default async function SponsorsPage({ params }: SponsorsPageProps) {
   const { locale: rawLocale } = await params;
   setRequestLocale(rawLocale);

@@ -3,7 +3,7 @@ import { defineRouting } from "next-intl/routing";
 export const routing = defineRouting({
   locales: ["es", "en"],
   defaultLocale: "es",
-  // Español vive en la raíz (/), inglés bajo /en
+  // Spanish lives at the root (/), English under /en
   localePrefix: "as-needed",
 });
 

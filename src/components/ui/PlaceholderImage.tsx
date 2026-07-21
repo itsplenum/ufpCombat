@@ -2,7 +2,7 @@ import Image from "next/image";
 
 type PlaceholderVariant = "red" | "blue" | "neutral";
 
-/** Rayas diagonales del handoff: rojas (esquina roja), azules (esquina azul) o neutras. */
+/** Diagonal stripes from the handoff: red (red corner), blue (blue corner) or neutral. */
 const variantBackground: Record<PlaceholderVariant, string> = {
   red: "repeating-linear-gradient(45deg,#1A1113 0 12px,#140A0C 12px 24px)",
   blue: "repeating-linear-gradient(-45deg,#131317 0 12px,#0C0C10 12px 24px)",
@@ -10,18 +10,18 @@ const variantBackground: Record<PlaceholderVariant, string> = {
 };
 
 interface PlaceholderImageProps {
-  /** Etiqueta monospace visible mientras no hay foto real, ej. "foto peleador". */
+  /** Monospace label shown while there is no real photo, e.g. "foto peleador". */
   label: string;
   variant?: PlaceholderVariant;
-  /** Cuando llegue el asset real, pasar src/alt y el placeholder desaparece. */
+  /** Once the real asset lands, pass src/alt and the placeholder goes away. */
   src?: string;
   alt?: string;
   className?: string;
 }
 
 /**
- * Imagen con fallback al placeholder rayado del diseño.
- * Punto único de swap cuando lleguen fotos reales: solo agregar `src`.
+ * Image that falls back to the design's striped placeholder.
+ * Single swap point once real photos arrive: just add `src`.
  */
 export function PlaceholderImage({
   label,

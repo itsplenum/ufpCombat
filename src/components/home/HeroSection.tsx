@@ -10,7 +10,7 @@ interface HeroSectionProps {
   event: UFPEvent;
 }
 
-/** Hero de la home: watermark UFP, título del evento, countdown vivo y CTAs. */
+/** Home hero: UFP watermark, event title, live countdown and CTAs. */
 export async function HeroSection({ event }: HeroSectionProps) {
   const t = await getTranslations("hero");
   const locale = (await getLocale()) as Locale;
@@ -27,10 +27,10 @@ export async function HeroSection({ event }: HeroSectionProps) {
       id="hero"
       className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden bg-[radial-gradient(ellipse_90%_70%_at_50%_110%,rgba(122,12,20,.55),transparent_60%)]"
     >
-      {/* Textura de líneas diagonales */}
+      {/* Diagonal line texture */}
       <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(242,236,228,.02)_0_2px,transparent_2px_14px)]" />
 
-      {/* Watermark gigante */}
+      {/* Giant watermark */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[58%] select-none">
         <OutlineText
           strokeColor="rgba(193,18,31,.22)"

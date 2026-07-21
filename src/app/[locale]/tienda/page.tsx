@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
   };
 }
 
-/** /tienda — catálogo completo con filtro por categoría y carrito mock. */
+/** /tienda — full catalog with category filter and a mock cart. */
 export default async function ShopPage({ params }: ShopPageProps) {
   const { locale: rawLocale } = await params;
   setRequestLocale(rawLocale);

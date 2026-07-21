@@ -12,14 +12,14 @@ const backgroundClasses: Record<SectionBackground, string> = {
 interface SectionProps {
   id?: string;
   background?: SectionBackground;
-  /** Ancho del contenedor: md = 1100px (listas), lg = 1200px (grids). */
+  /** Container width: md = 1100px (lists), lg = 1200px (grids). */
   width?: "md" | "lg";
-  /** Borde superior rojo translúcido (separador de bloques fuertes). */
+  /** Translucent red top border (separator between heavy blocks). */
   borderTop?: boolean;
   children: ReactNode;
 }
 
-/** Sección estándar del sitio: padding 90/48, contenedor centrado y reveal de scroll. */
+/** Standard site section: 90/48 padding, centered container and scroll reveal. */
 export function Section({
   id,
   background = "ink",

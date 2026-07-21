@@ -1,4 +1,4 @@
-/** Estilos compartidos de campos de formulario (inputs oscuros con foco rojo). */
+/** Shared form field styles (dark inputs with a red focus state). */
 export const fieldClasses =
   "w-full border border-cream/20 bg-ink px-4 py-[13px] font-body text-sm text-cream outline-none transition-colors focus:border-blood placeholder:text-cream/40";
 

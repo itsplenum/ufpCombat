@@ -7,7 +7,7 @@ export interface CountdownParts {
 
 const pad = (value: number) => String(value).padStart(2, "0");
 
-/** Placeholder mientras el countdown no ha montado en el cliente. */
+/** Placeholder shown until the countdown has mounted on the client. */
 export const COUNTDOWN_PLACEHOLDER: CountdownParts = {
   days: "--",
   hours: "--",
@@ -15,7 +15,7 @@ export const COUNTDOWN_PLACEHOLDER: CountdownParts = {
   seconds: "--",
 };
 
-/** Descompone la distancia a `targetMs` en partes con ceros a la izquierda; no baja de 00. */
+/** Breaks the distance to `targetMs` into zero-padded parts; never goes below 00. */
 export function getCountdownParts(targetMs: number, nowMs: number): CountdownParts {
   let remaining = Math.max(0, targetMs - nowMs);
 
@@ -35,7 +35,7 @@ export function getCountdownParts(targetMs: number, nowMs: number): CountdownPar
   };
 }
 
-/** Días completos restantes (para "Faltan N días" en la página de evento). */
+/** Whole days remaining (for the "Faltan N días" line on the event page). */
 export function getDaysRemaining(targetIso: string, nowMs = Date.now()): number {
   return Math.max(0, Math.floor((new Date(targetIso).getTime() - nowMs) / 86_400_000));
 }

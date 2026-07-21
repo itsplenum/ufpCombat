@@ -7,11 +7,11 @@ import type { Locale } from "@/data/types";
 import { footerNavLinks } from "./navLinks";
 
 interface FooterProps {
-  /** Versión reducida para páginas interiores (evento, peleador). */
+  /** Trimmed-down variant for inner pages (event, fighter). */
   compact?: boolean;
 }
 
-/** Pie de página: "UFP" outline + nav secundaria + línea legal. */
+/** Page footer: outlined "UFP" + secondary nav + legal line. */
 export async function Footer({ compact = false }: FooterProps) {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;

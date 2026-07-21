@@ -1,16 +1,16 @@
 import { z } from "zod";
 
-/** Récord de pelea en formato n-n-n, ej. "5-1-0". */
+/** Fight record in n-n-n format, e.g. "5-1-0". */
 const recordPattern = /^\d{1,3}-\d{1,3}-\d{1,3}$/;
 
-/** Form corto de la home. */
+/** Short form on the home page. */
 export const fighterApplicationSchema = z.object({
   name: z.string().trim().min(2).max(120),
   record: z.string().trim().regex(recordPattern),
   division: z.string().trim().min(3).max(120),
 });
 
-/** Form completo de /inscripcion. */
+/** Full form on /inscripcion. */
 export const fullFighterApplicationSchema = fighterApplicationSchema.extend({
   email: z.email().trim(),
   phone: z.string().trim().min(7).max(25).optional().or(z.literal("")),

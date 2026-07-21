@@ -12,7 +12,7 @@ interface FighterHeroProps {
   fighter: Fighter;
 }
 
-/** Hero del perfil: watermark del apodo, badge, nombre, récord, bio y foto cuerpo completo. */
+/** Profile hero: nickname watermark, badge, name, record, bio and full-body photo. */
 export async function FighterHero({ fighter }: FighterHeroProps) {
   const t = await getTranslations("fighterPage");
   const locale = (await getLocale()) as Locale;
@@ -30,7 +30,7 @@ export async function FighterHero({ fighter }: FighterHeroProps) {
 
   return (
     <section className="relative overflow-hidden border-b border-blood/35 bg-[radial-gradient(ellipse_80%_90%_at_75%_50%,rgba(122,12,20,.45),transparent_65%)]">
-      {/* Watermark: apodo o apellido */}
+      {/* Watermark: nickname, falling back to last name */}
       <div className="pointer-events-none absolute -left-5 -top-10 select-none whitespace-nowrap">
         <OutlineText
           strokeColor="rgba(193,18,31,.18)"

@@ -8,7 +8,7 @@ interface VideoCardProps {
   video: VideoClip;
 }
 
-/** Card de video highlight con duración. */
+/** Highlight video card with duration. */
 export async function VideoCard({ video }: VideoCardProps) {
   const locale = (await getLocale()) as Locale;
 

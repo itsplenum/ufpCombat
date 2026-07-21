@@ -5,7 +5,7 @@ interface MovementBadgeProps {
   newLabel: string;
 }
 
-/** Indicador de movimiento en el ranking: ▲ sube (verde), ▼ baja (rojo), — igual, NEW debut. */
+/** Ranking movement indicator: ▲ up (green), ▼ down (red), — unchanged, NEW for a debut. */
 export function MovementBadge({ movement, newLabel }: MovementBadgeProps) {
   if (movement === "new") {
     return (

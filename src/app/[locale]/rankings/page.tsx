@@ -25,8 +25,9 @@ export async function generateMetadata({ params }: RankingsPageProps): Promise<M
 }
 
 /**
- * /rankings — centro de visualización y fuente de la verdad de los rankings UFP:
- * P4P top 10, campeones por división con defensas y top de retadores con movimientos.
+ * /rankings — the display hub and source of truth for the UFP rankings:
+ * P4P top 10, champions per division with title defenses, and the top
+ * contenders with their movement.
  */
 export default async function RankingsPage({ params }: RankingsPageProps) {
   const { locale } = await params;
@@ -38,7 +39,7 @@ export default async function RankingsPage({ params }: RankingsPageProps) {
   return (
     <>
       <main>
-        {/* Hero oficial */}
+        {/* Official hero */}
         <section className="relative overflow-hidden border-b border-blood/35 bg-[radial-gradient(ellipse_90%_80%_at_50%_-10%,rgba(122,12,20,.45),transparent_60%)]">
           <div className="pointer-events-none absolute -right-6 -top-12 select-none">
             <OutlineText

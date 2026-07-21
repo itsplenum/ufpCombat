@@ -6,7 +6,7 @@ interface BioGridProps {
   stats: FighterStats;
 }
 
-/** Datos físicos y de origen del peleador en monospace. */
+/** Fighter's physical stats and background, in monospace. */
 export async function BioGrid({ stats }: BioGridProps) {
   const tBio = await getTranslations("fighterPage");
   const tFight = await getTranslations("fight");

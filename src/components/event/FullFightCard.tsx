@@ -10,9 +10,9 @@ interface FullFightCardProps {
 }
 
 /**
- * Cartelera completa de un evento, con resultados si ya ocurrió.
- * Compartida por la página de evento y por la home cuando no hay
- * evento agendado y se muestra el último realizado.
+ * Full fight card for an event, including results once it has happened.
+ * Shared by the event page and by the home page, which falls back to the
+ * most recent event when nothing is scheduled.
  */
 export async function FullFightCard({ event }: FullFightCardProps) {
   const t = await getTranslations("eventPage");

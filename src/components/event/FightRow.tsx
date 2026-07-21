@@ -6,7 +6,7 @@ interface FightRowProps {
   fight: Fight;
 }
 
-/** Fila compacta de la cartelera en la home. */
+/** Compact fight card row used on the home page. */
 export async function FightRow({ fight }: FightRowProps) {
   const t = await getTranslations("fight");
   const locale = (await getLocale()) as Locale;

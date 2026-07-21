@@ -10,7 +10,7 @@ interface MainEventSectionProps {
   event: UFPEvent;
 }
 
-/** Pelea estelar del próximo evento con tale of the tape. */
+/** Main event of the upcoming card, with tale of the tape. */
 export async function MainEventSection({ event }: MainEventSectionProps) {
   const t = await getTranslations("sections.mainEvent");
   const locale = (await getLocale()) as Locale;

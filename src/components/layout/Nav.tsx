@@ -5,7 +5,7 @@ import { LanguageToggle } from "./LanguageToggle";
 import { NavMobile } from "./NavMobile";
 import { primaryNavLinks } from "./navLinks";
 
-/** Barra de navegación sticky presente en todas las páginas. */
+/** Sticky navigation bar present on every page. */
 export async function Nav() {
   const t = await getTranslations();
 

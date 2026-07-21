@@ -17,7 +17,7 @@ const cornerStyles: Record<
   Corner,
   { photo: string; plate: string; name: string; subtitle: string }
 > = {
-  // Sobre `bg-blood` el texto va en crema: el ink al 70% quedaba en ~2.3:1.
+  // On `bg-blood` the text has to be cream: ink at 70% only reached ~2.3:1.
   red: {
     photo: "border border-blood/35",
     plate: "bg-blood",
@@ -32,7 +32,7 @@ const cornerStyles: Record<
   },
 };
 
-/** "18-2-0 · 14 KO · CAMPEÓN" — récord del roster o texto suelto del rival externo. */
+/** "18-2-0 · 14 KO · CAMPEÓN" — roster record, or free-form text for an outside opponent. */
 function cornerSubtitle(resolved: ResolvedCorner, locale: Locale): string {
   const record = resolved.fighter
     ? formatRecordWithFinish(resolved.fighter.record)
@@ -42,8 +42,8 @@ function cornerSubtitle(resolved: ResolvedCorner, locale: Locale): string {
 }
 
 /**
- * Placa con el nombre de una esquina. Es link al perfil solo si el peleador
- * está en el roster — ambas esquinas se comportan igual.
+ * Name plate for one corner. Links to the profile only if the fighter is on
+ * the roster — both corners behave the same way.
  */
 function CornerPlate({
   resolved,
@@ -89,8 +89,8 @@ function CornerPlate({
 }
 
 /**
- * Comparativa de la pelea estelar: foto + placa de cada esquina y
- * stats frente a frente (altura, alcance, edad, guardia).
+ * Main-event comparison: photo + name plate for each corner and
+ * head-to-head stats (height, reach, age, stance).
  */
 export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
   const t = await getTranslations("fight");
@@ -129,7 +129,7 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
 
   return (
     <div className="grid items-stretch gap-8 md:grid-cols-[1fr_auto_1fr]">
-      {/* Esquina roja */}
+      {/* Red corner */}
       <div className="flex flex-col text-right">
         <PlaceholderImage
           label={`foto ${red.corner.name} — esquina roja`}
@@ -144,7 +144,7 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
         />
       </div>
 
-      {/* Centro: VS + stats comparadas */}
+      {/* Center: VS + compared stats */}
       <div className="flex flex-col items-center justify-center gap-2">
         <OutlineText strokeWidth="1.5px" className="text-[64px]">
           {t("vs")}
@@ -158,7 +158,7 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
         </div>
       </div>
 
-      {/* Esquina azul */}
+      {/* Blue corner */}
       <div className="flex flex-col">
         <PlaceholderImage
           label={`foto ${blue.corner.name} — esquina azul`}

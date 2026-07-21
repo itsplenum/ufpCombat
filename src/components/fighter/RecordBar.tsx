@@ -5,7 +5,7 @@ interface RecordBarProps {
   record: FighterRecord;
 }
 
-/** Barra de récord del perfil: victorias / derrotas / KO (rojo) / sumisión. */
+/** Profile record bar: wins / losses / KO (red) / submissions. */
 export async function RecordBar({ record }: RecordBarProps) {
   const t = await getTranslations("fighterPage");
 

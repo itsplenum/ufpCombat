@@ -42,7 +42,7 @@ function CornerName({
   return <span className={className}>{resolved.corner.name}</span>;
 }
 
-/** Card de pelea en la página de evento; muestra el resultado si ya ocurrió. */
+/** Fight card on the event page; shows the result once the fight has happened. */
 export async function FightCardItem({ fight }: FightCardItemProps) {
   const t = await getTranslations("eventPage");
   const tFight = await getTranslations("fight");

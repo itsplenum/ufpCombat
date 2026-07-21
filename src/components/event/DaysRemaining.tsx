@@ -11,8 +11,8 @@ interface DaysRemainingProps {
 }
 
 /**
- * "Faltan N días" calculado en el cliente: el servidor renderiza "—" y el
- * cliente lo reemplaza al hidratar (evita quedar congelado en el build estático).
+ * "N days to go", computed on the client: the server renders "—" and the
+ * client swaps it in on hydration (keeps it from freezing into the static build).
  */
 export function DaysRemaining({ targetIso }: DaysRemainingProps) {
   const t = useTranslations("eventPage");

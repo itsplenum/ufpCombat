@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
-/** Par de links ES / EN que conservan la ruta actual al cambiar de idioma. */
+/** ES / EN link pair that keeps the current route when switching languages. */
 export function LanguageToggle() {
   const pathname = usePathname();
   const activeLocale = useLocale();

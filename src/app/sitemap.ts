@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllEvents, getAllFighters } from "@/data";
 import { site } from "@/data/site";
 
-/** Rutas estáticas del sitio (sin locale). */
+/** Static site routes (locale-agnostic). */
 const staticPaths = ["/", "/rankings", "/tienda", "/inscripcion", "/patrocinadores"];
 
 function entry(path: string): MetadataRoute.Sitemap[number] {

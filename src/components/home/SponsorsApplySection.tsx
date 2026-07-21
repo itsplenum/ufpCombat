@@ -5,14 +5,14 @@ import { ApplicationFormMini } from "@/components/forms/ApplicationFormMini";
 
 const SPONSOR_LOGO_SLOTS = 3;
 
-/** Bloque doble: pitch a patrocinadores + convocatoria de peleadores. */
+/** Two-up block: sponsor pitch + fighter open call. */
 export async function SponsorsApplySection() {
   const t = await getTranslations("sections");
 
   return (
     <Section background="ink-2">
       <div className="grid gap-12 lg:grid-cols-2">
-        {/* Patrocinadores */}
+        {/* Sponsors */}
         <div id="patrocinadores" className="flex flex-col gap-[22px]">
           <h2 className="font-display text-3xl uppercase text-cream md:text-[40px]">
             {t("sponsors.title")}
@@ -33,7 +33,7 @@ export async function SponsorsApplySection() {
           </CtaButton>
         </div>
 
-        {/* Inscripción de peleadores */}
+        {/* Fighter sign-up */}
         <div
           id="inscripcion"
           className="flex flex-col gap-[22px] border border-blood/40 bg-linear-160 from-surface-warm to-surface p-6 md:p-9"

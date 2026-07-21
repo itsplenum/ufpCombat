@@ -6,7 +6,7 @@ interface ScheduleBandProps {
   schedule: EventScheduleItem[];
 }
 
-/** Banda roja de horarios del evento. */
+/** Red band listing the event's schedule times. */
 export async function ScheduleBand({ schedule }: ScheduleBandProps) {
   const locale = (await getLocale()) as Locale;
 

@@ -6,7 +6,7 @@ export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt = "UFP · Ultimate Fight Promotions";
 
-/** OG image de la home: el próximo evento como póster. */
+/** Home OG image: the next event as a poster. */
 export default async function OgImage() {
   const event = getUpcomingEvent();
 

@@ -2,7 +2,7 @@ interface JsonLdProps {
   data: Record<string, unknown>;
 }
 
-/** Structured data (schema.org) embebido en la página. */
+/** Structured data (schema.org) embedded in the page. */
 export function JsonLd({ data }: JsonLdProps) {
   return (
     <script

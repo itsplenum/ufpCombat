@@ -132,7 +132,7 @@ function ChampionSpotlight({
   );
 }
 
-/** Board completo de rankings con filtro por disciplina (client-side). */
+/** Full rankings board with a client-side discipline filter. */
 export function RankingsBoard({ view }: RankingsBoardProps) {
   const [filter, setFilter] = useState<DisciplineFilter>("all");
 
@@ -148,7 +148,7 @@ export function RankingsBoard({ view }: RankingsBoardProps) {
 
   return (
     <div className="flex flex-col gap-10">
-      {/* Filtro por disciplina */}
+      {/* Discipline filter */}
       <div className="flex gap-2">
         {tabs.map((tab) => (
           <button

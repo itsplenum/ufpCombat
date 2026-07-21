@@ -3,15 +3,15 @@ import { Link } from "@/i18n/navigation";
 
 interface SectionHeadingProps {
   title: ReactNode;
-  /** Parte del título en rojo, ej. "& Rankings". */
+  /** Portion of the title rendered in red, e.g. "& Rankings". */
   titleAccent?: ReactNode;
-  /** Etiqueta pequeña letterspaced a la derecha del título. */
+  /** Small letterspaced label to the right of the title. */
   kicker?: ReactNode;
-  /** Link de acción alineado a la derecha, ej. "Página del evento →". */
+  /** Right-aligned action link, e.g. "Página del evento →". */
   action?: { label: string; href: string };
 }
 
-/** Encabezado estándar de sección: título Anton + kicker rojo + link opcional. */
+/** Standard section header: Anton title + red kicker + optional link. */
 export function SectionHeading({ title, titleAccent, kicker, action }: SectionHeadingProps) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">

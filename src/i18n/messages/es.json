@@ -55,8 +55,8 @@
     "tickets": {
       "title": "Boletos",
       "titleAccent": "/ Tickets",
-      "buy": "Apartar boleto",
-      "buySubject": "Apartado de boleto — zona {zone}"
+      "buy": "Comprar por WhatsApp",
+      "buyMessage": "¡Hola! Quiero comprar boletos para {event} — zona {zone} ({price}). ¿Me ayudan?"
     },
     "fighters": {
       "title": "Peleadores",

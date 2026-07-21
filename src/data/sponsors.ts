@@ -1,13 +1,13 @@
 import type { SponsorTier } from "./types";
 
-/** Paquetes de patrocinio, de mayor a menor. */
+/** Sponsorship packages, from largest to smallest. */
 export const sponsorTiers: SponsorTier[] = [
   {
     id: "naming",
     name: { es: "Naming del evento", en: "Event naming rights" },
     pitch: {
-      es: "Tu marca en el nombre del evento: 'UFP 18 presentado por…'. Presencia total en arena, PPV y campaña.",
-      en: "Your brand in the event name: 'UFP 18 presented by…'. Full presence across arena, PPV and campaign.",
+      es: "Tu marca en el nombre del evento: 'UFP 7 presentado por…'. Presencia total en arena, PPV y campaña.",
+      en: "Your brand in the event name: 'UFP 7 presented by…'. Full presence across arena, PPV and campaign.",
     },
     perks: [
       { es: "Logo en el centro del octágono", en: "Logo at the center of the octagon" },

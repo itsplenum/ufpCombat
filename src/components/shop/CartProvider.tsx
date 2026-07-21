@@ -29,8 +29,8 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null);
 
 /**
- * Store del carrito mock respaldado en localStorage: persiste entre visitas,
- * sincroniza entre pestañas (evento "storage") y el SSR ve un carrito vacío.
+ * Mock cart store backed by localStorage: it persists across visits, syncs
+ * between tabs (the "storage" event) and SSR always sees an empty cart.
  */
 const CART_STORAGE_KEY = "ufp-cart";
 const emptyCart: CartItem[] = [];
@@ -80,7 +80,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     writeCart(next);
   }, []);
 
-  /** Baja una unidad; al llegar a cero el item sale del carrito. */
+  /** Drops one unit; once it hits zero the item leaves the cart. */
   const decreaseItem = useCallback((slug: string) => {
     const next = readCart()
       .map((entry) => (entry.slug === slug ? { ...entry, quantity: entry.quantity - 1 } : entry))
@@ -116,7 +116,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function useCart(): CartContextValue {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useCart debe usarse dentro de <CartProvider>");
+    throw new Error("useCart must be used inside <CartProvider>");
   }
   return context;
 }

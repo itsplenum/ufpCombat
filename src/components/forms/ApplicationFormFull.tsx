@@ -10,7 +10,7 @@ import { fieldClasses, labelClasses, submitClasses } from "./formStyles";
 
 const VIDEO_FIELDS = [1, 2, 3] as const;
 
-/** Formulario completo de inscripción de peleadores (/inscripcion). */
+/** Full fighter application form (/inscripcion). */
 export function ApplicationFormFull() {
   const t = useTranslations("applyPage");
   const locale = useLocale() as Locale;

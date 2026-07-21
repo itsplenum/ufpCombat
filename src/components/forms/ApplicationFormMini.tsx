@@ -7,7 +7,7 @@ import { submitFighterApplication, type FormActionState } from "@/actions/apply"
 const inputClasses =
   "border border-cream/20 bg-ink px-4 py-[13px] font-body text-sm text-cream outline-none transition-colors focus:border-blood placeholder:text-cream/55";
 
-/** Form corto de inscripción de peleadores (home). */
+/** Short fighter application form (home). */
 export function ApplicationFormMini() {
   const t = useTranslations("sections.apply");
   const [state, formAction, isPending] = useActionState<FormActionState, FormData>(
