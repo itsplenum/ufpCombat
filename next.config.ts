@@ -3,14 +3,21 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
+/** Vercel sets this on its build machines. */
+const isVercel = Boolean(process.env.VERCEL);
+
 /**
- * Headers de seguridad aplicados a todo el sitio. Van acá y no solo en el
- * Caddyfile para que sobrevivan a un cambio de hosting (Vercel, otro proxy).
- * HSTS es la excepción: lo emite Caddy, que es quien termina el TLS.
+ * Site-wide security headers. They live here rather than only in the Caddyfile
+ * so they survive a change of hosting — the same repo is deployed both to
+ * Vercel (preview) and to the VPS behind Caddy (production).
  *
- * No hay CSP completa a propósito: Next inyecta scripts inline y una CSP
- * estricta necesita nonces por request, lo que rompería el prerender estático.
- * `frame-ancestors` sí se puede aplicar sin ese costo.
+ * HSTS is included here too, for the Vercel deployment: on the VPS it is Caddy
+ * that terminates TLS and emits it, so it is skipped there to avoid sending
+ * the header twice.
+ *
+ * There is deliberately no full CSP: Next injects inline scripts and a strict
+ * policy needs a per-request nonce, which would break static prerendering.
+ * `frame-ancestors` can be enforced without that cost.
  */
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -21,10 +28,20 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
   },
+  ...(isVercel
+    ? [
+        {
+          key: "Strict-Transport-Security",
+          value: "max-age=31536000; includeSubDomains",
+        },
+      ]
+    : []),
 ];
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Only for self-hosting in Docker. Vercel builds its own output format and
+  // warns when this is set, so it is left off there.
+  ...(isVercel ? {} : { output: "standalone" as const }),
   // No delatar la versión del framework.
   poweredByHeader: false,
   experimental: {

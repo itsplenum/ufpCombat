@@ -64,4 +64,4 @@ Ticket CTAs open WhatsApp with a per-zone prefilled message, built from `site.wh
 
 - `npm run dev` / `npm run build` / `npm run lint` / `npx tsc --noEmit`
 - Local Docker: `docker build --network=host -t ufp-site .` (Docker's bridge has no internet on this machine; the flag isn't needed on the VPS).
-- Deploy: see `DEPLOY.md` (Docker + Caddy on the VPS, domain ufpcombat.com). Operator-facing docs (`DEPLOY.md`, `LANZAMIENTO.md`, `MANUAL.md`) are deliberately kept in Spanish — the owner reads them.
+- Deploy: two targets from one repo. Vercel for previews/demos (zero config; `next.config.ts` branches on `process.env.VERCEL` to drop `output: "standalone"` and to emit HSTS, which on the VPS is Caddy's job). Docker + Caddy on the VPS for production — see `DEPLOY.md`. Operator-facing docs (`DEPLOY.md`, `LANZAMIENTO.md`, `MANUAL.md`) are deliberately kept in Spanish — the owner reads them.

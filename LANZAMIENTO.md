@@ -11,6 +11,27 @@ Tiempo estimado total: **30–45 minutos** (más la propagación de DNS, que pue
 El repo ya vive en `git@github.com:itsplenum/ufpCombat.git` y `main` está pusheado.
 Para publicar cambios futuros alcanza con `git push` (ver Paso 5).
 
+## Vía rápida — Vercel, para mostrar el sitio ya (~10 min)
+
+Para enseñarle el sitio a alguien **hoy**, sin tocar servidores. La VPS queda para el lanzamiento definitivo; el mismo repo sirve para las dos cosas.
+
+1. Entrá a [vercel.com](https://vercel.com) → **Continue with GitHub**.
+2. **Add New… → Project** → elegí el repo `ufpCombat` → **Import**.
+3. No cambies **nada** en la pantalla de configuración. Vercel detecta Next.js solo. → **Deploy**.
+4. A los ~2 minutos te da una URL tipo `ufp-combat.vercel.app`. Esa ya es compartible.
+
+Eso es todo: no hay variables de entorno que configurar ni comandos de build que escribir.
+
+**Qué funciona igual que en la VPS:** el español en `/` y el inglés en `/en`, el countdown, los botones de WhatsApp, las imágenes de redes sociales y los headers de seguridad. `next.config.ts` detecta que está en Vercel y se ajusta solo (ver la constante `isVercel`).
+
+**Cada `git push` a `main` redespliega automáticamente.** Las ramas generan URLs de preview aparte.
+
+**El dominio, después.** Mientras uses la URL `.vercel.app` no hace falta tocar el DNS. Cuando quieras `ufpcombat.com` ahí, es Vercel → Settings → Domains, y apuntar el DNS en Cloudflare. Ojo: el dominio solo puede apuntar a un lugar a la vez, así que eso conviene decidirlo recién cuando elijas destino final.
+
+> Plan gratis (Hobby): alcanza de sobra para mostrar el sitio, pero es **solo para uso no comercial**. En cuanto se vendan boletos o merch de verdad, hay que pasar al plan Pro o mover todo a la VPS — que es justamente el plan.
+
+---
+
 ## Paso 2 — Preparar la VPS (~15 min, una sola vez)
 
 Necesitas: la **IP de la VPS** y acceso SSH (usuario + contraseña o llave).
