@@ -6,12 +6,8 @@ export const site = {
   fullName: "Ultimate Fight Promotions",
   domain: "https://ufpcombat.com",
   contactEmail: "contacto@ufpcombat.com",
-  /**
-   * TODO(owner): replace with the real number before going to production.
-   * wa.me format: country code + number, digits only, no "+" and no spaces.
-   * E.g. Colombia: 573001234567
-   */
-  whatsappNumber: "570000000000",
+  /** Sales WhatsApp. wa.me format: country code + number, digits only. */
+  whatsappNumber: "573219103153",
 } as const;
 
 /**
