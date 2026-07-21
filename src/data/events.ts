@@ -14,47 +14,63 @@ const monasterioClub: Venue = {
   doorsOpen: "20:00",
 };
 
+/**
+ * Real UFP 6 ticketing, straight from the official price graphic. Prices are
+ * per box/table (except the single seat), which the perks make explicit so no
+ * one reads a group price as per-head. Ordered so the three ringside boxes
+ * fill the first row and the two VIP tables the second.
+ */
 const ufp6Tickets: TicketTier[] = [
   {
-    id: "general",
-    zone: "General",
-    price: 80000,
+    id: "palco-6",
+    zone: "Palco · 6 personas",
+    price: 450000,
     currency: "COP",
     perks: {
-      es: "Gradas superiores. La fiesta completa.",
-      en: "Upper stands. The full party.",
-    },
-  },
-  {
-    id: "preferente",
-    zone: "Preferente",
-    price: 150000,
-    currency: "COP",
-    perks: {
-      es: "Vista lateral privilegiada del octágono.",
-      en: "Prime side view of the octagon.",
-    },
-  },
-  {
-    id: "ringside",
-    zone: "Ringside",
-    price: 350000,
-    currency: "COP",
-    perks: {
-      es: "A metros de la acción. Salpica.",
-      en: "Feet from the action. It splashes.",
-    },
-  },
-  {
-    id: "vip-cage",
-    zone: "VIP Cage",
-    price: 750000,
-    currency: "COP",
-    perks: {
-      es: "Primera fila + acceso backstage + meet & greet.",
-      en: "Front row + backstage access + meet & greet.",
+      es: "A 1 m de la jaula. Precio del palco completo.",
+      en: "1 m from the cage. Price for the whole box.",
     },
     featured: true,
+  },
+  {
+    id: "palco-4",
+    zone: "Palco · 4 personas",
+    price: 300000,
+    currency: "COP",
+    perks: {
+      es: "A 1 m de la jaula. Precio del palco completo.",
+      en: "1 m from the cage. Price for the whole box.",
+    },
+  },
+  {
+    id: "palco-1",
+    zone: "Palco · 1 persona",
+    price: 100000,
+    currency: "COP",
+    perks: {
+      es: "A 1 m de la jaula. Puesto individual.",
+      en: "1 m from the cage. Single seat.",
+    },
+  },
+  {
+    id: "vip-oro",
+    zone: "VIP Oro · 4 personas",
+    price: 200000,
+    currency: "COP",
+    perks: {
+      es: "A 2,5 m de la jaula. Precio de la mesa (4).",
+      en: "2.5 m from the cage. Price for the table (4).",
+    },
+  },
+  {
+    id: "vip-plata",
+    zone: "VIP Plata · 4 personas",
+    price: 100000,
+    currency: "COP",
+    perks: {
+      es: "A 3,5 m de la jaula. Precio de la mesa (4).",
+      en: "3.5 m from the cage. Price for the table (4).",
+    },
   },
 ];
 
@@ -94,7 +110,7 @@ export const events: UFPEvent[] = [
         discipline: "mma",
         isTitleFight: false,
         red: { name: "Leo Wi" },
-        blue: { name: "Carlos Bravo" },
+        blue: { name: "Carlos Bravo", photo: "/fighters/carlos-bravo.png" },
       },
       {
         id: "ufp6-draft-1",

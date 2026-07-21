@@ -130,7 +130,14 @@ export interface ResolvedCorner {
  */
 export function resolveCorner(corner: FightCorner): ResolvedCorner {
   if (!isEnabled("roster")) {
-    return { corner: { name: corner.name, recordText: corner.recordText, tag: corner.tag } };
+    return {
+      corner: {
+        name: corner.name,
+        recordText: corner.recordText,
+        tag: corner.tag,
+        photo: corner.photo,
+      },
+    };
   }
 
   return {

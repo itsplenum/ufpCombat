@@ -98,6 +98,12 @@ export interface FightCorner {
   recordText?: string;
   /** E.g. "CAMPEÓN" / "#1". */
   tag?: Localized;
+  /**
+   * Photo for an outside opponent — path under /public. Roster fighters carry
+   * their photo on the Fighter object instead; this is for corners that never
+   * get a profile (name-only opponents), like the UFP 6 main event.
+   */
+  photo?: string;
 }
 
 export interface Fight {

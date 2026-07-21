@@ -133,6 +133,8 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
       <div className="flex flex-col text-right">
         <PlaceholderImage
           label={`foto ${red.corner.name} — esquina roja`}
+          src={red.corner.photo ?? red.fighter?.photoFull}
+          alt={red.corner.name}
           variant="red"
           className={`h-[340px] ${cornerStyles.red.photo}`}
         />
@@ -162,6 +164,8 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
       <div className="flex flex-col">
         <PlaceholderImage
           label={`foto ${blue.corner.name} — esquina azul`}
+          src={blue.corner.photo ?? blue.fighter?.photoFull}
+          alt={blue.corner.name}
           variant="blue"
           className={`h-[340px] ${cornerStyles.blue.photo}`}
         />
