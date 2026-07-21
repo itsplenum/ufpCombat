@@ -8,13 +8,29 @@ Dónde se carga cada cosa está en `MANUAL.md`. Los archivos viven en `src/data/
 
 ---
 
+## ✅ Ya cargado desde el póster oficial
+
+Esto **ya no hay que pedirlo** — salió del póster de UFP 6:
+
+- Evento: **UFP 6 "Champions"**, viernes 7 de agosto, 8:00 p.m.
+- Sede: **Monasterio Club**, Granada (Meta)
+- Los **10 peleadores anunciados**: Garzón Palma, El Zurdo, Zuluaga, Psicópata, Leo Wi, Carlos Bravo, Lobo, Medina, Ochoa, Orozco
+- Que la cartelera mezcla **boxeo y MMA**
+- Los extras: música en vivo, corridos bélicos, bailarinas, DJ, invitado especial **MB**
+- **Patrocinadores**: Monasterio, Sobre Ruedas, Passion Fruit, Kromasol, La Fortaleza, Grupo Colsolar, Bloom X, Aguardiente Antioqueño + aliados Somos, Combatam y Caray
+
+---
+
 ## 🔴 0. Bloqueantes reales
 
 | Dato | Por qué bloquea | Dónde va |
 | --- | --- | --- |
 | **Número de WhatsApp de ventas** | Hoy es `570000000000` (falso). Todos los botones de boletos llevan ahí. | `src/data/site.ts` → `whatsappNumber` |
 | **Email de contacto real** | Hoy es `contacto@ufpcombat.com`. Si el buzón no existe, se pierden inscripciones y patrocinios. | `src/data/site.ts` → `contactEmail` |
-| **Confirmar UFP 6: fecha, hora y sede** | Hoy: viernes 7 ago 2026, 20:00, Movistar Arena Bogotá. El countdown de la home cuenta contra ese dato. | `src/data/events.ts` |
+| **Quién pelea contra quién** | El póster lista 10 nombres pero ningún duelo. Hoy están emparejados por orden del póster — **es una suposición** y se publica como si fuera la cartelera oficial. | `src/data/events.ts` |
+| **Precios reales de boletos** | Las 4 zonas y sus precios ($80.000 a $750.000) son inventados; el póster no los menciona. Publicar un precio equivocado es el peor error posible. | `src/data/events.ts` → `ufp6Tickets` |
+| **Qué peleas son boxeo y cuáles MMA** | El póster solo dice que la cartelera mezcla ambas. Hoy todas figuran como MMA. | `src/data/events.ts` |
+| **Dirección exacta del Monasterio Club** | Hoy dice solo "Granada, Meta". | `src/data/events.ts` |
 
 ---
 
