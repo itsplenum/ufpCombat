@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Nav } from "@/components/layout/Nav";
 import { site } from "@/data/site";
+import { isBeta } from "@/lib/environment";
 import "../globals.css";
 
 const anton = Anton({
@@ -45,6 +46,8 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
     },
     description: t("description"),
     metadataBase: new URL(site.domain),
+    // robots.txt only asks; this tells crawlers directly.
+    ...(isBeta ? { robots: { index: false, follow: false } } : {}),
   };
 }
 

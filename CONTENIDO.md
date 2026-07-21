@@ -1,8 +1,8 @@
 # Lo que nos falta para el lanzamiento
 
-Los datos de **UFP 6** ya son reales (salieron del póster). Lo demás está construido pero sin contenido, así que **por ahora está oculto** — ver `src/data/features.ts`.
+Los datos de **UFP 6** ya son reales (salieron del póster). El resto del sitio funciona pero corre sobre datos de relleno.
 
-La idea es simple: el sitio solo muestra lo que tenemos de verdad. Nada de secciones con datos de relleno.
+**Estamos en beta:** todas las secciones están encendidas para poder mostrar el sitio completo, y el beta va con `noindex` para que Google no levante peleadores ni precios inventados. Antes de producción hay que apagar lo que siga sin contenido real — un flag por sección en `src/data/features.ts`.
 
 ---
 
@@ -10,7 +10,7 @@ La idea es simple: el sitio solo muestra lo que tenemos de verdad. Nada de secci
 
 Evento UFP 6 "Champions" · viernes 7 de agosto, 8:00 p.m. · Monasterio Club, Granada (Meta) · estelar **Leo Wi vs Carlos Bravo** · música en vivo, corridos bélicos, bailarinas, DJ e invitado especial MB · patrocinadores del póster · WhatsApp de ventas.
 
-**Hoy el sitio son cinco bloques:** portada con countdown, pelea estelar, cartelera, boletos, y patrocinios + convocatoria de peleadores.
+**El sitio completo:** portada con countdown, pelea estelar, cartelera, boletos, roster, rankings, resultados, tienda, patrocinios y convocatoria de peleadores.
 
 ---
 
@@ -18,7 +18,7 @@ Evento UFP 6 "Champions" · viernes 7 de agosto, 8:00 p.m. · Monasterio Club, G
 
 | Qué | Cómo está hoy |
 | --- | --- |
-| **Precios y zonas de boletos** | Inventados ($80.000 a $750.000). Es lo único falso que sigue visible. |
+| **Precios y zonas de boletos** | Inventados ($80.000 a $750.000). |
 | **Los 4 duelos restantes** | Entre Garzón Palma, El Zurdo, Zuluaga, Psicópata, Lobo, Medina, Ochoa y Orozco. Están cargados pero ocultos. |
 | **Qué peleas son boxeo y cuáles MMA** | Todas figuran como MMA. |
 | **Orden de la cartelera** | Co-estelar, preliminares, apertura. |
@@ -29,9 +29,9 @@ Suma si lo tenemos: capacidad del lugar, asaltos por pelea, si hay transmisión.
 
 ---
 
-## 2. Secciones apagadas hasta tener contenido
+## 2. Encendidas en beta, pero con datos inventados
 
-Están hechas y funcionando. Se prenden cambiando una línea en `src/data/features.ts` cuando llegue el material.
+Funcionan de punta a punta, pero el contenido es de relleno. Cada una se apaga con una línea en `src/data/features.ts` si llegamos a producción sin el material.
 
 **Tienda** — no hay mercancía todavía. Cuando la haya: nombre, precio en COP, categoría, foto, tallas y stock por producto. Y hay que definir cómo se cobra: pasarela (Wompi, Bold, Mercado Pago) o pedidos por WhatsApp. Hoy el carrito suma pero no cobra.
 
