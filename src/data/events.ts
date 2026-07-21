@@ -76,60 +76,64 @@ export const events: UFPEvent[] = [
       { time: "—", label: { es: "Invitado especial MB · Bailarinas · DJ", en: "Special guest MB · Dancers · DJ" } },
     ],
     /**
-     * Real lineup announced on the UFP 6 poster: ten fighters, five per side.
+     * UFP 6 lineup. Only the main event is confirmed: Leo Wi vs Carlos Bravo.
      *
-     * TODO(owner) — the poster does NOT state any of this, so it is provisional:
-     *   1. WHO FIGHTS WHOM. Pairings below follow the poster's left-to-right
-     *      order (1st left vs 1st right). Confirm before going public.
-     *   2. Which bouts are boxing and which are MMA (the poster only says the
-     *      card mixes both). Everything is tagged `mma` as a placeholder.
-     *   3. Weight divisions, number of rounds, and which bout is the main event.
-     * Division and round labels are omitted on purpose rather than invented.
+     * The other four bouts are DRAFTS (`draft: true`) — the poster announces
+     * the ten fighters but not the matchups, so these pairings are guesses kept
+     * for reference only. They are filtered out of everything public by
+     * `getPublishedFights()`; flip `draft` off as each one is confirmed.
+     *
+     * TODO(owner): confirm the remaining matchups, which bouts are boxing vs
+     * MMA (all tagged `mma` for now), weight classes and round counts.
      */
     fights: [
       {
-        id: "ufp6-fight-1",
+        id: "ufp6-main",
         order: 0,
         label: { es: "Pelea estelar", en: "Main event" },
         discipline: "mma",
         isTitleFight: false,
-        red: { name: "Garzón Palma" },
+        red: { name: "Leo Wi" },
         blue: { name: "Carlos Bravo" },
       },
       {
-        id: "ufp6-fight-2",
+        id: "ufp6-draft-1",
         order: 1,
-        label: { es: "Co-estelar", en: "Co-main" },
+        label: { es: "Por confirmar", en: "TBA" },
         discipline: "mma",
         isTitleFight: false,
-        red: { name: "El Zurdo" },
+        draft: true,
+        red: { name: "Garzón Palma" },
         blue: { name: "Lobo" },
       },
       {
-        id: "ufp6-fight-3",
+        id: "ufp6-draft-2",
         order: 2,
-        label: { es: "Cartelera principal", en: "Main card" },
+        label: { es: "Por confirmar", en: "TBA" },
         discipline: "mma",
         isTitleFight: false,
-        red: { name: "Zuluaga" },
+        draft: true,
+        red: { name: "El Zurdo" },
         blue: { name: "Medina" },
       },
       {
-        id: "ufp6-fight-4",
+        id: "ufp6-draft-3",
         order: 3,
-        label: { es: "Cartelera principal", en: "Main card" },
+        label: { es: "Por confirmar", en: "TBA" },
         discipline: "mma",
         isTitleFight: false,
-        red: { name: "Psicópata" },
+        draft: true,
+        red: { name: "Zuluaga" },
         blue: { name: "Ochoa" },
       },
       {
-        id: "ufp6-fight-5",
+        id: "ufp6-draft-4",
         order: 4,
-        label: { es: "Apertura", en: "Opener" },
+        label: { es: "Por confirmar", en: "TBA" },
         discipline: "mma",
         isTitleFight: false,
-        red: { name: "Leo Wi" },
+        draft: true,
+        red: { name: "Psicópata" },
         blue: { name: "Orozco" },
       },
     ],

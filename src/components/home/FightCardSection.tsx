@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { getPublishedFights } from "@/data";
 import type { UFPEvent } from "@/data/types";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -12,7 +13,7 @@ interface FightCardSectionProps {
 export async function FightCardSection({ event }: FightCardSectionProps) {
   const t = await getTranslations("sections.fightCard");
 
-  const undercard = event.fights.filter((fight) => fight.order > 0);
+  const undercard = getPublishedFights(event).filter((fight) => fight.order > 0);
 
   return (
     <Section id="cartelera" width="md">

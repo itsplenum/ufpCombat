@@ -115,6 +115,12 @@ export interface Fight {
   blue: FightCorner;
   /** Past events only. */
   result?: FightResult;
+  /**
+   * Draft bout: announced internally but not confirmed for publication. Kept in
+   * the data so nothing is lost, filtered out of everything the public sees —
+   * see `getPublishedFights()` in `data/index.ts`.
+   */
+  draft?: boolean;
 }
 
 export interface TicketTier {

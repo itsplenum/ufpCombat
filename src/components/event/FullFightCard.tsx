@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { isEventUpcoming } from "@/data";
+import { getPublishedFights, isEventUpcoming } from "@/data";
 import type { UFPEvent } from "@/data/types";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -17,7 +17,7 @@ interface FullFightCardProps {
 export async function FullFightCard({ event }: FullFightCardProps) {
   const t = await getTranslations("eventPage");
 
-  const orderedFights = [...event.fights].sort((a, b) => a.order - b.order);
+  const orderedFights = [...getPublishedFights(event)].sort((a, b) => a.order - b.order);
 
   return (
     <Section id="cartelera" background="ink-2" width="md">

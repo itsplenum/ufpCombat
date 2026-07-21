@@ -64,9 +64,18 @@ export function getLatestPastEvent(): UFPEvent | undefined {
   return getPastEvents()[0];
 }
 
+/**
+ * Bouts that are cleared to be shown publicly. Drafts are matchups that exist
+ * in the data but are not confirmed yet, so nothing on the site may surface
+ * them — always read a card through this, never `event.fights` directly.
+ */
+export function getPublishedFights(event: UFPEvent): Fight[] {
+  return event.fights.filter((fight) => !fight.draft);
+}
+
 /** Main event of a card (order 0). */
 export function getMainFight(event: UFPEvent): Fight | undefined {
-  return event.fights.find((fight) => fight.order === 0);
+  return getPublishedFights(event).find((fight) => fight.order === 0);
 }
 
 export function getDivision(id: string): Division | undefined {
@@ -114,7 +123,7 @@ export function getNextFightFor(
   fighterSlug: string,
 ): { event: UFPEvent; fight: Fight; opponent: FightCorner } | undefined {
   for (const event of events.filter(isEventUpcoming)) {
-    for (const fight of event.fights) {
+    for (const fight of getPublishedFights(event)) {
       if (fight.red.slug === fighterSlug) {
         return { event, fight, opponent: fight.blue };
       }
