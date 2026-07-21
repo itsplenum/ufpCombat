@@ -66,7 +66,7 @@ No hay ninguna imagen real todavía; todo son placeholders rayados, hechos para 
 | Peleador, retrato | 1 por peleador | cuadrada, mín. 600×600 |
 | Productos de la tienda | 1 por producto | cuadrada, mín. 800×800 |
 
-Las de peleadores conviene sacarlas con fondo uniforme, o el roster se ve desparejo. De la estelar ya tenemos la de **Carlos Bravo**; falta la de **Leo Wi** (mismo formato vertical).
+Las de peleadores conviene sacarlas con fondo uniforme, o el roster se ve desparejo. La estelar ya tiene sus dos fotos (**Leo Wi** y **Carlos Bravo**).
 
 ---
 

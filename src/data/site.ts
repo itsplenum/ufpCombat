@@ -10,7 +10,7 @@ export const site = {
   whatsappNumber: "573219103153",
   /** Site author credit, shown discreetly in the footer. */
   author: "Plenum",
-  authorUrl: "https://github.com/itsplenum",
+  authorUrl: "https://www.linkedin.com/in/plenum/",
 } as const;
 
 /**
