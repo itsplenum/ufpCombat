@@ -46,10 +46,10 @@ export async function FighterHero({ fighter }: FighterHeroProps) {
       >
         <div className="flex flex-col gap-[18px] pb-16">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="bg-blood px-3.5 py-1.5 font-condensed text-[13px] font-bold uppercase tracking-[.24em] text-ink">
+            <span className="bg-blood px-3.5 py-1.5 font-condensed text-[13px] font-bold uppercase tracking-[.24em] text-cream">
               {badge}
             </span>
-            <span className="font-mono text-xs text-cream/50">{disciplineLine}</span>
+            <span className="font-mono text-xs text-cream/60">{disciplineLine}</span>
           </div>
 
           <h1 className="font-display text-[min(12vw,96px)] uppercase leading-[.94]">

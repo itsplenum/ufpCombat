@@ -20,7 +20,7 @@ export async function Nav() {
         <span className="font-display text-3xl leading-none tracking-[.02em] text-blood">
           {t("brand.name")}
         </span>
-        <span className="hidden font-condensed text-[11px] uppercase tracking-[.32em] text-cream/50 sm:inline">
+        <span className="hidden font-condensed text-[11px] uppercase tracking-[.32em] text-cream/65 sm:inline">
           {t("brand.tagline")}
         </span>
       </Link>

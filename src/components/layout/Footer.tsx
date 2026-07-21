@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { OutlineText } from "@/components/ui/OutlineText";
-import { legal } from "@/data/site";
+import { getCopyright } from "@/data/site";
 import { L } from "@/lib/localize";
 import type { Locale } from "@/data/types";
 import { footerNavLinks } from "./navLinks";
@@ -15,7 +15,7 @@ interface FooterProps {
 export async function Footer({ compact = false }: FooterProps) {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;
-  const copyright = L(legal.copyright, locale);
+  const copyright = L(getCopyright(), locale);
 
   if (compact) {
     return (
@@ -24,7 +24,7 @@ export async function Footer({ compact = false }: FooterProps) {
           <Link href="/">
             <OutlineText className="text-5xl leading-none">UFP</OutlineText>
           </Link>
-          <span className="font-mono text-[11px] text-cream/35">{copyright}</span>
+          <span className="font-mono text-[11px] text-cream/65">{copyright}</span>
         </div>
       </footer>
     );
@@ -52,7 +52,7 @@ export async function Footer({ compact = false }: FooterProps) {
             })}
           </nav>
         </div>
-        <div className="flex flex-wrap justify-between gap-3 font-mono text-[11px] text-cream/35">
+        <div className="flex flex-wrap justify-between gap-3 font-mono text-[11px] text-cream/65">
           <span>{copyright}</span>
           <span>ES / EN · {t("footer.contact")}</span>
         </div>

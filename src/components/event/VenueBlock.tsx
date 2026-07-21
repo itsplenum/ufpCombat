@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale, Venue } from "@/data/types";
+import { formatNumber } from "@/lib/format";
 import { L } from "@/lib/localize";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
@@ -13,7 +14,7 @@ export async function VenueBlock({ venue }: VenueBlockProps) {
   const locale = (await getLocale()) as Locale;
 
   const facts = [
-    { label: t("capacity"), value: venue.capacity.toLocaleString("en-US") },
+    { label: t("capacity"), value: formatNumber(venue.capacity, locale) },
     { label: t("doors"), value: venue.doorsOpen },
     { label: t("broadcast"), value: L(venue.broadcast, locale) },
   ];

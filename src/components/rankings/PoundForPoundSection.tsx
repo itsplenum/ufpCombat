@@ -32,7 +32,7 @@ export async function PoundForPoundSection({ entries, newLabel }: PoundForPoundS
               #1
             </OutlineText>
           </div>
-          <span className="font-condensed text-sm uppercase tracking-[.3em] text-blood">
+          <span className="font-condensed text-sm uppercase tracking-[.3em] text-blood-hover">
             {t("p4pTitle")} #1
           </span>
           <span className="font-display text-5xl uppercase leading-none text-cream md:text-[56px]">
@@ -51,7 +51,7 @@ export async function PoundForPoundSection({ entries, newLabel }: PoundForPoundS
               key={entry.rank}
               className="grid grid-cols-[40px_54px_1fr_90px] items-center gap-3 border-b border-cream/10 px-4 py-[11px] transition-colors hover:bg-blood/8"
             >
-              <span className="font-display text-lg text-cream/45">{entry.rank}</span>
+              <span className="font-display text-lg text-cream/55">{entry.rank}</span>
               <MovementBadge movement={entry.movement} newLabel={newLabel} />
               <span className="font-display text-lg uppercase text-cream">
                 {entry.href ? (

@@ -74,7 +74,7 @@ export default async function SponsorsPage({ params }: SponsorsPageProps) {
                   <span className="font-display text-[40px] leading-none text-blood">
                     {value}
                   </span>
-                  <span className="font-mono text-[11px] tracking-[.14em] text-cream/50">
+                  <span className="font-mono text-[11px] tracking-[.14em] text-cream/65">
                     {t(key)}
                   </span>
                 </div>
@@ -95,7 +95,7 @@ export default async function SponsorsPage({ params }: SponsorsPageProps) {
                   {L(tier.name, locale)}
                 </span>
                 <p className="text-sm leading-relaxed text-cream/60">{L(tier.pitch, locale)}</p>
-                <span className="font-condensed text-xs uppercase tracking-[.24em] text-blood">
+                <span className="font-condensed text-xs uppercase tracking-[.24em] text-blood-hover">
                   {t("perksLabel")}
                 </span>
                 <ul className="flex flex-col gap-2">
@@ -104,7 +104,7 @@ export default async function SponsorsPage({ params }: SponsorsPageProps) {
                       key={perk.es}
                       className="flex items-baseline gap-2.5 text-sm text-cream/70"
                     >
-                      <span className="font-display text-blood">/</span>
+                      <span className="font-display text-blood-hover">/</span>
                       {L(perk, locale)}
                     </li>
                   ))}
@@ -120,7 +120,7 @@ export default async function SponsorsPage({ params }: SponsorsPageProps) {
             {Array.from({ length: SPONSOR_LOGO_SLOTS }, (_, index) => (
               <div
                 key={index}
-                className="flex h-[70px] items-center justify-center border border-dashed border-cream/20 bg-surface font-mono text-[10px] text-cream/35"
+                className="flex h-[70px] items-center justify-center border border-dashed border-cream/20 bg-surface font-mono text-[10px] text-cream/65"
               >
                 [ logo ]
               </div>

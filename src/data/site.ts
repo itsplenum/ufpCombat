@@ -9,19 +9,20 @@ export const site = {
 } as const;
 
 /**
- * Mensajes del ticker superior. Frases deliberadamente bilingües
- * (estilo cartel de pelea) — no se traducen por locale.
+ * Frases fijas del ticker superior. Deliberadamente bilingües (estilo cartel
+ * de pelea) — no se traducen por locale. El anuncio del próximo evento NO va
+ * acá: lo deriva `getTickerMessages()` de `data/index.ts` a partir del evento.
  */
-export const tickerMessages: string[] = [
-  "UFP 17 · Sangre Nueva · 15 Ago 2026 · Arena Ciudad",
+export const tickerPhrases: string[] = [
   "Boletos a la venta / Tickets on sale now",
   "PPV disponible en todo el mundo / Worldwide PPV",
 ];
 
-/** Copy reutilizable para zonas legales/SEO. */
-export const legal: { copyright: Localized } = {
-  copyright: {
-    es: "© 2026 Ultimate Fight Promotions. Todos los derechos reservados.",
-    en: "© 2026 Ultimate Fight Promotions. All rights reserved.",
-  },
-};
+/** Línea de copyright — el año se calcula, nunca se hardcodea. */
+export function getCopyright(): Localized {
+  const year = new Date().getFullYear();
+  return {
+    es: `© ${year} ${site.fullName}. Todos los derechos reservados.`,
+    en: `© ${year} ${site.fullName}. All rights reserved.`,
+  };
+}

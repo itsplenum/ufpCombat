@@ -14,9 +14,9 @@ export async function ScheduleBand({ schedule }: ScheduleBandProps) {
 
   return (
     <section className="bg-blood">
-      <div className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-x-12 gap-y-2 px-6 py-[18px] font-condensed text-[15px] font-bold uppercase tracking-[.2em] text-ink md:px-12">
-        {schedule.map((item) => (
-          <span key={item.time}>
+      <div className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-x-12 gap-y-2 px-6 py-[18px] font-condensed text-[15px] font-bold uppercase tracking-[.2em] text-cream md:px-12">
+        {schedule.map((item, index) => (
+          <span key={`${index}-${item.time}`}>
             {item.time} — {L(item.label, locale)}
           </span>
         ))}

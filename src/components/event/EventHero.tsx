@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { getMainFight, resolveCorner } from "@/data";
+import { getMainFight, isEventUpcoming, resolveCorner } from "@/data";
 import type { Locale, UFPEvent } from "@/data/types";
 import { formatEventDate } from "@/lib/format";
 import { CtaButton } from "@/components/ui/CtaButton";
@@ -15,17 +15,18 @@ interface EventHeroProps {
 export async function EventHero({ event }: EventHeroProps) {
   const tHero = await getTranslations("hero");
   const tEvent = await getTranslations("eventPage");
+  const tFight = await getTranslations("fight");
   const locale = (await getLocale()) as Locale;
 
   const mainFight = getMainFight(event);
   const red = mainFight ? resolveCorner(mainFight.red) : undefined;
   const blue = mainFight ? resolveCorner(mainFight.blue) : undefined;
-  const isUpcoming = event.status === "upcoming";
+  const isUpcoming = isEventUpcoming(event);
 
-  const versusLine =
-    red && blue
-      ? `${red.fighter?.lastName ?? red.corner.name} vs ${blue.fighter?.lastName ?? blue.corner.name}`
-      : null;
+  // Nombres separados: concatenar y volver a partir por " vs " rompe con
+  // cualquier apellido que contenga esa secuencia.
+  const redName = red ? (red.fighter?.lastName ?? red.corner.name) : null;
+  const blueName = blue ? (blue.fighter?.lastName ?? blue.corner.name) : null;
 
   return (
     <section className="relative flex min-h-[78vh] items-center overflow-hidden border-b border-blood/35 bg-[radial-gradient(ellipse_100%_80%_at_50%_0%,rgba(122,12,20,.5),transparent_60%)]">
@@ -51,13 +52,12 @@ export async function EventHero({ event }: EventHeroProps) {
               {event.title}
             </span>
           </h1>
-          {versusLine ? (
+          {redName && blueName ? (
             <div className="font-display text-[22px] uppercase leading-tight text-cream/85">
-              {versusLine.split(" vs ")[0]} <span className="text-blood">vs</span>{" "}
-              {versusLine.split(" vs ")[1]}
+              {redName} <span className="text-blood">{tFight("vs")}</span> {blueName}
             </div>
           ) : null}
-          <span className="font-mono text-xs text-cream/50">
+          <span className="font-mono text-xs text-cream/60">
             {mainFight?.isTitleFight ? `${tEvent("championship")} · ` : ""}
             {isUpcoming ? (
               <DaysRemaining targetIso={event.date} />

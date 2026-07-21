@@ -6,24 +6,10 @@ Tiempo estimado total: **30–45 minutos** (más la propagación de DNS, que pue
 
 ---
 
-## Paso 1 — Subir el código a GitHub (~5 min)
+## Paso 1 — Subir el código a GitHub — ✅ HECHO
 
-El repo git ya existe localmente con todo el historial. Solo falta crearlo en GitHub y pushear.
-
-```bash
-cd ~/Work/ufpCombat
-
-# 1a. Autenticarte (abre el navegador; elige GitHub.com → HTTPS → Login with browser)
-gh auth login
-
-# 1b. Crear el repo privado y pushear en un solo comando
-gh repo create ufpcombat --private --source=. --push
-```
-
-Verifica: `gh repo view ufpcombat --web` debe abrir el repo con todos los commits.
-
-> Alternativa sin `gh`: crea un repo privado vacío en github.com, luego
-> `git remote add origin git@github.com:TU_USUARIO/ufpcombat.git && git push -u origin master`.
+El repo ya vive en `git@github.com:itsplenum/ufpCombat.git` y `main` está pusheado.
+Para publicar cambios futuros alcanza con `git push` (ver Paso 5).
 
 ## Paso 2 — Preparar la VPS (~15 min, una sola vez)
 
@@ -53,7 +39,7 @@ cat ~/.ssh/id_ed25519.pub
 # (o hazlo en 10 segundos desde tu máquina: gh repo deploy-key add — pídemelo)
 
 # 2f. Clonar y levantar
-git clone git@github.com:TU_USUARIO/ufpcombat.git ~/ufpcombat
+git clone git@github.com:itsplenum/ufpCombat.git ~/ufpcombat
 cd ~/ufpcombat
 docker compose up -d --build
 ```
@@ -95,6 +81,10 @@ Abre en el navegador y confirma:
 - [ ] `https://ufpcombat.com/rankings` y `/evento/ufp-17` y `/peleador/marco-rios` cargan
 - [ ] El countdown de la home avanza
 - [ ] Enviar el formulario de inscripción → aparece "✓ Recibido" (y el dato queda en `docker compose logs web` en la VPS)
+- [ ] `https://ufpcombat.com/peleador/no-existe` → 404 con la marca UFP (nav + footer), no una pantalla blanca
+- [ ] Headers de seguridad presentes:
+      `curl -sI https://ufpcombat.com | grep -i "strict-transport\|x-content-type\|x-frame"`
+      → deben salir los tres, y **no** debe aparecer `X-Powered-By`
 
 ## Paso 5 — Publicar cambios futuros (el flujo de siempre)
 

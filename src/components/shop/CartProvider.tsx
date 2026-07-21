@@ -21,6 +21,7 @@ interface CartContextValue {
   itemCount: number;
   total: number;
   addItem: (item: Omit<CartItem, "quantity">) => void;
+  decreaseItem: (slug: string) => void;
   removeItem: (slug: string) => void;
   hasItem: (slug: string) => boolean;
 }
@@ -79,6 +80,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     writeCart(next);
   }, []);
 
+  /** Baja una unidad; al llegar a cero el item sale del carrito. */
+  const decreaseItem = useCallback((slug: string) => {
+    const next = readCart()
+      .map((entry) => (entry.slug === slug ? { ...entry, quantity: entry.quantity - 1 } : entry))
+      .filter((entry) => entry.quantity > 0);
+    writeCart(next);
+  }, []);
+
   const removeItem = useCallback((slug: string) => {
     writeCart(readCart().filter((entry) => entry.slug !== slug));
   }, []);
@@ -94,10 +103,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       itemCount: items.reduce((sum, entry) => sum + entry.quantity, 0),
       total: items.reduce((sum, entry) => sum + entry.price * entry.quantity, 0),
       addItem,
+      decreaseItem,
       removeItem,
       hasItem,
     }),
-    [items, addItem, removeItem, hasItem],
+    [items, addItem, decreaseItem, removeItem, hasItem],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

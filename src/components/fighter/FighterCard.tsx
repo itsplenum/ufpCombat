@@ -42,7 +42,7 @@ export async function FighterCard({ fighter }: FighterCardProps) {
         <span className="font-mono text-[11px] text-blood-hover">
           {formatRecordWithFinish(fighter.record)}
         </span>
-        <span className="font-condensed text-xs uppercase tracking-[.16em] text-cream/50">
+        <span className="font-condensed text-xs uppercase tracking-[.16em] text-cream/60">
           {divisionLine}
         </span>
       </div>

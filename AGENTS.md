@@ -22,6 +22,20 @@ Sitio de la promotora de peleas UFP (MMA + Boxeo). Next.js 16 App Router + TypeS
 - Tokens de diseño en `src/app/globals.css` (`@theme`): ink/surface (negros), blood (#C1121F), cream (#F2ECE4), win (verde). Fuentes: Anton (display), Barlow Condensed (labels), Barlow (body). Border-radius 0 en todo.
 - Imágenes: `PlaceholderImage` renderiza rayas CSS hasta que se le pase `src` real.
 - Forms: server actions en `src/actions/` con zod (`src/lib/schemas.ts`) — hoy solo loggean; ahí se conecta email/CRM.
+- 404: `[locale]/not-found.tsx` para slugs inexistentes (hereda nav/footer); `app/global-not-found.tsx` para URLs sin ruta y locales inválidos (necesita `experimental.globalNotFound` y trae sus propias fuentes/estilos porque saltea el render normal).
+- `Reveal` anima con `IntersectionObserver` + `--animate-rise` (CSS), no con `motion`: el HTML del servidor sale visible, así que un fallo de JS nunca deja la página en blanco.
+- Home y página de evento son ISR (`revalidate = 3600`): qué evento es "el próximo" se decide contra la fecha real, y sin revalidación esa comparación quedaría congelada en el build.
+
+## Accesibilidad
+
+- Contraste mínimo AA (4.5:1) sobre `ink`: crema a `/55` o más (`/65` para 10-11px). Para texto chico en rojo usar `blood-hover` (4.65:1), no `blood` (3.15:1). Sobre `bg-blood` el texto va en `cream`, no en `ink`.
+- Deuda conocida: `cream` sobre `bg-blood` da 4.1:1 — pasa para texto grande, queda corto para texto chico. Cerrarlo del todo exige mover esas placas a `blood-deep`, que es una decisión de diseño pendiente.
+- Diálogos (carrito, menú móvil): `role="dialog"` + `aria-modal`, foco al abrir y devuelto al cerrar, Escape, y scroll del body bloqueado.
+
+## Convenciones de git
+
+- **Los commits NO llevan coautor.** Nada de trailers `Co-Authored-By:` ni líneas tipo "Generated with…". El mensaje termina en su última línea de contenido.
+- Mensajes en español, en imperativo o con prefijo de fase (`F0:`, `Fix:`, `Docs:`), describiendo el *qué* y el *porqué*.
 
 ## Comandos
 

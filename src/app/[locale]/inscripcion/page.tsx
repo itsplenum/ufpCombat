@@ -71,7 +71,7 @@ export default async function ApplyPage({ params }: ApplyPageProps) {
                     key={key}
                     className="flex items-baseline gap-3 text-[15px] leading-relaxed text-cream/65"
                   >
-                    <span className="font-display text-blood">/</span>
+                    <span className="font-display text-blood-hover">/</span>
                     {t(key)}
                   </li>
                 ))}

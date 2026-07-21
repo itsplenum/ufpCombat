@@ -22,7 +22,7 @@ export async function SponsorsApplySection() {
             {Array.from({ length: SPONSOR_LOGO_SLOTS }, (_, index) => (
               <div
                 key={index}
-                className="flex h-[70px] items-center justify-center border border-dashed border-cream/20 bg-surface font-mono text-[10px] text-cream/35"
+                className="flex h-[70px] items-center justify-center border border-dashed border-cream/20 bg-surface font-mono text-[10px] text-cream/65"
               >
                 [ logo ]
               </div>

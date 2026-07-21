@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { ProductCategory } from "@/data/types";
+import { useLocale } from "next-intl";
+import type { Locale, ProductCategory } from "@/data/types";
 import { formatPrice } from "@/lib/format";
 import { ProductCard } from "./ProductCard";
 import { CartDrawer } from "./CartDrawer";
@@ -26,6 +27,8 @@ export interface ShopLabels {
   checkoutSoon: string;
   remove: string;
   closeCart: string;
+  increaseQuantity: string;
+  decreaseQuantity: string;
 }
 
 interface ShopCatalogProps {
@@ -36,26 +39,27 @@ interface ShopCatalogProps {
 type CategoryFilter = "all" | ProductCategory;
 
 function AddToCartButton({ product, labels }: { product: ProductView; labels: ShopLabels }) {
-  const { addItem, hasItem } = useCart();
-  const inCart = hasItem(product.slug);
+  const { addItem, items } = useCart();
+  const quantity = items.find((entry) => entry.slug === product.slug)?.quantity ?? 0;
 
   return (
     <button
       type="button"
       onClick={() => addItem({ slug: product.slug, name: product.name, price: product.price })}
       className={`mt-1 cursor-pointer border px-3 py-2 font-condensed text-[13px] font-bold uppercase tracking-[.18em] transition-colors ${
-        inCart
+        quantity > 0
           ? "border-win/50 text-win"
           : "border-blood text-blood-hover hover:bg-blood hover:text-cream"
       }`}
     >
-      {inCart ? labels.added : labels.addToCart}
+      {quantity > 0 ? `${labels.added} (${quantity})` : labels.addToCart}
     </button>
   );
 }
 
 function CatalogGrid({ products, labels }: ShopCatalogProps) {
   const [filter, setFilter] = useState<CategoryFilter>("all");
+  const locale = useLocale() as Locale;
 
   const categoryTabs: { id: CategoryFilter; label: string }[] = [
     { id: "all", label: labels.filterAll },
@@ -76,6 +80,7 @@ function CatalogGrid({ products, labels }: ShopCatalogProps) {
             key={tab.id}
             type="button"
             onClick={() => setFilter(tab.id)}
+            aria-pressed={filter === tab.id}
             className={`cursor-pointer px-5 py-2 font-condensed text-sm font-bold uppercase tracking-[.18em] transition-colors ${
               filter === tab.id
                 ? "clip-cta-sm bg-blood text-cream"
@@ -92,7 +97,7 @@ function CatalogGrid({ products, labels }: ShopCatalogProps) {
           <ProductCard
             key={product.slug}
             name={product.name}
-            priceLabel={formatPrice(product.price)}
+            priceLabel={formatPrice(product.price, locale)}
             image={product.image}
             action={<AddToCartButton product={product} labels={labels} />}
           />

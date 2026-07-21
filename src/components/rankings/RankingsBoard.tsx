@@ -38,12 +38,12 @@ function ContenderRow({
           : "grid-cols-[32px_44px_1fr_90px] md:grid-cols-[40px_54px_1fr_110px]"
       }`}
     >
-      <span className="font-display text-lg text-cream/45">{contender.rank}</span>
+      <span className="font-display text-lg text-cream/55">{contender.rank}</span>
       <MovementBadge movement={contender.movement} newLabel={labels.newBadge} />
       <span className="font-display text-lg uppercase text-cream md:text-xl">{name}</span>
       <span className="font-mono text-xs text-blood-hover">{contender.record}</span>
       {showLastFight ? (
-        <span className="hidden font-mono text-[11px] text-cream/45 md:block">
+        <span className="hidden font-mono text-[11px] text-cream/65 md:block">
           {contender.lastFight ?? ""}
         </span>
       ) : null}
@@ -60,7 +60,7 @@ function TableHeader({
 }) {
   return (
     <div
-      className={`grid gap-3 border-b border-blood/40 px-4 pb-2 font-condensed text-[11px] uppercase tracking-[.24em] text-cream/40 ${
+      className={`grid gap-3 border-b border-blood/40 px-4 pb-2 font-condensed text-[11px] uppercase tracking-[.24em] text-cream/65 ${
         showLastFight
           ? "grid-cols-[32px_44px_1fr_90px] md:grid-cols-[40px_54px_1fr_110px_1fr]"
           : "grid-cols-[32px_44px_1fr_90px] md:grid-cols-[40px_54px_1fr_110px]"
@@ -83,14 +83,16 @@ function ChampionSpotlight({
   labels: RankingsView["labels"];
 }) {
   if (!division.champion) {
+    const topContender = division.contenders[0];
+
     return (
       <div className="flex h-full min-h-[200px] flex-col items-center justify-center gap-2 border border-dashed border-blood/40 bg-surface p-6 text-center">
         <span className="font-display text-[28px] uppercase text-blood [text-shadow:0_0_40px_rgba(193,18,31,.4)]">
           {labels.vacantTitle}
         </span>
-        <span className="font-mono text-[11px] text-cream/40">
-          #1 — {division.contenders[0]?.name}
-        </span>
+        {topContender ? (
+          <span className="font-mono text-[11px] text-cream/65">#1 — {topContender.name}</span>
+        ) : null}
       </div>
     );
   }
@@ -108,7 +110,7 @@ function ChampionSpotlight({
         className="h-[180px] border-b border-blood/30"
       />
       <div className="flex flex-1 flex-col gap-2 p-5">
-        <span className="self-start bg-blood px-2.5 py-1 font-condensed text-[11px] font-bold uppercase tracking-[.24em] text-ink">
+        <span className="self-start bg-blood px-2.5 py-1 font-condensed text-[11px] font-bold uppercase tracking-[.24em] text-cream">
           {labels.champion}
         </span>
         <span className="font-display text-[28px] uppercase leading-none text-cream">
@@ -120,7 +122,7 @@ function ChampionSpotlight({
           {champion.defensesLine}
         </span>
         {champion.nextFightLine ? (
-          <span className="font-mono text-[11px] text-cream/45">{champion.nextFightLine}</span>
+          <span className="font-mono text-[11px] text-cream/65">{champion.nextFightLine}</span>
         ) : null}
         <span className="mt-auto font-condensed text-sm font-bold uppercase tracking-[.2em] text-blood-hover transition-colors group-hover:text-cream">
           {labels.viewProfile}
@@ -153,6 +155,7 @@ export function RankingsBoard({ view }: RankingsBoardProps) {
             key={tab.id}
             type="button"
             onClick={() => setFilter(tab.id)}
+            aria-pressed={filter === tab.id}
             className={`cursor-pointer px-6 py-2.5 font-condensed text-[15px] font-bold uppercase tracking-[.18em] transition-colors ${
               filter === tab.id
                 ? "clip-cta-sm bg-blood text-cream"

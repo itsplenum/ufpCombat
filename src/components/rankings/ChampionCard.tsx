@@ -21,10 +21,10 @@ export async function ChampionCard({ ranking }: ChampionCardProps) {
   return (
     <div className="flex flex-col gap-3.5 border border-blood/40 bg-linear-160 from-surface-warm to-surface p-6">
       <div className="flex items-center justify-between">
-        <span className="font-condensed text-sm uppercase tracking-[.24em] text-blood">
+        <span className="font-condensed text-sm uppercase tracking-[.24em] text-blood-hover">
           {division ? L(division.name, locale) : ranking.divisionId}
         </span>
-        <span className="font-mono text-[10px] tracking-[.2em] text-cream/40">{t("belt")}</span>
+        <span className="font-mono text-[10px] tracking-[.2em] text-cream/65">{t("belt")}</span>
       </div>
       <span className="font-display text-[28px] uppercase leading-none text-cream">
         {championName}

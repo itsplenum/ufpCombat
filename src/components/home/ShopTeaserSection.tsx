@@ -26,7 +26,7 @@ export async function ShopTeaserSection() {
           <ProductCard
             key={product.slug}
             name={L(product.name, locale)}
-            priceLabel={formatPrice(product.price)}
+            priceLabel={formatPrice(product.price, locale)}
             image={product.image}
           />
         ))}

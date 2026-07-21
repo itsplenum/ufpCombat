@@ -11,7 +11,7 @@ const variantClasses: Record<CtaVariant, string> = {
   filled:
     "bg-blood text-cream hover:bg-blood-hover hover:text-ink shadow-[0_0_40px_rgba(193,18,31,.4)]",
   outline:
-    "border border-cream/35 text-cream hover:border-blood-hover hover:text-blood-hover",
+    "border border-cream/55 text-cream hover:border-blood-hover hover:text-blood-hover",
   outlineRed: "border border-blood text-blood-hover hover:bg-blood hover:text-cream",
 };
 

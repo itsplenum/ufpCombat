@@ -30,7 +30,7 @@ export async function RecordBar({ record }: RecordBarProps) {
           >
             {value}
           </span>
-          <span className="text-center font-condensed text-xs uppercase tracking-[.2em] text-cream/50">
+          <span className="text-center font-condensed text-xs uppercase tracking-[.2em] text-cream/60">
             {label}
           </span>
         </div>

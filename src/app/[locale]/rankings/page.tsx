@@ -59,7 +59,7 @@ export default async function RankingsPage({ params }: RankingsPageProps) {
               <span className="border border-blood/40 bg-surface px-3.5 py-2 font-mono text-[11px] text-cream/60">
                 {view.updatedLine}
               </span>
-              <span className="font-condensed text-sm uppercase tracking-[.24em] text-cream/45">
+              <span className="font-condensed text-sm uppercase tracking-[.24em] text-cream/55">
                 {view.officialNote}
               </span>
             </div>

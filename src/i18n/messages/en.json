@@ -3,6 +3,15 @@
     "name": "UFP",
     "tagline": "Ultimate Fight Promotions"
   },
+  "meta": {
+    "description": "Ultimate Fight Promotions — MMA and Boxing. Events, fight cards, fighters, official rankings, tickets and PPV."
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Knocked Out",
+    "body": "This page doesn't exist or has been moved. Head back to the front page for the next event.",
+    "cta": "Back to home"
+  },
   "nav": {
     "event": "Event",
     "fightCard": "Fight Card",
@@ -46,7 +55,8 @@
     "tickets": {
       "title": "Tickets",
       "titleAccent": "/ Boletos",
-      "buy": "Buy"
+      "buy": "Reserve ticket",
+      "buySubject": "Ticket reservation — {zone} zone"
     },
     "fighters": {
       "title": "Fighters",
@@ -179,7 +189,9 @@
     "total": "Total",
     "checkoutSoon": "Checkout — coming soon",
     "remove": "Remove",
-    "closeCart": "Close cart"
+    "closeCart": "Close cart",
+    "increaseQuantity": "Increase quantity",
+    "decreaseQuantity": "Decrease quantity"
   },
   "applyPage": {
     "title": "Think you can",

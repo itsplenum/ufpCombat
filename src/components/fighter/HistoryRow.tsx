@@ -10,7 +10,7 @@ interface HistoryRowProps {
 
 const outcomeColors: Record<FightHistoryEntry["outcome"], string> = {
   W: "text-win",
-  L: "text-blood",
+  L: "text-blood-hover",
   D: "text-cream/60",
 };
 
@@ -41,7 +41,7 @@ export async function HistoryRow({ entry }: HistoryRowProps) {
       <span className="hidden font-condensed text-[15px] tracking-[.08em] text-cream/65 md:block">
         {L(entry.method, locale)}
       </span>
-      <span className="hidden font-mono text-xs text-cream/50 lg:block">
+      <span className="hidden font-mono text-xs text-cream/60 lg:block">
         {entry.eventSlug ? (
           <Link
             href={`/evento/${entry.eventSlug}`}

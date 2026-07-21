@@ -1,4 +1,4 @@
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import type { Fight, Locale } from "@/data/types";
 import { L } from "@/lib/localize";
 
@@ -8,6 +8,7 @@ interface FightRowProps {
 
 /** Fila compacta de la cartelera en la home. */
 export async function FightRow({ fight }: FightRowProps) {
+  const t = await getTranslations("fight");
   const locale = (await getLocale()) as Locale;
 
   return (
@@ -18,13 +19,13 @@ export async function FightRow({ fight }: FightRowProps) {
       <span className="font-display text-xl uppercase text-cream md:text-right md:text-2xl">
         {fight.red.name}
       </span>
-      <span className="font-condensed text-base font-bold text-cream/40 md:text-center">
-        VS
+      <span className="font-condensed text-base font-bold text-cream/55 md:text-center">
+        {t("vs")}
       </span>
       <span className="font-display text-xl uppercase text-cream md:text-2xl">
         {fight.blue.name}
       </span>
-      <span className="font-mono text-xs text-cream/50 md:text-right">
+      <span className="font-mono text-xs text-cream/60 md:text-right">
         {L(fight.divisionLabel, locale)}
       </span>
     </div>

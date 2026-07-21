@@ -19,7 +19,7 @@ export async function VideoCard({ video }: VideoCardProps) {
         <span className="absolute inset-0 flex items-center justify-center">
           <PlayBadge />
         </span>
-        <span className="absolute bottom-2.5 right-3 font-mono text-[10px] text-cream/40">
+        <span className="absolute bottom-2.5 right-3 font-mono text-[10px] text-cream/65">
           {video.duration}
         </span>
       </div>

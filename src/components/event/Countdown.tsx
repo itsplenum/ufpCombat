@@ -47,7 +47,7 @@ export function Countdown({ targetIso }: CountdownProps) {
           >
             {value}
           </span>
-          <span className="font-condensed text-[11px] uppercase tracking-[.24em] text-cream/50">
+          <span className="font-condensed text-[11px] uppercase tracking-[.24em] text-cream/65">
             {label}
           </span>
         </div>

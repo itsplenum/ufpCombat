@@ -13,14 +13,14 @@ export function LanguageToggle() {
     <span className="flex items-center gap-2 font-condensed text-sm uppercase tracking-[.14em]">
       {routing.locales.map((locale, index) => (
         <span key={locale} className="flex items-center gap-2">
-          {index > 0 && <span className="text-cream/30">/</span>}
+          {index > 0 && <span className="text-cream/55">/</span>}
           <Link
             href={pathname}
             locale={locale}
             className={
               locale === activeLocale
                 ? "text-blood-hover"
-                : "text-cream/50 transition-colors hover:text-cream"
+                : "text-cream/60 transition-colors hover:text-cream"
             }
           >
             {locale.toUpperCase()}

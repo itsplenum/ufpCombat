@@ -45,7 +45,7 @@ export function PlaceholderImage({
       role="img"
       aria-label={alt ?? label}
     >
-      <span className="font-mono text-xs text-cream/40">[ {label} ]</span>
+      <span className="font-mono text-xs text-cream/60">[ {label} ]</span>
     </div>
   );
 }

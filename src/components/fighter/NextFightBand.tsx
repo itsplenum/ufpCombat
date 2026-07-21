@@ -22,7 +22,7 @@ export async function NextFightBand({ fighterSlug }: NextFightBandProps) {
     <section className="bg-blood">
       <Link
         href={`/evento/${event.slug}`}
-        className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4 px-6 py-[22px] text-ink transition-colors hover:text-cream md:px-12"
+        className="group mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4 px-6 py-[22px] text-cream md:px-12"
       >
         <span className="font-condensed text-sm font-bold uppercase tracking-[.26em]">
           {t("nextFight")}
@@ -31,7 +31,7 @@ export async function NextFightBand({ fighterSlug }: NextFightBandProps) {
           vs. {opponent.name} · UFP {event.number}: {event.title} ·{" "}
           {formatEventDate(event.date, locale)}
         </span>
-        <span className="border-[1.5px] border-current px-6 py-2.5 font-condensed text-[15px] font-bold uppercase tracking-[.2em]">
+        <span className="border-[1.5px] border-current px-6 py-2.5 font-condensed text-[15px] font-bold uppercase tracking-[.2em] transition-colors group-hover:bg-cream group-hover:text-blood-deep">
           {t("ticketsCta")}
         </span>
       </Link>

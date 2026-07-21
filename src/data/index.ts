@@ -1,13 +1,16 @@
+import { formatEventDate } from "@/lib/format";
 import { divisions } from "./divisions";
 import { events } from "./events";
 import { fighters } from "./fighters";
 import { divisionRankings } from "./rankings";
+import { tickerPhrases } from "./site";
 import type {
   Division,
   DivisionRanking,
   Fight,
   FightCorner,
   Fighter,
+  Locale,
   UFPEvent,
 } from "./types";
 
@@ -32,18 +35,33 @@ export function getEvent(slug: string): UFPEvent | undefined {
   return events.find((event) => event.slug === slug);
 }
 
-/** Próximo evento (el de fecha más cercana entre los upcoming). */
+/**
+ * Un evento es "próximo" mientras su fecha no haya pasado. La fecha manda:
+ * así la home no se congela esperando que alguien edite `events.ts` a mano.
+ * `status: "past"` funciona como override manual para archivar un evento
+ * antes de tiempo (cancelado, pospuesto sin fecha nueva).
+ */
+export function isEventUpcoming(event: UFPEvent): boolean {
+  return event.status !== "past" && new Date(event.date).getTime() > Date.now();
+}
+
+/** Próximo evento (el de fecha más cercana entre los que aún no ocurrieron). */
 export function getUpcomingEvent(): UFPEvent | undefined {
   return events
-    .filter((event) => event.status === "upcoming")
+    .filter(isEventUpcoming)
     .sort((a, b) => a.date.localeCompare(b.date))[0];
 }
 
-/** Eventos pasados, del más reciente al más antiguo. */
+/** Eventos ya ocurridos (o archivados a mano), del más reciente al más antiguo. */
 export function getPastEvents(): UFPEvent[] {
   return events
-    .filter((event) => event.status === "past")
+    .filter((event) => !isEventUpcoming(event))
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/** Último evento realizado — fallback de la home cuando no hay nada agendado. */
+export function getLatestPastEvent(): UFPEvent | undefined {
+  return getPastEvents()[0];
 }
 
 /** Pelea estelar de un evento (order 0). */
@@ -57,6 +75,25 @@ export function getDivision(id: string): Division | undefined {
 
 export function getDivisionRankings(): DivisionRanking[] {
   return divisionRankings;
+}
+
+/**
+ * Mensajes del ticker superior: el anuncio del próximo evento se deriva del
+ * propio evento (número, título, fecha y sede viven solo en `events.ts`),
+ * seguido de las frases fijas de `site.ts`.
+ */
+export function getTickerMessages(locale: Locale): string[] {
+  const upcomingEvent = getUpcomingEvent();
+  if (!upcomingEvent) return tickerPhrases;
+
+  const announcement = [
+    `UFP ${upcomingEvent.number}`,
+    upcomingEvent.title,
+    formatEventDate(upcomingEvent.date, locale),
+    upcomingEvent.venue.name,
+  ].join(" · ");
+
+  return [announcement, ...tickerPhrases];
 }
 
 /** Esquina resuelta contra el roster para render (récord + link a perfil). */
@@ -76,7 +113,7 @@ export function resolveCorner(corner: FightCorner): ResolvedCorner {
 export function getNextFightFor(
   fighterSlug: string,
 ): { event: UFPEvent; fight: Fight; opponent: FightCorner } | undefined {
-  for (const event of events.filter((e) => e.status === "upcoming")) {
+  for (const event of events.filter(isEventUpcoming)) {
     for (const fight of event.fights) {
       if (fight.red.slug === fighterSlug) {
         return { event, fight, opponent: fight.blue };

@@ -14,12 +14,17 @@ export function formatRecordWithFinish(record: FighterRecord): string {
   return `${formatRecord(record)} · ${finish}`;
 }
 
-/** "$450" / "$2,400" — precios MXN sin decimales. */
-export function formatPrice(amount: number): string {
-  return `$${amount.toLocaleString("en-US")}`;
+const dateLocales: Record<Locale, string> = { es: "es-MX", en: "en-US" };
+
+/** "22,300" — separadores de miles según el locale. */
+export function formatNumber(value: number, locale: Locale): string {
+  return new Intl.NumberFormat(dateLocales[locale]).format(value);
 }
 
-const dateLocales: Record<Locale, string> = { es: "es-MX", en: "en-US" };
+/** "$450" / "$2,400" — precios MXN sin decimales. */
+export function formatPrice(amount: number, locale: Locale): string {
+  return `$${formatNumber(amount, locale)}`;
+}
 
 /** Strings date-only ("2026-05-24") se formatean en UTC para no correrse un día. */
 function timeZoneFor(iso: string): string {

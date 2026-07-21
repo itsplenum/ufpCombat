@@ -20,5 +20,5 @@ export function MovementBadge({ movement, newLabel }: MovementBadgeProps) {
   if (movement < 0) {
     return <span className="font-mono text-xs text-blood-hover">▼{Math.abs(movement)}</span>;
   }
-  return <span className="font-mono text-xs text-cream/35">—</span>;
+  return <span className="font-mono text-xs text-cream/65">—</span>;
 }

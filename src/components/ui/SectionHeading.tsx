@@ -20,7 +20,7 @@ export function SectionHeading({ title, titleAccent, kicker, action }: SectionHe
         {titleAccent ? <span className="text-blood"> {titleAccent}</span> : null}
       </h2>
       {kicker ? (
-        <span className="font-condensed text-sm uppercase tracking-[.3em] text-blood">
+        <span className="font-condensed text-sm uppercase tracking-[.3em] text-blood-hover">
           {kicker}
         </span>
       ) : null}

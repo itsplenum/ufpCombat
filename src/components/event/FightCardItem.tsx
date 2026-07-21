@@ -45,6 +45,7 @@ function CornerName({
 /** Card de pelea en la página de evento; muestra el resultado si ya ocurrió. */
 export async function FightCardItem({ fight }: FightCardItemProps) {
   const t = await getTranslations("eventPage");
+  const tFight = await getTranslations("fight");
   const locale = (await getLocale()) as Locale;
 
   const red = resolveCorner(fight.red);
@@ -77,11 +78,11 @@ export async function FightCardItem({ fight }: FightCardItemProps) {
         </div>
 
         <div className="flex min-w-[150px] flex-col items-center gap-1">
-          <span className="font-condensed text-xs uppercase tracking-[.24em] text-blood">
+          <span className="font-condensed text-xs uppercase tracking-[.24em] text-blood-hover">
             {L(fight.label, locale)}
           </span>
-          <OutlineText className="text-[22px]">VS</OutlineText>
-          <span className="font-mono text-[11px] text-cream/50">
+          <OutlineText className="text-[22px]">{tFight("vs")}</OutlineText>
+          <span className="font-mono text-[11px] text-cream/65">
             {L(fight.divisionLabel, locale)}
           </span>
         </div>

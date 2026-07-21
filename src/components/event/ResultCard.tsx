@@ -25,7 +25,7 @@ export async function ResultCard({ event }: ResultCardProps) {
           <PlayBadge />
         </span>
         {event.highlight?.videoDuration ? (
-          <span className="absolute bottom-2.5 right-3 font-mono text-[10px] text-cream/40">
+          <span className="absolute bottom-2.5 right-3 font-mono text-[10px] text-cream/65">
             {event.highlight.videoDuration}
           </span>
         ) : null}

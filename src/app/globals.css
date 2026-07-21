@@ -120,9 +120,24 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* La nav navega por anclas (/#seccion); el scroll suave marea a quien pide
+     menos movimiento, así que vuelve a ser instantáneo. */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* `Reveal` ya corta por JS antes de ocultar nada; esto es el cinturón
+     además de los tiradores, por si el elemento se marca desde otro lado. */
   .animate-marquee,
   .animate-pulse-dim,
-  .animate-flicker {
+  .animate-flicker,
+  .animate-rise {
     animation: none;
+  }
+
+  /* Si se anula la animación, el estado inicial oculto no se puede quedar. */
+  .animate-rise {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -54,6 +54,8 @@ export default async function ShopPage({ params }: ShopPageProps) {
     checkoutSoon: t("checkoutSoon"),
     remove: t("remove"),
     closeCart: t("closeCart"),
+    increaseQuantity: t("increaseQuantity"),
+    decreaseQuantity: t("decreaseQuantity"),
   };
 
   return (

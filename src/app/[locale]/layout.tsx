@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Anton, Barlow, Barlow_Condensed } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Nav } from "@/components/layout/Nav";
 import { site } from "@/data/site";
@@ -29,15 +29,24 @@ const barlowCondensed = Barlow_Condensed({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${site.name} · ${site.fullName}`,
-    template: `%s | ${site.name}`,
-  },
-  description:
-    "Ultimate Fight Promotions — MMA y Boxeo. Eventos, cartelera, peleadores, rankings oficiales, boletos y PPV.",
-  metadataBase: new URL(site.domain),
-};
+/**
+ * Metadata raíz. Es `generateMetadata` y no un objeto estático porque la
+ * description tiene que salir en el idioma de la página: con `metadata` estático
+ * las páginas en inglés heredaban la description en español.
+ */
+export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+
+  return {
+    title: {
+      default: `${site.name} · ${site.fullName}`,
+      template: `%s | ${site.name}`,
+    },
+    description: t("description"),
+    metadataBase: new URL(site.domain),
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

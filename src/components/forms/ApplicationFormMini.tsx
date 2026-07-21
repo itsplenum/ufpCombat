@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { submitFighterApplication, type FormActionState } from "@/actions/apply";
 
 const inputClasses =
-  "border border-cream/20 bg-ink px-4 py-[13px] font-body text-sm text-cream outline-none transition-colors focus:border-blood placeholder:text-cream/40";
+  "border border-cream/20 bg-ink px-4 py-[13px] font-body text-sm text-cream outline-none transition-colors focus:border-blood placeholder:text-cream/55";
 
 /** Form corto de inscripción de peleadores (home). */
 export function ApplicationFormMini() {

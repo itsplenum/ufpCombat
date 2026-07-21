@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { getAllEvents, getEvent, getMainFight } from "@/data";
+import { getAllEvents, getEvent, getMainFight, isEventUpcoming } from "@/data";
 import type { Locale } from "@/data/types";
 import { site } from "@/data/site";
 import { formatEventDate } from "@/lib/format";
@@ -14,13 +14,16 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EventHero } from "@/components/event/EventHero";
 import { ScheduleBand } from "@/components/event/ScheduleBand";
-import { FightCardItem } from "@/components/event/FightCardItem";
+import { FullFightCard } from "@/components/event/FullFightCard";
 import { TicketGrid } from "@/components/event/TicketGrid";
 import { VenueBlock } from "@/components/event/VenueBlock";
 
 interface EventPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
+
+/** Ver la nota de la home: `isEventUpcoming()` se evalúa al prerenderizar. */
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -45,25 +48,38 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   };
 }
 
-/** Structured data para que Google indexe el evento como SportsEvent. */
+/** Duración estimada de una función completa (preliminares + estelar). */
+const EVENT_DURATION_HOURS = 4;
+
+function eventEndDate(startIso: string): string {
+  const end = new Date(startIso);
+  end.setHours(end.getHours() + EVENT_DURATION_HOURS);
+  return end.toISOString();
+}
+
+/**
+ * Structured data para que Google indexe el evento como SportsEvent.
+ * `eventStatus` solo aplica a eventos por venir: schema.org no tiene un
+ * estado "finalizado", eso lo comunica `endDate` en el pasado.
+ */
 function eventJsonLd(event: NonNullable<ReturnType<typeof getEvent>>) {
+  const isUpcoming = isEventUpcoming(event);
+
   return {
     "@context": "https://schema.org",
     "@type": "SportsEvent",
     name: `UFP ${event.number}: ${event.title}`,
     sport: "Mixed Martial Arts / Boxing",
     startDate: event.date,
-    eventStatus:
-      event.status === "upcoming"
-        ? "https://schema.org/EventScheduled"
-        : "https://schema.org/EventScheduled",
+    endDate: eventEndDate(event.date),
+    ...(isUpcoming ? { eventStatus: "https://schema.org/EventScheduled" } : {}),
     location: {
       "@type": "Place",
       name: event.venue.name,
       address: event.venue.address.es,
     },
     organizer: { "@type": "Organization", name: site.fullName, url: site.domain },
-    ...(event.status === "upcoming" && event.tickets.length > 0
+    ...(isUpcoming && event.tickets.length > 0
       ? {
           offers: event.tickets.map((tier) => ({
             "@type": "Offer",
@@ -87,11 +103,9 @@ export default async function EventPage({ params }: EventPageProps) {
   const event = getEvent(slug);
   if (!event) notFound();
 
-  const tEvent = await getTranslations("eventPage");
   const tTickets = await getTranslations("sections.tickets");
 
-  const isUpcoming = event.status === "upcoming";
-  const orderedFights = [...event.fights].sort((a, b) => a.order - b.order);
+  const isUpcoming = isEventUpcoming(event);
 
   return (
     <>
@@ -100,21 +114,7 @@ export default async function EventPage({ params }: EventPageProps) {
         <EventHero event={event} />
         <ScheduleBand schedule={event.schedule} />
 
-        <Section id="cartelera" background="ink-2" width="md">
-          <SectionHeading
-            title={tEvent("fullCard")}
-            kicker={
-              isUpcoming
-                ? tEvent("fightsCount", { count: orderedFights.length })
-                : tEvent("resultsKicker")
-            }
-          />
-          <div className="flex flex-col gap-4">
-            {orderedFights.map((fight) => (
-              <FightCardItem key={fight.id} fight={fight} />
-            ))}
-          </div>
-        </Section>
+        <FullFightCard event={event} />
 
         {isUpcoming && event.tickets.length > 0 ? (
           <Section id="boletos" background="ticket-gradient" width="md" borderTop>
