@@ -4,7 +4,7 @@
     "tagline": "Ultimate Fight Promotions"
   },
   "meta": {
-    "description": "Ultimate Fight Promotions — MMA and Boxing. Events, fight cards, fighters, official rankings, tickets and PPV."
+    "description": "Ultimate Fight Promotions — Live boxing and MMA. Events, fight cards, fighters, official rankings and tickets."
   },
   "notFound": {
     "code": "404",
@@ -39,8 +39,8 @@
   "hero": {
     "nextEvent": "Próximo evento / Next event",
     "buyTickets": "Buy tickets",
-    "watchPpv": "Watch on PPV",
-    "disciplines": "MMA + Boxing"
+    "disciplines": "MMA + Boxing",
+    "seeCard": "See fight card"
   },
   "sections": {
     "mainEvent": {
@@ -81,7 +81,7 @@
     },
     "sponsors": {
       "title": "Sponsors",
-      "pitch": "Your brand in front of thousands in the arena and millions on PPV. Packages from cage branding to event naming rights. / Tu marca en el octágono.",
+      "pitch": "Your brand in front of thousands at the event and across social. Packages from ring branding to event naming rights. / Tu marca en el octágono.",
       "kitCta": "Sponsorship kit"
     },
     "apply": {
@@ -119,7 +119,7 @@
     "round": "R{round}",
     "capacity": "CAPACITY",
     "doors": "DOORS OPEN",
-    "broadcast": "PPV BROADCAST",
+    "broadcast": "BROADCAST",
     "arenaTitle": "Arena"
   },
   "fighterPage": {
@@ -221,9 +221,9 @@
     "title": "Sponsor",
     "titleAccent": "the fight",
     "kicker": "UFP Partnerships",
-    "pitch": "Every UFP event packs the arena and reaches millions on PPV. Put your brand where nobody blinks.",
+    "pitch": "Every UFP event packs the room and travels far on social. Put your brand where nobody blinks.",
     "statAttendance": "AVG. ATTENDANCE",
-    "statPpv": "PPV REACH",
+    "statPpv": "SOCIAL REACH",
     "statSocial": "SOCIAL FOLLOWERS",
     "tiersTitle": "Packages",
     "perksLabel": "Includes",

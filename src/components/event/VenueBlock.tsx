@@ -13,11 +13,15 @@ export async function VenueBlock({ venue }: VenueBlockProps) {
   const t = await getTranslations("eventPage");
   const locale = (await getLocale()) as Locale;
 
+  // Capacity and broadcast only render when the venue actually has them:
+  // showing a made-up number is worse than showing nothing.
   const facts = [
-    { label: t("capacity"), value: formatNumber(venue.capacity, locale) },
+    venue.capacity
+      ? { label: t("capacity"), value: formatNumber(venue.capacity, locale) }
+      : null,
     { label: t("doors"), value: venue.doorsOpen },
-    { label: t("broadcast"), value: L(venue.broadcast, locale) },
-  ];
+    venue.broadcast ? { label: t("broadcast"), value: L(venue.broadcast, locale) } : null,
+  ].filter((fact) => fact !== null);
 
   return (
     <div className="grid items-center gap-12 lg:grid-cols-2">

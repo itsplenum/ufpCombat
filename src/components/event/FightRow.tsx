@@ -26,7 +26,7 @@ export async function FightRow({ fight }: FightRowProps) {
         {fight.blue.name}
       </span>
       <span className="font-mono text-xs text-cream/60 md:text-right">
-        {L(fight.divisionLabel, locale)}
+        {fight.divisionLabel ? L(fight.divisionLabel, locale) : null}
       </span>
     </div>
   );

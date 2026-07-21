@@ -1,14 +1,17 @@
 import type { TicketTier, UFPEvent, Venue } from "./types";
 
-const movistarArena: Venue = {
-  name: "Movistar Arena",
+/**
+ * Real venue for UFP 6, taken from the official poster.
+ * TODO(owner): confirm the street address and the venue capacity — the poster
+ * gives neither, so both are left out rather than guessed.
+ */
+const monasterioClub: Venue = {
+  name: "Monasterio Club",
   address: {
-    es: "Diagonal 61C #26-36, Bogotá. Puertas abren 16:00. Estacionamiento y TransMilenio a pocas cuadras. Menores acompañados de un adulto.",
-    en: "Diagonal 61C #26-36, Bogotá. Doors open at 4:00 PM. Parking and TransMilenio nearby. Minors must be accompanied by an adult.",
+    es: "Granada, Meta. El evento arranca a las 8:00 p.m.",
+    en: "Granada, Meta, Colombia. Doors from 8:00 PM.",
   },
-  capacity: 14000,
-  doorsOpen: "16:00",
-  broadcast: { es: "ufp.tv / cable operadores", en: "ufp.tv / cable providers" },
+  doorsOpen: "20:00",
 };
 
 const ufp6Tickets: TicketTier[] = [
@@ -60,90 +63,74 @@ export const events: UFPEvent[] = [
   {
     slug: "ufp-6",
     number: 6,
-    title: "Sangre Nueva",
+    title: "Champions",
     status: "upcoming",
     date: "2026-08-07T20:00:00-05:00",
-    venue: movistarArena,
+    venue: monasterioClub,
+    // Straight from the poster: an 8:00 PM start, live music and a special
+    // guest. TODO(owner): confirm the running order of fights vs. music.
     schedule: [
-      { time: "17:00", label: { es: "Preliminares", en: "Prelims" } },
-      { time: "19:00", label: { es: "Cartelera principal", en: "Main card" } },
-      { time: "20:00", label: { es: "PPV en vivo", en: "PPV live" } },
-      { time: "~22:30", label: { es: "Pelea estelar", en: "Main event" } },
+      { time: "20:00", label: { es: "Arranca la noche", en: "Doors / show starts" } },
+      { time: "—", label: { es: "Peleas en vivo · Boxeo y MMA", en: "Live fights · Boxing & MMA" } },
+      { time: "—", label: { es: "Música en vivo · Corridos bélicos", en: "Live music · Corridos bélicos" } },
+      { time: "—", label: { es: "Invitado especial MB · Bailarinas · DJ", en: "Special guest MB · Dancers · DJ" } },
     ],
+    /**
+     * Real lineup announced on the UFP 6 poster: ten fighters, five per side.
+     *
+     * TODO(owner) — the poster does NOT state any of this, so it is provisional:
+     *   1. WHO FIGHTS WHOM. Pairings below follow the poster's left-to-right
+     *      order (1st left vs 1st right). Confirm before going public.
+     *   2. Which bouts are boxing and which are MMA (the poster only says the
+     *      card mixes both). Everything is tagged `mma` as a placeholder.
+     *   3. Weight divisions, number of rounds, and which bout is the main event.
+     * Division and round labels are omitted on purpose rather than invented.
+     */
     fights: [
       {
-        id: "ufp6-main",
+        id: "ufp6-fight-1",
         order: 0,
-        label: { es: "Estelar · Título", en: "Main event · Title" },
+        label: { es: "Pelea estelar", en: "Main event" },
         discipline: "mma",
-        divisionLabel: { es: "MMA · Wélter · 5R", en: "MMA · Welterweight · 5R" },
-        rounds: 5,
-        isTitleFight: true,
-        red: {
-          slug: "marco-rios",
-          name: '"El Verdugo" Marco Ríos',
-          tag: { es: "CAMPEÓN", en: "CHAMPION" },
-        },
-        blue: {
-          slug: "dmitri-volkov",
-          name: 'Dmitri "Iron" Volkov',
-          tag: { es: "RETADOR #1", en: "#1 CONTENDER" },
-        },
+        isTitleFight: false,
+        red: { name: "Garzón Palma" },
+        blue: { name: "Carlos Bravo" },
       },
       {
-        id: "ufp6-colead",
+        id: "ufp6-fight-2",
         order: 1,
         label: { es: "Co-estelar", en: "Co-main" },
         discipline: "mma",
-        divisionLabel: { es: "MMA · Ligero · 3R", en: "MMA · Lightweight · 3R" },
-        rounds: 3,
         isTitleFight: false,
-        red: { slug: "adrian-vega", name: '"La Pantera" Vega' },
-        blue: { slug: "kenji-nakamura", name: "Kenji Nakamura" },
+        red: { name: "El Zurdo" },
+        blue: { name: "Lobo" },
       },
       {
-        id: "ufp6-boxing",
+        id: "ufp6-fight-3",
         order: 2,
-        label: { es: "Boxeo 10R", en: "Boxing 10R" },
-        discipline: "boxing",
-        divisionLabel: { es: "Boxeo · Mediano · 10R", en: "Boxing · Middleweight · 10R" },
-        rounds: 10,
+        label: { es: "Cartelera principal", en: "Main card" },
+        discipline: "mma",
         isTitleFight: false,
-        red: { slug: "ivan-cruz", name: 'Iván "Dinamita" Cruz' },
-        blue: { slug: "tyrone-bell", name: "Tyrone Bell" },
+        red: { name: "Zuluaga" },
+        blue: { name: "Medina" },
       },
       {
-        id: "ufp6-prelim-1",
+        id: "ufp6-fight-4",
         order: 3,
-        label: { es: "Preliminar", en: "Prelim" },
+        label: { es: "Cartelera principal", en: "Main card" },
         discipline: "mma",
-        divisionLabel: { es: "MMA · Paja Fem. · 3R", en: "MMA · W. Strawweight · 3R" },
-        rounds: 3,
         isTitleFight: false,
-        red: { slug: "sofia-mendoza", name: 'Sofía "Reina" Mendoza' },
-        blue: { slug: "anna-kovacs", name: "Anna Kovács" },
+        red: { name: "Psicópata" },
+        blue: { name: "Ochoa" },
       },
       {
-        id: "ufp6-prelim-2",
+        id: "ufp6-fight-5",
         order: 4,
-        label: { es: "Preliminar", en: "Prelim" },
-        discipline: "mma",
-        divisionLabel: { es: "MMA · Pluma · 3R", en: "MMA · Featherweight · 3R" },
-        rounds: 3,
-        isTitleFight: false,
-        red: { slug: "bruno-salazar", name: "Bruno Salazar" },
-        blue: { slug: "jamal-carter", name: "Jamal Carter" },
-      },
-      {
-        id: "ufp6-opener",
-        order: 5,
         label: { es: "Apertura", en: "Opener" },
-        discipline: "boxing",
-        divisionLabel: { es: "Boxeo · Wélter · 8R", en: "Boxing · Welterweight · 8R" },
-        rounds: 8,
+        discipline: "mma",
         isTitleFight: false,
-        red: { slug: "diego-paz", name: 'Diego "El Toro" Paz' },
-        blue: { slug: "luca-moretti", name: "Luca Moretti" },
+        red: { name: "Leo Wi" },
+        blue: { name: "Orozco" },
       },
     ],
     tickets: ufp6Tickets,
@@ -154,7 +141,7 @@ export const events: UFPEvent[] = [
     title: "Juicio Final",
     status: "past",
     date: "2026-05-23T20:00:00-05:00",
-    venue: movistarArena,
+    venue: monasterioClub,
     schedule: [],
     fights: [
       {
@@ -277,7 +264,7 @@ export const events: UFPEvent[] = [
     title: "Territorio",
     status: "past",
     date: "2026-03-14T20:00:00-05:00",
-    venue: movistarArena,
+    venue: monasterioClub,
     schedule: [],
     fights: [
       {
@@ -354,7 +341,7 @@ export const events: UFPEvent[] = [
     title: "Fuego Cruzado",
     status: "past",
     date: "2026-01-17T20:00:00-05:00",
-    venue: movistarArena,
+    venue: monasterioClub,
     schedule: [],
     fights: [
       {

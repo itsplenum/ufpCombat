@@ -1,4 +1,26 @@
-import type { SponsorTier } from "./types";
+import type { SponsorBrand, SponsorTier } from "./types";
+
+/**
+ * Official UFP 6 sponsors, read off the event poster.
+ *
+ * TODO(owner): two logos on the poster were not legible enough to transcribe
+ * (an orange circular badge and the rightmost one carrying a phone number) —
+ * send the names and they get added here. Logos themselves are still missing:
+ * without `logo` the grid falls back to the brand name set in type.
+ */
+export const sponsorBrands: SponsorBrand[] = [
+  { name: "Monasterio", kind: "venue" },
+  { name: "Sobre Ruedas", kind: "official" },
+  { name: "Passion Fruit", kind: "official" },
+  { name: "Kromasol", kind: "official" },
+  { name: "La Fortaleza", kind: "official" },
+  { name: "Grupo Colsolar", kind: "official" },
+  { name: "Bloom X", kind: "official" },
+  { name: "Aguardiente Antioqueño", kind: "official" },
+  { name: "Somos", kind: "media" },
+  { name: "Combatam", kind: "media" },
+  { name: "Caray Combat Sports", kind: "media" },
+];
 
 /** Sponsorship packages, from largest to smallest. */
 export const sponsorTiers: SponsorTier[] = [
@@ -6,13 +28,13 @@ export const sponsorTiers: SponsorTier[] = [
     id: "naming",
     name: { es: "Naming del evento", en: "Event naming rights" },
     pitch: {
-      es: "Tu marca en el nombre del evento: 'UFP 7 presentado por…'. Presencia total en arena, PPV y campaña.",
-      en: "Your brand in the event name: 'UFP 7 presented by…'. Full presence across arena, PPV and campaign.",
+      es: "Tu marca en el nombre del evento: 'UFP 7 presentado por…'. Presencia total en el evento, redes y campaña.",
+      en: "Your brand in the event name: 'UFP 7 presented by…'. Full presence across the event, social and campaign.",
     },
     perks: [
       { es: "Logo en el centro del octágono", en: "Logo at the center of the octagon" },
-      { es: "Menciones en transmisión PPV", en: "PPV broadcast mentions" },
-      { es: "Activaciones en la arena", en: "In-arena activations" },
+      { es: "Menciones desde el escenario", en: "Mentions from the stage" },
+      { es: "Activaciones en el evento", en: "On-site activations" },
       { es: "Suite VIP + hospitality", en: "VIP suite + hospitality" },
     ],
   },
@@ -37,7 +59,7 @@ export const sponsorTiers: SponsorTier[] = [
       en: "Presence on screens, website, social media and event materials.",
     },
     perks: [
-      { es: "Logo en pantallas de arena", en: "Arena screen logos" },
+      { es: "Logo en pantallas del evento", en: "Event screen logos" },
       { es: "Presencia en ufpcombat.com", en: "Presence on ufpcombat.com" },
       { es: "Contenido en redes UFP", en: "UFP social media content" },
     ],

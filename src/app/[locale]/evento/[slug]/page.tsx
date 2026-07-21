@@ -38,7 +38,13 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
 
   const mainFight = getMainFight(event);
   const description = mainFight
-    ? `${mainFight.red.name} vs ${mainFight.blue.name} · ${L(mainFight.divisionLabel, locale as Locale)} · ${event.venue.name}`
+    ? [
+        `${mainFight.red.name} vs ${mainFight.blue.name}`,
+        mainFight.divisionLabel ? L(mainFight.divisionLabel, locale as Locale) : null,
+        event.venue.name,
+      ]
+        .filter(Boolean)
+        .join(" · ")
     : event.venue.name;
 
   return {

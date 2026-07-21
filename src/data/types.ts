@@ -107,9 +107,9 @@ export interface Fight {
   /** E.g. "Estelar · Título", "Co-estelar", "Boxeo 10R". */
   label: Localized;
   discipline: Discipline;
-  /** E.g. "MMA · Wélter · 5R". */
-  divisionLabel: Localized;
-  rounds: number;
+  /** E.g. "MMA · Wélter · 5R". Optional: omitted while the matchup is unconfirmed. */
+  divisionLabel?: Localized;
+  rounds?: number;
   isTitleFight: boolean;
   red: FightCorner;
   blue: FightCorner;
@@ -130,9 +130,11 @@ export interface TicketTier {
 export interface Venue {
   name: string;
   address: Localized;
-  capacity: number;
+  /** Optional: a real number or nothing. Never invent a capacity — the block hides itself. */
+  capacity?: number;
   doorsOpen: string;
-  broadcast: Localized;
+  /** Optional: only for events that are actually broadcast. */
+  broadcast?: Localized;
   mapImage?: string;
 }
 
@@ -202,6 +204,15 @@ export interface Product {
   currency: "COP";
   category: ProductCategory;
   image?: string;
+}
+
+/** A brand actually sponsoring the promotion, as listed on the event poster. */
+export interface SponsorBrand {
+  name: string;
+  /** venue = hosts the event, media = broadcast/press partner, official = everyone else. */
+  kind: "venue" | "official" | "media";
+  /** Path under /public. Missing ⇒ the grid renders the name instead. */
+  logo?: string;
 }
 
 export interface SponsorTier {

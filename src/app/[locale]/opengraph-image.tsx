@@ -18,6 +18,6 @@ export default async function OgImage() {
     eyebrow: `${formatEventDate(event.date, "es")} · ${event.venue.name}`,
     title: `UFP ${event.number}`,
     titleAccent: event.title,
-    footer: "BOLETOS Y PPV EN UFPCOMBAT.COM",
+    footer: "BOLETOS EN UFPCOMBAT.COM",
   });
 }

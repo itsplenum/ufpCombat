@@ -22,7 +22,8 @@ export const site = {
  */
 export const tickerPhrases: string[] = [
   "Boletos a la venta / Tickets on sale now",
-  "PPV disponible en todo el mundo / Worldwide PPV",
+  "Peleas en vivo · Boxeo y MMA / Live boxing & MMA",
+  "Música en vivo · Corridos bélicos · DJ",
 ];
 
 /** Copyright line — the year is computed, never hardcoded. */

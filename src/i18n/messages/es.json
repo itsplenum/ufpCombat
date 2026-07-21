@@ -4,7 +4,7 @@
     "tagline": "Ultimate Fight Promotions"
   },
   "meta": {
-    "description": "Ultimate Fight Promotions — MMA y Boxeo. Eventos, cartelera, peleadores, rankings oficiales, boletos y PPV."
+    "description": "Ultimate Fight Promotions — Boxeo y MMA en vivo. Eventos, cartelera, peleadores, rankings oficiales y boletos."
   },
   "notFound": {
     "code": "404",
@@ -39,8 +39,8 @@
   "hero": {
     "nextEvent": "Próximo evento / Next event",
     "buyTickets": "Comprar boletos",
-    "watchPpv": "Ver por PPV",
-    "disciplines": "MMA + Boxeo"
+    "disciplines": "MMA + Boxeo",
+    "seeCard": "Ver cartelera"
   },
   "sections": {
     "mainEvent": {
@@ -81,7 +81,7 @@
     },
     "sponsors": {
       "title": "Patrocinadores",
-      "pitch": "Tu marca frente a miles en la arena y millones por PPV. Paquetes desde branding en el octágono hasta naming del evento. / Put your brand in the cage.",
+      "pitch": "Tu marca frente a miles en el evento y en redes. Paquetes desde branding en el ring hasta naming del evento. / Put your brand in the cage.",
       "kitCta": "Kit de patrocinio"
     },
     "apply": {
@@ -119,7 +119,7 @@
     "round": "R{round}",
     "capacity": "CAPACIDAD",
     "doors": "APERTURA DE PUERTAS",
-    "broadcast": "TRANSMISIÓN PPV",
+    "broadcast": "TRANSMISIÓN",
     "arenaTitle": "Arena"
   },
   "fighterPage": {
@@ -221,9 +221,9 @@
     "title": "Patrocina",
     "titleAccent": "la pelea",
     "kicker": "Partnerships UFP",
-    "pitch": "Cada evento UFP llena la arena y llega a millones por PPV. Pon tu marca donde nadie parpadea.",
+    "pitch": "Cada evento UFP llena el lugar y se mueve fuerte en redes. Pon tu marca donde nadie parpadea.",
     "statAttendance": "ASISTENCIA PROMEDIO",
-    "statPpv": "ALCANCE PPV",
+    "statPpv": "ALCANCE EN REDES",
     "statSocial": "SEGUIDORES REDES",
     "tiersTitle": "Paquetes",
     "perksLabel": "Incluye",

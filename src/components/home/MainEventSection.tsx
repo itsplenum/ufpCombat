@@ -22,7 +22,11 @@ export async function MainEventSection({ event }: MainEventSectionProps) {
     <Section id="evento" background="ink-2" borderTop>
       <SectionHeading
         title={t("title")}
-        kicker={t("kicker", { division: L(mainFight.divisionLabel, locale) })}
+        kicker={
+          mainFight.divisionLabel
+            ? t("kicker", { division: L(mainFight.divisionLabel, locale) })
+            : undefined
+        }
       />
       <TaleOfTheTape fight={mainFight} />
     </Section>

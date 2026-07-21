@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import { localizedAlternates } from "@/lib/seo";
-import { sponsorTiers } from "@/data/sponsors";
+import { sponsorBrands, sponsorTiers } from "@/data/sponsors";
 import type { Locale } from "@/data/types";
 import { L } from "@/lib/localize";
 import { Footer } from "@/components/layout/Footer";
@@ -22,7 +22,6 @@ const reachStats = [
   { key: "statSocial", value: "3.4M" },
 ] as const;
 
-const SPONSOR_LOGO_SLOTS = 6;
 
 export async function generateMetadata({ params }: SponsorsPageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -117,12 +116,12 @@ export default async function SponsorsPage({ params }: SponsorsPageProps) {
         <Section width="md">
           <SectionHeading title={t("currentSponsors")} />
           <div className="grid grid-cols-2 gap-3 md:grid-cols-6">
-            {Array.from({ length: SPONSOR_LOGO_SLOTS }, (_, index) => (
+            {sponsorBrands.map((brand) => (
               <div
-                key={index}
-                className="flex h-[70px] items-center justify-center border border-dashed border-cream/20 bg-surface font-mono text-[10px] text-cream/65"
+                key={brand.name}
+                className="flex h-[70px] items-center justify-center border border-cream/20 bg-surface px-2 text-center font-condensed text-xs uppercase leading-tight tracking-[.12em] text-cream/75"
               >
-                [ logo ]
+                {brand.name}
               </div>
             ))}
           </div>

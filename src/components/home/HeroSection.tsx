@@ -66,8 +66,8 @@ export async function HeroSection({ event }: HeroSectionProps) {
           <CtaButton href="/#boletos" size="lg">
             {t("buyTickets")}
           </CtaButton>
-          <CtaButton href="/#boletos" variant="outline" size="lg">
-            {t("watchPpv")}
+          <CtaButton href="/#cartelera" variant="outline" size="lg">
+            {t("seeCard")}
           </CtaButton>
         </div>
       </Reveal>
