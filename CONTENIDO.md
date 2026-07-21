@@ -1,6 +1,6 @@
 # Qué información hay que conseguir para reemplazar los datos de ejemplo
 
-Todo lo que hay hoy en el sitio es **inventado**: nombres, récords, fechas, precios, patrocinadores. Funciona como maqueta, pero nada de eso es real.
+Los datos del **evento UFP 6** ya son reales (salieron del póster oficial). Todo lo demás sigue siendo **inventado**: el roster de 13 peleadores, los rankings, los eventos pasados, los productos de la tienda y los precios.
 
 Esta es la lista completa de lo que hace falta pedir, ordenada por urgencia. Lo marcado 🔴 debería estar **antes** de que el sitio sea público; lo demás puede ir entrando después sin romper nada.
 
@@ -37,17 +37,14 @@ Esto **ya no hay que pedirlo** — salió del póster de UFP 6:
 
 ## 🔴 1. El evento (UFP 6)
 
-- Número y **nombre del evento** (hoy "Sangre Nueva")
-- **Fecha y hora exactas** de inicio, con huso horario
-- **Sede**: nombre, dirección completa, capacidad, hora de apertura de puertas
-- **Cómo se transmite**: canal/plataforma de PPV, precio si aplica
-- **Horarios de la jornada**: preliminares / cartelera principal / estelar
-- **Cartelera completa**, pelea por pelea:
-  - los dos peleadores de cada esquina
-  - disciplina (MMA o boxeo), división y número de asaltos
-  - si es pelea de título
-  - el orden real (estelar, co-estelar, preliminares, apertura)
-- **Boletos**: nombre de cada zona, precio en COP, y qué incluye cada una
+Nombre, fecha, hora y sede ya están cargados. Falta:
+
+- **Dirección exacta** del Monasterio Club y **capacidad** del lugar (hoy se ocultan porque no se inventan)
+- **Los 4 duelos restantes**: quién pelea contra quién entre Garzón Palma, El Zurdo, Zuluaga, Psicópata, Lobo, Medina, Ochoa y Orozco
+- Por cada pelea: **disciplina** (boxeo o MMA), **división de peso**, **número de asaltos** y si es pelea de título
+- **Orden real** de la cartelera (co-estelar, preliminares, apertura)
+- **Boletos**: nombre de cada zona, precio real en COP y qué incluye
+- Si el evento se **transmite** por algún lado
 
 > Hoy hay 4 zonas de ejemplo: General $80.000, Preferente $150.000, Ringside $350.000, VIP Cage $750.000. **Todos los precios son inventados.**
 
