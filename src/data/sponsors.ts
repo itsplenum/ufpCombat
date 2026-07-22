@@ -13,7 +13,7 @@ export const sponsorBrands: SponsorBrand[] = [
   { name: "Sobre Ruedas", kind: "official" },
   { name: "Passion Fruit", kind: "official" },
   { name: "Kromasol", kind: "official" },
-  { name: "La Fortaleza", kind: "official" },
+  { name: "La Fonda del Arroz", kind: "official" },
   { name: "Grupo Colsolar", kind: "official" },
   { name: "Bloom X", kind: "official" },
   { name: "Aguardiente Antioqueño", kind: "official" },
