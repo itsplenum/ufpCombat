@@ -122,6 +122,7 @@ export const events: UFPEvent[] = [
         discipline: "mma",
         divisionLabel: { es: "MMA · Título Nacional", en: "MMA · National Title" },
         time: "03:30",
+        poster: "/fights/leo-vs-bravo.jpg",
         isTitleFight: true,
         red: {
           name: "Leo Wi",

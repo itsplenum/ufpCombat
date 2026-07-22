@@ -38,7 +38,10 @@ export async function EventHero({ event }: EventHeroProps) {
       >
         <PlaceholderImage
           label={`${red?.fighter?.lastName ?? "esquina roja"} — pose frente a frente`}
+          src={red?.corner.photo ?? red?.fighter?.photoFull}
+          alt={red?.corner.name}
           variant="red"
+          imageClassName="object-top"
           className="hidden h-[440px] -rotate-[1.5deg] border border-blood/35 lg:flex"
         />
 
@@ -74,7 +77,10 @@ export async function EventHero({ event }: EventHeroProps) {
 
         <PlaceholderImage
           label={`${blue?.fighter?.lastName ?? "esquina azul"} — pose frente a frente`}
+          src={blue?.corner.photo ?? blue?.fighter?.photoFull}
+          alt={blue?.corner.name}
           variant="blue"
+          imageClassName="object-top"
           className="hidden h-[440px] rotate-[1.5deg] border border-cream/20 lg:flex"
         />
       </Reveal>
