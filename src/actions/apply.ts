@@ -19,6 +19,7 @@ export async function submitFighterApplication(
     name: formData.get("name"),
     record: formData.get("record"),
     division: formData.get("division"),
+    phone: formData.get("phone"),
   });
 
   if (!parsed.success) {
@@ -29,6 +30,7 @@ export async function submitFighterApplication(
     subject: `Inscripción de peleador — ${parsed.data.name}`,
     fields: {
       Nombre: parsed.data.name,
+      WhatsApp: parsed.data.phone,
       Récord: parsed.data.record,
       División: parsed.data.division,
       Origen: "Formulario corto (home)",

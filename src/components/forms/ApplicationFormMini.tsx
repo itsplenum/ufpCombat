@@ -33,6 +33,13 @@ export function ApplicationFormMini() {
         placeholder={t("divisionPlaceholder")}
         className={inputClasses}
       />
+      <input
+        name="phone"
+        type="tel"
+        required
+        placeholder={t("phonePlaceholder")}
+        className={inputClasses}
+      />
       <button
         type="submit"
         disabled={submitted || isPending}

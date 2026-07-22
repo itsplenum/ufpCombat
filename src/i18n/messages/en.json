@@ -88,10 +88,11 @@
     "apply": {
       "title": "Think you can",
       "titleAccent": "take it?",
-      "pitch": "Open call for amateur and professional fighters. Send your record, videos and division. The best debut at UFP.",
+      "pitch": "Open call for amateur and professional fighters. Leave your record and WhatsApp and we'll reach out. The best debut at UFP.",
       "namePlaceholder": "Name / Nombre",
       "recordPlaceholder": "Record (e.g. 5-1-0)",
       "divisionPlaceholder": "Division and discipline",
+      "phonePlaceholder": "WhatsApp (e.g. 320 000 0000)",
       "submit": "Send application",
       "submitted": "✓ Received — we'll contact you"
     }

@@ -18,7 +18,9 @@ import { Resend } from "resend";
  */
 const apiKey = process.env.RESEND_API_KEY;
 const recipient = process.env.SUBMISSIONS_EMAIL;
-const sender = process.env.SUBMISSIONS_FROM ?? "UFP Web <onboarding@resend.dev>";
+// `||` (not `??`): SUBMISSIONS_FROM is often present-but-empty in the .env, and
+// an empty `from` makes Resend reject the send with "domain is invalid".
+const sender = process.env.SUBMISSIONS_FROM || "UFP Web <onboarding@resend.dev>";
 
 const resend = apiKey ? new Resend(apiKey) : null;
 

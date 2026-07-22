@@ -88,10 +88,11 @@
     "apply": {
       "title": "¿Crees que",
       "titleAccent": "aguantas?",
-      "pitch": "Convocatoria abierta para peleadores amateur y profesionales. Manda tu récord, videos y división. Los mejores debutan en UFP.",
+      "pitch": "Convocatoria abierta para peleadores amateur y profesionales. Déjanos tu récord y WhatsApp y te contactamos. Los mejores debutan en UFP.",
       "namePlaceholder": "Nombre / Name",
       "recordPlaceholder": "Récord (ej. 5-1-0)",
       "divisionPlaceholder": "División y disciplina",
+      "phonePlaceholder": "WhatsApp (ej. 320 000 0000)",
       "submit": "Enviar aplicación",
       "submitted": "✓ Recibido — te contactamos"
     }
