@@ -116,6 +116,13 @@ export interface Fight {
   /** E.g. "MMA · Wélter · 5R". Optional: omitted while the matchup is unconfirmed. */
   divisionLabel?: Localized;
   rounds?: number;
+  /** Scheduled start time, "HH:MM" (24h, event-local). */
+  time?: string;
+  /**
+   * Promo poster for the bout (a composite "X vs Y" graphic), path under /public.
+   * Used by the home fight-card grid; distinct from the per-fighter corner photo.
+   */
+  poster?: string;
   isTitleFight: boolean;
   red: FightCorner;
   blue: FightCorner;

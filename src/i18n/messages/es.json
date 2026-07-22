@@ -51,7 +51,7 @@
     "fightCard": {
       "title": "Cartelera",
       "kicker": "Fight card · {event}",
-      "eventPageLink": "Página del evento →"
+      "eventPageLink": "Ver cartelera completa →"
     },
     "tickets": {
       "title": "Boletos",

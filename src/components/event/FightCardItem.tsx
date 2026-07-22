@@ -83,7 +83,9 @@ export async function FightCardItem({ fight }: FightCardItemProps) {
           </span>
           <OutlineText className="text-[22px]">{tFight("vs")}</OutlineText>
           <span className="font-mono text-[11px] text-cream/65">
-            {fight.divisionLabel ? L(fight.divisionLabel, locale) : null}
+            {[fight.time, fight.divisionLabel ? L(fight.divisionLabel, locale) : null]
+              .filter(Boolean)
+              .join(" · ")}
           </span>
         </div>
 

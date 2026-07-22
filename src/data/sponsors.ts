@@ -16,6 +16,7 @@ export const sponsorBrands: SponsorBrand[] = [
   { name: "La Fonda del Arroz", kind: "official" },
   { name: "Grupo Colsolar", kind: "official" },
   { name: "Bloom X", kind: "official" },
+  { name: "Voltios Burger", kind: "official" },
   { name: "Aguardiente Antioqueño", kind: "official" },
   { name: "Somos", kind: "media" },
   { name: "Combatam", kind: "media" },

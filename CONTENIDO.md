@@ -74,6 +74,7 @@ Las de peleadores conviene sacarlas con fondo uniforme, o el roster se ve despar
 
 - Descripción real de UFP y requisitos para inscribirse como peleador
 - Redes sociales (el sitio no tiene ninguna todavía)
+- **Correo de marca** `contacto@ufpcombat.com`: pendiente. Opciones **gratis** (sin mensualidad): Cloudflare Email Routing (reenvía a tu Gmail) o Zoho Mail free (buzón propio). **No** auto-hospedar en la VPS (Hostinger bloquea el puerto 25 + mala entregabilidad). Para que el sitio envíe desde la marca: verificar el dominio en Resend y llenar `SUBMISSIONS_FROM`. Hoy los formularios llegan por Resend con remitente `onboarding@resend.dev`.
 - Números reales de alcance/seguidores/asistencia para la pizarra de patrocinios — se quitó a propósito hasta tenerlos; vuelve apenas los pases
 - Paquetes de patrocinio con precio real, y el kit en PDF si existe
 - Política de tratamiento de datos — la Ley 1581 la exige y ya tenemos dos formularios recogiendo datos
