@@ -72,6 +72,16 @@ const ufp6Tickets: TicketTier[] = [
       en: "3.5 m from the cage. Price for the table (4).",
     },
   },
+  {
+    id: "general",
+    zone: "General",
+    price: 30000,
+    currency: "COP",
+    perks: {
+      es: "Entrada general. La opción más económica.",
+      en: "General admission. The most affordable option.",
+    },
+  },
 ];
 
 /** UFP events. Adding a new event = adding one object here. */

@@ -1,45 +1,78 @@
 # Despliegue de ufpcombat.com
 
-El sitio corre en la VPS con Docker: un contenedor Next.js (standalone) detrás de Caddy, que gestiona HTTPS automáticamente con Let's Encrypt.
+La VPS es un **servidor multi-app**: un único reverse proxy Caddy al frente termina el
+HTTPS de todos los dominios y enruta a cada app por su nombre de contenedor sobre una
+red Docker compartida (`edge`). UFP es la **primera app**. Agregar otra = repetir el
+patrón, sin tocar lo existente.
 
-## 1. DNS (una sola vez)
+```
+VPS (Ubuntu) ── Docker
+  red "edge" (compartida)
+   ├─ ~/infra/proxy/    → Caddy :80/:443  (Let's Encrypt para todos los dominios)
+   ├─ ~/apps/ufpcombat/ → ufp-web:3000    (esta app, sin BD)
+   └─ ~/apps/<otra>/    → <otra>-web (+ su Postgres en red privada)
+```
 
-En el panel de tu dominio, crea dos registros apuntando a la IP de la VPS:
+## 1. DNS (una sola vez, en Cloudflare)
 
-| Tipo | Nombre | Valor        |
-| ---- | ------ | ------------ |
-| A    | @      | IP de la VPS |
-| A    | www    | IP de la VPS |
-
-Caddy redirige `www.ufpcombat.com` → `ufpcombat.com` y emite los certificados solo (necesita los puertos 80 y 443 abiertos).
+Registros A `@` y `www` → IP de la VPS, en **nube gris (DNS-only)** para que Caddy
+emita los certificados directo. `www` redirige a `ufpcombat.com`. (El proxy naranja de
+Cloudflare se puede activar después; ahí habría que pasar Caddy al challenge DNS-01.)
 
 ## 2. Preparar la VPS (una sola vez)
 
 ```bash
-# En la VPS (Ubuntu/Debian):
-curl -fsSL https://get.docker.com | sh
+# En la VPS (Ubuntu):
+curl -fsSL https://get.docker.com | sh          # si no viene Docker
+ufw allow 22/tcp && ufw allow 80/tcp && ufw allow 443/tcp
 
-# Clonar el repo
-git clone <URL-DEL-REPO> ~/ufpcombat
-cd ~/ufpcombat
+# Red compartida + reverse proxy (ver ~/infra/proxy/)
+docker network create edge
+cd ~/infra/proxy && docker compose up -d
+```
+
+## 3. Desplegar UFP (app #1)
+
+```bash
+git clone git@github.com:itsplenum/ufpCombat.git ~/apps/ufpcombat
+cd ~/apps/ufpcombat
+cp .env.example .env      # pegar RESEND_API_KEY y SUBMISSIONS_EMAIL (ver .env.example)
 docker compose up -d --build
 ```
 
-Primera emisión de certificado tarda unos segundos tras levantar. Verifica: `https://ufpcombat.com` y `https://ufpcombat.com/en`.
+`web` se une a la red `edge`; el proxy ya lo alcanza en `ufp-web:3000` y emite el
+certificado en cuanto el DNS resuelva. Verifica `https://ufpcombat.com` y `/en`.
 
-## 3. Publicar cambios
+## 4. Publicar cambios
 
-Desde tu máquina, con los cambios ya pusheados al repo:
+Desde tu máquina, con los cambios pusheados:
 
 ```bash
-VPS_HOST=usuario@ip ./deploy.sh
+VPS_HOST=root@IP ./deploy.sh
 ```
 
-O manualmente en la VPS: `cd ~/ufpcombat && git pull && docker compose up -d --build`.
+O en la VPS: `cd ~/apps/ufpcombat && git pull && docker compose up -d --build`.
+
+## Agregar otra app (con Postgres)
+
+Nueva carpeta `~/apps/<app>/` con su propio `docker-compose.yml`:
+
+- `web`: en las redes `[edge, internal]` (el proxy la ve por `edge`; habla con su BD
+  por `internal`).
+- `db` (`postgres:16-alpine`): **solo** en `internal`, sin `ports:` → invisible a
+  internet y a las demás apps; solo su `web` la alcanza en `db:5432`. Datos en un
+  volumen. Backups con `pg_dump` por cron.
+
+Luego agregar un bloque de dominio en `~/infra/proxy/Caddyfile` (`reverse_proxy
+<app>-web:<puerto>`) y recargar el proxy. UFP no lleva `db`: sus datos viven en
+`src/data/*.ts`.
 
 ## Notas
 
-- El contenido (eventos, peleadores, rankings, productos) vive en `src/data/*.ts` — editar + push + deploy es todo el flujo editorial de hoy. El día que haya CMS, solo se reemplazan los selectores de `src/data/index.ts`.
-- Los formularios (inscripción/patrocinio) llegan por correo vía Resend. Copia `.env.example` a `.env` en la VPS con tu `RESEND_API_KEY` y `SUBMISSIONS_EMAIL`; sin eso siguen funcionando pero solo quedan en el log del contenedor (`docker compose logs web`), que además es el respaldo si un correo falla.
-- Prueba local del stack completo: `docker compose up --build` y abre `http://localhost` (Caddy servirá con certificado interno; para probar solo la app: `docker build -t ufp . && docker run -p 3000:3000 ufp`).
-- En esta máquina de desarrollo (CachyOS) el bridge de Docker no tiene salida a internet (firewall local), así que el build local necesita `docker build --network=host …`. En la VPS no hace falta.
+- Contenido (eventos, boletos, patrocinadores) en `src/data/*.ts` — editar + push +
+  deploy es el flujo editorial de hoy. Con CMS, solo cambian los selectores de
+  `src/data/index.ts`.
+- Formularios (inscripción/patrocinio) → correo vía Resend (`src/lib/email.ts`),
+  configurado en `.env`. Sin `.env` quedan en `docker compose logs web` (el respaldo).
+- Prueba local de la imagen: `docker build --network=host -t ufp .` (en esta máquina de
+  desarrollo el bridge de Docker no tiene salida; en la VPS no hace falta el flag).

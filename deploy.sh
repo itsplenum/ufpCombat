@@ -8,7 +8,7 @@ if [[ -z "${VPS_HOST:-}" ]]; then
   exit 1
 fi
 
-VPS_DIR="${VPS_DIR:-~/ufpcombat}"
+VPS_DIR="${VPS_DIR:-~/apps/ufpcombat}"
 
 ssh "$VPS_HOST" "cd $VPS_DIR && git pull --ff-only && docker compose up -d --build && docker image prune -f"
 echo "✓ Desplegado — verifica https://ufpcombat.com"

@@ -1,6 +1,11 @@
+# UFP is one app on a shared multi-app host: a single Caddy reverse proxy (in
+# ~/infra/proxy) terminates TLS for every domain and routes to each app by
+# container name over the external "edge" network. So this compose ships only
+# the app itself — no Caddy, no published ports — and joins that shared network.
 services:
   web:
     build: .
+    container_name: ufp-web
     restart: unless-stopped
     # Email relay for the forms (Resend). Optional: without a .env the site runs
     # fine and submissions stay in `docker compose logs web`. See .env.example.
@@ -9,20 +14,11 @@ services:
         required: false
     expose:
       - "3000"
+    networks:
+      - edge
 
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - web
-
-volumes:
-  caddy_data:
-  caddy_config:
+networks:
+  # Created once on the host: `docker network create edge`. Shared with the
+  # reverse proxy so it can reach ufp-web:3000.
+  edge:
+    external: true

@@ -32,51 +32,69 @@ Eso es todo: no hay variables de entorno que configurar ni comandos de build que
 
 ---
 
-## Paso 2 — Preparar la VPS (~15 min, una sola vez)
+## Paso 2 — Preparar la VPS y el proxy compartido (~20 min, una sola vez)
 
-Necesitas: la **IP de la VPS** y acceso SSH (usuario + contraseña o llave).
+La VPS aloja varias apps detrás de un único proxy. Este paso deja la base lista; UFP se despliega en el Paso 2.6. Necesitas la **IP de la VPS** y acceso SSH (root, o un usuario con sudo).
 
 ```bash
 # 2a. Conéctate
-ssh usuario@IP_DE_LA_VPS
-```
+ssh root@IP_DE_LA_VPS
 
-Ya dentro de la VPS:
-
-```bash
-# 2b. Instalar Docker (Ubuntu/Debian)
+# 2b. Instalar Docker (si la plantilla no lo trae)
 curl -fsSL https://get.docker.com | sh
 
-# 2c. Si tu usuario no es root, permitirle usar Docker (cierra y reabre la sesión SSH después)
-sudo usermod -aG docker $USER
+# 2c. Abrir puertos (SSH + web) si hay firewall
+ufw allow 22/tcp && ufw allow 80/tcp && ufw allow 443/tcp
 
-# 2d. Abrir puertos web si hay firewall activo (ufw es lo común en Ubuntu)
-sudo ufw allow 80/tcp && sudo ufw allow 443/tcp
-
-# 2e. Darle acceso al repo privado: genera una llave en la VPS...
+# 2d. Acceso al repo privado: genera una llave y agrégala como deploy key en GitHub
 ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub
-# ...y pega esa llave en GitHub → Settings → SSH and GPG keys → New SSH key
-# (o hazlo en 10 segundos desde tu máquina: gh repo deploy-key add — pídemelo)
+# → GitHub → repo ufpCombat → Settings → Deploy keys → Add key (pega la línea)
+# (o desde tu máquina en 10s: gh repo deploy-key add — pídemelo)
 
-# 2f. Clonar
-git clone git@github.com:itsplenum/ufpCombat.git ~/ufpcombat
-cd ~/ufpcombat
-
-# 2g. Correo de los formularios (ver Paso 2.5). Sin esto el sitio corre igual,
-#     pero las inscripciones/patrocinios solo quedan en el log del contenedor.
-cp .env.example .env
-nano .env   # pega RESEND_API_KEY y SUBMISSIONS_EMAIL, guarda con Ctrl+O, Ctrl+X
-
-# 2h. Levantar
-docker compose up -d --build
+# 2e. Red compartida entre el proxy y todas las apps
+docker network create edge
 ```
 
-El primer build tarda unos minutos. Verifica que los dos contenedores corren:
+**2f. Reverse proxy compartido** — crea `~/infra/proxy/` con dos archivos:
 
+`~/infra/proxy/docker-compose.yml`
+```yaml
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [edge]
+networks:
+  edge: { external: true }
+volumes:
+  caddy_data:
+  caddy_config:
+```
+
+`~/infra/proxy/Caddyfile`
+```
+ufpcombat.com {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+	reverse_proxy ufp-web:3000
+}
+www.ufpcombat.com {
+	redir https://ufpcombat.com{uri} permanent
+}
+```
+
+Levanta el proxy (cada app nueva = un bloque de dominio más aquí + `docker compose up -d`):
 ```bash
-docker compose ps        # web y caddy deben estar "running"
-curl -s -o /dev/null -w "%{http_code}\n" http://localhost:3000   # → 200
+cd ~/infra/proxy && docker compose up -d
 ```
 
 ## Paso 2.5 — Correo de los formularios con Resend (~5 min, una sola vez)
@@ -85,24 +103,41 @@ Hoy no existe un correo `@ufpcombat.com`, y montarlo en la VPS toma tiempo. Mien
 
 1. Entra a [resend.com](https://resend.com) y crea la cuenta **con el correo donde quieres recibir las submissions** (importante: con el remitente por defecto, Resend solo entrega a ese mismo correo).
 2. **API Keys → Create API Key**. Copia la clave (empieza por `re_`).
-3. En la VPS, dentro de `~/ufpcombat`, edita `.env` (paso 2g):
+3. Estos dos valores van en el `.env` de UFP (Paso 2.6):
    - `RESEND_API_KEY=re_...`
    - `SUBMISSIONS_EMAIL=tu-correo@gmail.com`
    - `SUBMISSIONS_FROM=` (déjalo vacío por ahora)
-4. Ya. Si el sitio está corriendo, aplica los cambios con `docker compose up -d`.
+4. Si el sitio ya está corriendo, aplica los cambios con `docker compose up -d` en `~/apps/ufpcombat`.
 
 Más adelante, cuando exista `@ufpcombat.com`, se verifica el dominio en Resend y se pone `SUBMISSIONS_FROM="UFP <noreply@ufpcombat.com>"` para enviar desde la marca y a cualquier destinatario.
 
 > El plan gratis de Resend da 3.000 correos/mes — de sobra para los formularios.
 
-## Paso 3 — Apuntar el dominio (~5 min + propagación)
+## Paso 2.6 — Desplegar UFP (app #1)
 
-En el panel donde compraste **ufpcombat.com** (registrador), crea dos registros DNS:
+```bash
+git clone git@github.com:itsplenum/ufpCombat.git ~/apps/ufpcombat
+cd ~/apps/ufpcombat
+cp .env.example .env
+nano .env   # pega RESEND_API_KEY y SUBMISSIONS_EMAIL (Paso 2.5), guarda con Ctrl+O, Ctrl+X
+docker compose up -d --build
+```
 
-| Tipo | Nombre / Host | Valor         | TTL             |
-| ---- | ------------- | ------------- | --------------- |
-| A    | `@`           | IP de la VPS  | el más bajo     |
-| A    | `www`         | IP de la VPS  | el más bajo     |
+El primer build tarda unos minutos. `web` se une a la red `edge` y el proxy ya lo alcanza en `ufp-web:3000`. Verifica:
+
+```bash
+docker compose ps                              # ufp-web "running"
+docker exec ufp-web wget -qO- localhost:3000 >/dev/null && echo OK
+```
+
+## Paso 3 — Apuntar el dominio en Cloudflare (~5 min + propagación)
+
+En Cloudflare → tu dominio **ufpcombat.com** → **DNS → Records**, crea dos registros A, ambos en **nube gris (DNS only)** para que Caddy emita los certificados directo:
+
+| Tipo | Nombre / Host | Valor         | Proxy        | TTL  |
+| ---- | ------------- | ------------- | ------------ | ---- |
+| A    | `@`           | IP de la VPS  | DNS only 🔘  | Auto |
+| A    | `www`         | IP de la VPS  | DNS only 🔘  | Auto |
 
 Borra cualquier registro A/AAAA/CNAME previo en `@` y `www` que apunte a otro lado (parking del registrador, etc.).
 
@@ -123,8 +158,9 @@ Abre en el navegador y confirma:
 - [ ] `https://ufpcombat.com/en` — home en inglés; el toggle ES/EN funciona en ambas direcciones
 - [ ] `https://www.ufpcombat.com` — redirige al dominio sin www
 - [ ] `https://ufpcombat.com/evento/ufp-6` y `/patrocinadores` y `/inscripcion` cargan
+- [ ] Boletos: se muestran **6 zonas** y el botón de **General** abre WhatsApp con "$30.000"
 - [ ] El countdown de la home avanza
-- [ ] Enviar el formulario de inscripción → aparece "✓ Recibido", **te llega el correo** y el dato queda en `docker compose logs web` en la VPS
+- [ ] Enviar el formulario de inscripción → aparece "✓ Recibido", **te llega el correo** y el dato queda en el log (`docker compose logs web` en `~/apps/ufpcombat`)
 - [ ] Secciones apagadas dan 404 a propósito: `/tienda`, `/rankings`, `/peleador/marco-rios` (tienda, roster, rankings y resultados están off hasta tener contenido real)
 - [ ] `https://ufpcombat.com/peleador/no-existe` → 404 con la marca UFP (nav + footer), no una pantalla blanca
 - [ ] Headers de seguridad presentes:
@@ -137,10 +173,10 @@ Cada vez que edites contenido (ver `MANUAL.md`):
 
 ```bash
 git add -A && git commit -m "descripción del cambio" && git push
-VPS_HOST=usuario@IP_DE_LA_VPS ./deploy.sh
+VPS_HOST=root@IP_DE_LA_VPS ./deploy.sh
 ```
 
-`deploy.sh` entra a la VPS por SSH, hace `git pull` y reconstruye. El sitio se actualiza en ~2–3 minutos sin downtime perceptible.
+`deploy.sh` entra a la VPS por SSH, hace `git pull` en `~/apps/ufpcombat` y reconstruye. El sitio se actualiza en ~2–3 minutos sin downtime perceptible.
 
 ---
 
