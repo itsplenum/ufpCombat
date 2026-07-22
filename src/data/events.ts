@@ -109,8 +109,8 @@ export const events: UFPEvent[] = [
         label: { es: "Pelea estelar", en: "Main event" },
         discipline: "mma",
         isTitleFight: false,
-        red: { name: "Leo Wi", photo: "/fighters/leo-wi.png" },
-        blue: { name: "Carlos Bravo", photo: "/fighters/carlos-bravo.png" },
+        red: { name: "Leo Wi", photo: "/fighters/leo-wi.jpg" },
+        blue: { name: "Carlos Bravo", photo: "/fighters/carlos-bravo.jpg" },
       },
       {
         id: "ufp6-draft-1",

@@ -17,6 +17,14 @@ interface PlaceholderImageProps {
   src?: string;
   alt?: string;
   className?: string;
+  /** Extra classes on the <Image> — object-position, filters (e.g. "object-top"). */
+  imageClassName?: string;
+  /**
+   * Fades the image's bottom into the page. Pass a Tailwind gradient end color
+   * (e.g. "to-ink-2") so a photo shot on a plain light wall dissolves into the
+   * dark UI instead of punching a bright rectangle into it.
+   */
+  fadeTo?: string;
 }
 
 /**
@@ -29,11 +37,18 @@ export function PlaceholderImage({
   src,
   alt,
   className = "",
+  imageClassName = "",
+  fadeTo,
 }: PlaceholderImageProps) {
   if (src) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
-        <Image src={src} alt={alt ?? label} fill className="object-cover" />
+        <Image src={src} alt={alt ?? label} fill className={`object-cover ${imageClassName}`} />
+        {fadeTo ? (
+          <div
+            className={`pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-b from-transparent ${fadeTo}`}
+          />
+        ) : null}
       </div>
     );
   }

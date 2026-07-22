@@ -136,7 +136,9 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
           src={red.corner.photo ?? red.fighter?.photoFull}
           alt={red.corner.name}
           variant="red"
-          className={`h-[340px] ${cornerStyles.red.photo}`}
+          className={`h-[400px] md:h-[500px] ${cornerStyles.red.photo}`}
+          imageClassName="object-top"
+          fadeTo="to-ink-2"
         />
         <CornerPlate
           resolved={red}
@@ -167,7 +169,9 @@ export async function TaleOfTheTape({ fight }: TaleOfTheTapeProps) {
           src={blue.corner.photo ?? blue.fighter?.photoFull}
           alt={blue.corner.name}
           variant="blue"
-          className={`h-[340px] ${cornerStyles.blue.photo}`}
+          className={`h-[400px] md:h-[500px] ${cornerStyles.blue.photo}`}
+          imageClassName="object-top"
+          fadeTo="to-ink-2"
         />
         <CornerPlate
           resolved={blue}
