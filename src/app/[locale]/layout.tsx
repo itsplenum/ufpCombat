@@ -71,6 +71,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html
       lang={locale}
       className={`${anton.variable} ${barlow.variable} ${barlowCondensed.variable}`}
+      // Grammar/translation extensions (LanguageTool, Grammarly…) inject attributes
+      // like data-lt-installed onto <html> before React hydrates. This suppresses
+      // the resulting attribute mismatch on this element only (it does not cascade).
+      suppressHydrationWarning
     >
       <body>
         <NextIntlClientProvider>
